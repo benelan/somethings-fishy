@@ -28,7 +28,8 @@
     "eslint": "8.6.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.28.0"
+    "eslint-plugin-react": "7.28.0",
+    "husky": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,7 +43,8 @@
     "lint:js": "eslint --ext .js --fix . && prettier --write \"**/*.js\"",
     "lint:json": "prettier --write \"**/*.json\"",
     "lint:md": "prettier --write \"**/*.md\"",
-    "lint:ts": "eslint --ext .ts,.tsx --fix . && prettier --write \"**/*.ts?(x)\""
+    "lint:ts": "eslint --ext .ts,.tsx --fix . && prettier --write \"**/*.ts?(x)\"",
+    "prepare": "husky install"
   },
   "resolutions": {
     "styled-components": "^5"
