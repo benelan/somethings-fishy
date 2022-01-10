@@ -1,0 +1,23 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "ignorePatterns": ["public", "build", "node_modules"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "eslint-plugin-react", "prettier"],
+  "rules": {
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "curly": "error",
+    "lines-between-class-members": ["error", "always"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-unneeded-ternary": "error",
+    "react/jsx-sort-props": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/self-closing-comp": "error"
+  }
+}
