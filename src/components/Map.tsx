@@ -4,7 +4,6 @@ import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 
-
 const mapDivStyle = {
   padding: 0,
   margin: 0,
@@ -22,25 +21,25 @@ function Map() {
        */
       const webmap = new WebMap({
         portalItem: {
-          id: "aa1d3f80270146208328cf66d022e09c",
-        },
+          id: "aa1d3f80270146208328cf66d022e09c"
+        }
       });
 
       const view = new MapView({
         container: mapDiv?.current,
-        map: webmap,
+        map: webmap
       });
 
       const bookmarks = new Bookmarks({
         view,
         // allows bookmarks to be added, edited, or deleted
-        editingEnabled: true,
+        editingEnabled: true
       });
 
       const bkExpand = new Expand({
         view,
         content: bookmarks,
-        expanded: true,
+        expanded: true
       });
 
       // Add the widget to the top-right corner of the view
@@ -57,7 +56,7 @@ function Map() {
     }
   }, [mapDiv]);
 
-  return <div style={mapDivStyle} ref={mapDiv}></div>;
+  return <div ref={mapDiv} style={mapDivStyle} />;
 }
 
 export default Map;
