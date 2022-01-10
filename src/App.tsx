@@ -5,6 +5,7 @@ import {
   CalciteIcon,
 } from "@esri/calcite-components-react";
 import "@esri/calcite-components/dist/calcite/calcite.css";
+import Map from "./components/Map";
 
 function App() {
   const [sliderValue, setSliderValue] = useState<number | null>(50);
@@ -30,6 +31,9 @@ function App() {
         }
       />
       <p>The slider currently has a value of {sliderValue}</p>
+      <div style={{ height: "500px", width: "90%" }}>
+        <Map />
+      </div>
     </>
   );
 }

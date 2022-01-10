@@ -11,3 +11,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@import 'https://js.arcgis.com/4.22/@arcgis/core/assets/esri/themes/light/main.css';
