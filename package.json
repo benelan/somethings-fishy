@@ -50,7 +50,8 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "styled-components": "^5"
+    "styled-components": "^5",
+    "react-error-overlay": "6.0.9"
   },
   "eslintConfig": {
     "extends": [
