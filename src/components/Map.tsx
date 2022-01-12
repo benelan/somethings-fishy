@@ -1,17 +1,19 @@
 import React, { useRef, useEffect } from "react";
+import styled from "styled-components";
 import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
 import LayerList from "@arcgis/core/widgets/LayerList";
+import "@arcgis/core/assets/esri/themes/light/main.css";
 
-const mapDivStyle = {
-  padding: 0,
-  margin: 0,
-  height: "100%",
-  width: "100%"
-};
+const MapDiv = styled.div`
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+`;
 
 const Map: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -28,7 +30,7 @@ const Map: React.FC = (): JSX.Element => {
         throw new Error("API key not found");
       }
       esriConfig.apiKey = `${REACT_APP_GLOBAL_API_KEY}`;
-      
+
       //Add webmap
       const webmap = new WebMap({
         portalItem: {
@@ -81,7 +83,7 @@ const Map: React.FC = (): JSX.Element => {
     }
   }, [mapDiv]);
 
-  return <div ref={mapDiv} style={mapDivStyle} />;
+  return <MapDiv ref={mapDiv} />;
 };
 
 export default Map;
