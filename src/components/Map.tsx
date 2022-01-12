@@ -45,7 +45,7 @@ const Map: React.FC = (): JSX.Element => {
       const bkExpand = new Expand({
         view,
         content: bookmarks,
-        expanded: true
+        expanded: false
       });
 
       const layerList = new LayerList({
@@ -55,7 +55,7 @@ const Map: React.FC = (): JSX.Element => {
       const lyrlistExpand = new Expand({
         view,
         content: layerList,
-        expanded: true
+        expanded: false
       });
 
       // Add the widget to the top-right corner of the view
