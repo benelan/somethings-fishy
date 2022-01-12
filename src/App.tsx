@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Map from "./components/Map";
-import Landing from "./components/Landing";
+import Landing from "./components/landing/Landing";
 import Introduction from "./components/InfoCards";
 import "@esri/calcite-components/dist/calcite/calcite.css";
 
