@@ -6,12 +6,13 @@ import Introduction from "./components/InfoCards";
 import "@esri/calcite-components/dist/calcite/calcite.css";
 
 const ContentContainer = styled.div`
-  padding-left: 3rem;
-  padding-right: 3rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
   height: 100%;
 
   & > * {
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 `;
 

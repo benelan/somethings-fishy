@@ -6,6 +6,8 @@ const CardContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+  overflow-x: hidden;
+  margin: -1rem;
 
   & > * {
     flex: 1 1 300px;
