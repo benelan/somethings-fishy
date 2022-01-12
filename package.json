@@ -1,6 +1,8 @@
 {
-  "name": "hack-the-map-5",
+  "name": "surfs-up",
   "version": "0.1.0",
+  "description": "Hack The Map 5 project analyzing the impact of human influence on aquatic ecosystems in the Gulf of Mexico.",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@arcgis/core": "^4.22.2",
@@ -8,28 +10,27 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "3.4.1",
-    "styled-components": "^5.3.3",
-    "typescript": "^3.2.1",
-    "web-vitals": "^2.1.3"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@typescript-eslint/eslint-plugin": "4.33.0",
-    "@typescript-eslint/parser": "4.33.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.19",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.19",
+    "@typescript-eslint/eslint-plugin": "4.33.0",
+    "@typescript-eslint/parser": "4.33.0",
     "concurrently": "7.0.0",
-    "ncp": "^2.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-prettier": "3.4.1",
     "eslint-plugin-react": "7.28.0",
-    "husky": "^7.0.0"
+    "husky": "^7.0.0",
+    "ncp": "^2.0.0",
+    "typescript": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -66,5 +67,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benelan/surfs-up.git"
+  },
+  "volta": {
+    "node": "16.13.0",
+    "npm": "8.1.2"
   }
 }
