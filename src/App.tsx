@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Map from "./components/Map";
 import Landing from "./components/Landing";
-import Introduction from "./components/Introduction";
+import Introduction from "./components/InfoCards";
 import "@esri/calcite-components/dist/calcite/calcite.css";
 
 const ContentContainer = styled.div`
