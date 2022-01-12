@@ -8,8 +8,8 @@ const CardContainer = styled.div`
   justify-content: space-evenly;
 
   & > * {
+    flex: 1 1 300px;
     margin: 1rem;
-    width: 33vh;
   }
 `;
 
