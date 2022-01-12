@@ -49,7 +49,7 @@ function Map() {
       });
 
       const layerList = new LayerList({
-        view: view
+        view
       });
 
       const lyrlistExpand = new Expand({
