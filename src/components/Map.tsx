@@ -5,7 +5,6 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
 import LayerList from "@arcgis/core/widgets/LayerList";
-import TimeSlider from "@arcgis/core/widgets/TimeSlider";
 
 const mapDivStyle = {
   padding: 0,
