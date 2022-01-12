@@ -3,6 +3,8 @@ import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
+import esriConfig from "@arcgis/core/config";
+import LayerList from "@arcgis/core/widgets/LayerList";
 
 const mapDivStyle = {
   padding: 0,
@@ -19,9 +21,13 @@ function Map() {
       /**
        * Initialize application
        */
+
+      const globalApikey =
+        "AAPK66d0fa7f737142fcb780f9fd1c8155f04YBLPof_SmYB-dzJgafylrodNieETG6SVXdYeo75C5eFIt9NykPed6jRtTI_c01w";
+      esriConfig.apiKey = globalApikey;
       const webmap = new WebMap({
         portalItem: {
-          id: "aa1d3f80270146208328cf66d022e09c"
+          id: "71be6dbf62ca43db8f2658e9e440f139"
         }
       });
 
@@ -42,8 +48,22 @@ function Map() {
         expanded: true
       });
 
+      const layerList = new LayerList({
+        view
+      });
+
+      const lyrlistExpand = new Expand({
+        view,
+        content: layerList,
+        expanded: true
+      });
+
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
+      // Adds widget below other elements in the top left corner of the view
+      view.ui.add(lyrlistExpand, {
+        position: "top-left"
+      });
 
       // bonus - how many bookmarks in the webmap?
       webmap.when(() => {
