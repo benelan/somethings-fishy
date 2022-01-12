@@ -22,9 +22,14 @@ const Map: React.FC = (): JSX.Element => {
        * Initialize application
        */
 
-      const globalApikey =
-        "AAPK66d0fa7f737142fcb780f9fd1c8155f04YBLPof_SmYB-dzJgafylrodNieETG6SVXdYeo75C5eFIt9NykPed6jRtTI_c01w";
-      esriConfig.apiKey = globalApikey;
+      //Add global API key from environment variables to access data
+      const { REACT_APP_GLOBAL_API_KEY } = process.env;
+      if (!REACT_APP_GLOBAL_API_KEY) {
+        throw new Error("API key not found");
+      }
+      esriConfig.apiKey = `${REACT_APP_GLOBAL_API_KEY}`;
+      
+      //Add webmap
       const webmap = new WebMap({
         portalItem: {
           id: "71be6dbf62ca43db8f2658e9e440f139"
