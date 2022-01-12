@@ -1,37 +1,36 @@
-import React, { useState } from "react";
-import { CalciteButton, CalciteSlider, CalciteIcon } from "@esri/calcite-components-react";
-import "@esri/calcite-components/dist/calcite/calcite.css";
+import React from "react";
+import styled from "styled-components";
 import Map from "./components/Map";
+import Landing from "./components/Landing";
+import Introduction from "./components/Introduction";
+import "@esri/calcite-components/dist/calcite/calcite.css";
 
-function App() {
-  const [sliderValue, setSliderValue] = useState<number | null>(50);
+const ContentContainer = styled.div`
+  padding-left: 3rem;
+  padding-right: 3rem;
+  height: 100%;
 
+  & > * {
+    margin: 2rem;
+  }
+`;
+
+const MapContainer = styled.div`
+  height: 70vh;
+`;
+
+const App: React.FC = (): JSX.Element => {
   return (
     <>
-      <h1>
-        Sample Template
-        <CalciteIcon icon="banana" />
-      </h1>
-      <p>
-        This is a sample using Calcite Components React, which can be used to reproduce and report
-        issues.
-      </p>
-      <CalciteButton>Test</CalciteButton>
-      <CalciteSlider
-        max={100}
-        min={1}
-        onCalciteSliderUpdate={(e) =>
-          setSliderValue((e?.target as HTMLCalciteSliderElement)?.value)
-        }
-        step={1}
-        value={sliderValue}
-      />
-      <p>The slider currently has a value of {sliderValue}</p>
-      <div style={{ height: "500px", width: "90%" }}>
-        <Map />
-      </div>
+      <Landing />
+      <ContentContainer>
+        <Introduction />
+        <MapContainer>
+          <Map />
+        </MapContainer>
+      </ContentContainer>
     </>
   );
-}
+};
 
 export default App;
