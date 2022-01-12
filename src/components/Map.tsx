@@ -13,7 +13,7 @@ const mapDivStyle = {
   width: "100%"
 };
 
-function Map() {
+const Map: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
@@ -77,6 +77,6 @@ function Map() {
   }, [mapDiv]);
 
   return <div ref={mapDiv} style={mapDivStyle} />;
-}
+};
 
 export default Map;
