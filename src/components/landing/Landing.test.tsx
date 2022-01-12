@@ -4,6 +4,6 @@ import Landing from "./Landing";
 
 test("renders app title", () => {
   render(<Landing />);
-  const linkElement = screen.getByText(/surfs up/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/surfs up/i);
+  expect(titleElement).toBeInTheDocument();
 });
