@@ -6,6 +6,8 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
 import LayerList from "@arcgis/core/widgets/LayerList";
+import TimeSlider from "@arcgis/core/widgets/TimeSlider";
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapDiv = styled.div`
@@ -64,7 +66,15 @@ const Map: React.FC = (): JSX.Element => {
         content: layerList,
         expanded: false
       });
+      // time slider widget initialization
+      const timeSlider = new TimeSlider({
+        container: "timeSlider",
+        mode: "instant",
+        view: view,
+        timeVisible: true
+      });
 
+      view.ui.add(timeSlider, "bottom-left");
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
       // Adds widget below other elements in the top left corner of the view
@@ -79,6 +89,20 @@ const Map: React.FC = (): JSX.Element => {
         } else {
           console.log("No bookmarks in this webmap.");
         }
+        const layer = webmap.allLayers.find((layer) => {
+          return layer.title === "REMSS_SeaSurfaceTemp";
+        });
+        const timeLayer = layer as MapImageLayer;
+        console.log(timeLayer);
+        timeLayer.when(() => {
+          const fullTimeExtent = timeLayer.timeInfo.fullTimeExtent;
+
+          // set up time slider properties
+          timeSlider.fullTimeExtent = fullTimeExtent;
+          timeSlider.stops = {
+            interval: timeLayer.timeInfo.interval
+          };
+        });
       });
     }
   }, [mapDiv]);

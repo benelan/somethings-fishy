@@ -48,7 +48,7 @@ const App: React.FC = (): JSX.Element => {
           <MapContainer>
             <MapSwiper>
               <SlideContainer>
-                <SlideHeader>Seat Temperature Map</SlideHeader>
+                <SlideHeader>Sea Temperature Map</SlideHeader>
                 <Map />
               </SlideContainer>
               <SlideContainer>
