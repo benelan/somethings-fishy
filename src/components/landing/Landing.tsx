@@ -4,6 +4,13 @@ import "./Landing.css";
 // shamelessly borrowed from https://codepen.io/goodkatz/pen/LYPGxQz
 const Landing: React.FC = (): JSX.Element => (
   <div className="header">
+    <a href="https://github.com/benelan/surfs-up" rel="noopener noreferrer" target="_blank">
+      <img
+        alt="GitHub"
+        src="/img/github-logo.png"
+        style={{ position: "fixed", right: "0.5rem", top: "0.5rem" }}
+      />
+    </a>
     <div className="inner-header flex">
       <svg
         baseProfile="tiny"
