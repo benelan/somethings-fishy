@@ -8,6 +8,7 @@ import esriConfig from "@arcgis/core/config";
 import LayerList from "@arcgis/core/widgets/LayerList";
 import TimeSlider from "@arcgis/core/widgets/TimeSlider";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
+import TimeInterval from "@arcgis/core/TimeInterval";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapDiv = styled.div`
@@ -102,10 +103,10 @@ const Map: React.FC = (): JSX.Element => {
           // set up time slider properties
           timeSlider.fullTimeExtent = fullTimeExtent;
           timeSlider.stops = {
-            interval: {
+            interval: new TimeInterval({
               value: 1,
               unit: "years"
-            }
+            })
           };
           timeSlider.tickConfigs = [
             {
