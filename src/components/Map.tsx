@@ -102,8 +102,31 @@ const Map: React.FC = (): JSX.Element => {
           // set up time slider properties
           timeSlider.fullTimeExtent = fullTimeExtent;
           timeSlider.stops = {
-            interval: timeLayer.timeInfo.interval
+            interval: {
+              value: 1,
+              unit: "years"
+            }
           };
+          timeSlider.tickConfigs = [
+            {
+              mode: "position",
+              values: [
+                // dates to be used for ticks and labels
+                new Date(2010, 0, 1),
+                new Date(2012, 0, 1),
+                new Date(2014, 0, 1),
+                new Date(2016, 0, 1),
+                new Date(2018, 0, 1),
+                new Date(2020, 0, 1)
+              ].map((date) => date.getTime()),
+              labelsVisible: true, // display labels for the ticks
+              labelFormatFunction: (value) => {
+                // format the labels for the ticks
+                const date = new Date(value);
+                return `${date.getUTCFullYear()}`; // show full year values
+              }
+            }
+          ];
         });
       });
     }
