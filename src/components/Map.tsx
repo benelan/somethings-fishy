@@ -6,6 +6,10 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
 import LayerList from "@arcgis/core/widgets/LayerList";
+import TimeSlider from "@arcgis/core/widgets/TimeSlider";
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
+import TimeInterval from "@arcgis/core/TimeInterval";
+import Legend from "@arcgis/core/widgets/Legend";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapDiv = styled.div`
@@ -64,7 +68,21 @@ const Map: React.FC = (): JSX.Element => {
         content: layerList,
         expanded: false
       });
+      // time slider widget initialization
+      const timeSlider = new TimeSlider({
+        container: "timeSlider",
+        mode: "instant",
+        view,
+        timeVisible: true
+      });
 
+      const legend = new Legend({
+        view
+      });
+
+      view.ui.add(legend, "bottom-left");
+      //Add widget to the bottom-left corner of view
+      view.ui.add(timeSlider, "bottom-right");
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
       // Adds widget below other elements in the top left corner of the view
@@ -79,6 +97,44 @@ const Map: React.FC = (): JSX.Element => {
         } else {
           console.log("No bookmarks in this webmap.");
         }
+        //Find time aware layer
+        const layer = webmap.allLayers.find((layer) => {
+          return layer.title === "REMSS_SeaSurfaceTemp";
+        });
+
+        //Cast layer to MapImageLayer to access time info and set up TimeSlider
+        const timeLayer = layer as MapImageLayer;
+        timeLayer.when(() => {
+          const fullTimeExtent = timeLayer.timeInfo.fullTimeExtent;
+          // set up time slider properties
+          timeSlider.fullTimeExtent = fullTimeExtent;
+          timeSlider.stops = {
+            interval: new TimeInterval({
+              value: 1,
+              unit: "years"
+            })
+          };
+          timeSlider.tickConfigs = [
+            {
+              mode: "position",
+              values: [
+                // dates to be used for ticks and labels
+                new Date(2010, 0, 1),
+                new Date(2012, 0, 1),
+                new Date(2014, 0, 1),
+                new Date(2016, 0, 1),
+                new Date(2018, 0, 1),
+                new Date(2020, 0, 1)
+              ].map((date) => date.getTime()),
+              labelsVisible: true, // display labels for the ticks
+              labelFormatFunction: (value) => {
+                // format the labels for the ticks
+                const date = new Date(value);
+                return `${date.getUTCFullYear()}`; // show full year values
+              }
+            }
+          ];
+        });
       });
     }
   }, [mapDiv]);
