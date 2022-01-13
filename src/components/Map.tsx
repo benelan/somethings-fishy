@@ -9,6 +9,7 @@ import LayerList from "@arcgis/core/widgets/LayerList";
 import TimeSlider from "@arcgis/core/widgets/TimeSlider";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TimeInterval from "@arcgis/core/TimeInterval";
+import Legend from "@arcgis/core/widgets/Legend";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapDiv = styled.div`
@@ -75,8 +76,13 @@ const Map: React.FC = (): JSX.Element => {
         timeVisible: true
       });
 
+      const legend = new Legend({
+        view: view
+      });
+
+      view.ui.add(legend, "bottom-left");
       //Add widget to the bottom-left corner of view
-      view.ui.add(timeSlider, "bottom-left");
+      view.ui.add(timeSlider, "bottom-right");
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
       // Adds widget below other elements in the top left corner of the view
