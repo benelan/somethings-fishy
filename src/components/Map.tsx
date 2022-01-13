@@ -70,10 +70,11 @@ const Map: React.FC = (): JSX.Element => {
       const timeSlider = new TimeSlider({
         container: "timeSlider",
         mode: "instant",
-        view: view,
+        view,
         timeVisible: true
       });
 
+      //Add widget to the bottom-left corner of view
       view.ui.add(timeSlider, "bottom-left");
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
@@ -89,14 +90,15 @@ const Map: React.FC = (): JSX.Element => {
         } else {
           console.log("No bookmarks in this webmap.");
         }
+        //Find time aware layer
         const layer = webmap.allLayers.find((layer) => {
           return layer.title === "REMSS_SeaSurfaceTemp";
         });
+
+        //Cast layer to MapImageLayer to access time info and set up TimeSlider
         const timeLayer = layer as MapImageLayer;
-        console.log(timeLayer);
         timeLayer.when(() => {
           const fullTimeExtent = timeLayer.timeInfo.fullTimeExtent;
-
           // set up time slider properties
           timeSlider.fullTimeExtent = fullTimeExtent;
           timeSlider.stops = {
