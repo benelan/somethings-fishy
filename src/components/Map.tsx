@@ -77,7 +77,7 @@ const Map: React.FC = (): JSX.Element => {
       });
 
       const legend = new Legend({
-        view: view
+        view
       });
 
       view.ui.add(legend, "bottom-left");
