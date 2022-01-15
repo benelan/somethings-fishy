@@ -2,8 +2,7 @@ import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
-//import esriConfig from "@arcgis/core/config";
-import "@arcgis/core/assets/esri/themes/light/main.css";
+// import esriConfig from "@arcgis/core/config";
 
 const MapDiv = styled.div`
   padding: 0;
@@ -17,12 +16,12 @@ const BioMap: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (mapDiv.current) {
-      //Add global API key from environment variables to access data
+      // Add global API key from environment variables to access data
       // const { REACT_APP_GLOBAL_API_KEY } = process.env;
       // if (!REACT_APP_GLOBAL_API_KEY) {
       //   throw new Error("API key not found");
       // }
-      // esriConfig.apiKey = `${REACT_APP_GLOBAL_API_KEY}`;
+      // esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
 
       const map = new Map({
         basemap: "gray-vector"

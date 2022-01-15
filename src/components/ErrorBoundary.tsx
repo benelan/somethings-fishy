@@ -14,6 +14,7 @@ const ErrorDisplay = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 export default class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -31,8 +32,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
   render(): React.ReactNode {
     if (this.state.hasError) {
       return <ErrorDisplay>Something went wrong loading the maps.</ErrorDisplay>;
-    } else {
-      return this.props.children;
     }
+    return this.props.children;
   }
 }

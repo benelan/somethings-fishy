@@ -5,6 +5,7 @@ import CollectionMap from "./CollectionMap";
 import Map from "./Map";
 import MapSwiper from "./MapSwiper";
 import ErrorBoundary from "../ErrorBoundary";
+import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const SlideContainer = styled.div<{ height: string }>`
   height: ${(props) => props.height};
