@@ -10,7 +10,6 @@ import TimeSlider from "@arcgis/core/widgets/TimeSlider";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TimeInterval from "@arcgis/core/TimeInterval";
 import Legend from "@arcgis/core/widgets/Legend";
-import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapDiv = styled.div`
   padding: 0;
@@ -33,7 +32,7 @@ const Map: React.FC = (): JSX.Element => {
       if (!REACT_APP_GLOBAL_API_KEY) {
         throw new Error("API key not found");
       }
-      esriConfig.apiKey = `${REACT_APP_GLOBAL_API_KEY}`;
+      esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
 
       //Add webmap
       const webmap = new WebMap({

@@ -8,7 +8,7 @@ const Landing: React.FC = (): JSX.Element => (
       <img
         alt="GitHub"
         src="/img/github-logo.png"
-        style={{ position: "fixed", right: "0.5rem", top: "0.5rem" }}
+        style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
       />
     </a>
     <div className="inner-header flex">
