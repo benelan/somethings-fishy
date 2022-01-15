@@ -4,6 +4,7 @@ import BioMap from "./BioMap";
 import CollectionMap from "./CollectionMap";
 import Map from "./Map";
 import MapSwiper from "./MapSwiper";
+import ErrorBoundary from "../ErrorBoundary";
 
 const SlideContainer = styled.div<{ height: string }>`
   height: ${(props) => props.height};
@@ -17,20 +18,22 @@ const SlideHeader = styled.div`
 
 const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
   return (
-    <MapSwiper>
-      <SlideContainer height={height}>
-        <SlideHeader>Sea Temperature Map</SlideHeader>
-        <Map />
-      </SlideContainer>
-      <SlideContainer height={height}>
-        <SlideHeader>Biodiversity Map</SlideHeader>
-        <BioMap />
-      </SlideContainer>
-      <SlideContainer height={height}>
-        <SlideHeader>Data Collection Map</SlideHeader>
-        <CollectionMap />
-      </SlideContainer>
-    </MapSwiper>
+    <ErrorBoundary height={height}>
+      <MapSwiper>
+        <SlideContainer height={height}>
+          <SlideHeader>Sea Temperature Map</SlideHeader>
+          <Map />
+        </SlideContainer>
+        <SlideContainer height={height}>
+          <SlideHeader>Biodiversity Map</SlideHeader>
+          <BioMap />
+        </SlideContainer>
+        <SlideContainer height={height}>
+          <SlideHeader>Data Collection Map</SlideHeader>
+          <CollectionMap />
+        </SlideContainer>
+      </MapSwiper>
+    </ErrorBoundary>
   );
 };
 
