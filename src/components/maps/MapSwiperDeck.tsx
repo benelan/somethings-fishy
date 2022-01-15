@@ -18,7 +18,7 @@ const SlideHeader = styled.div`
 
 const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
   return (
-    <ErrorBoundary height={height}>
+    <ErrorBoundary>
       <MapSwiper>
         <SlideContainer height={height}>
           <SlideHeader>Sea Temperature Map</SlideHeader>

@@ -1,13 +1,19 @@
 import React, { ErrorInfo } from "react";
+import styled from "styled-components";
 
 interface Props {
-  height: string;
+  children?: React.ReactNode;
 }
 
 interface State {
   hasError: boolean;
 }
 
+const ErrorDisplay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 export default class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -24,9 +30,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
 
   render(): React.ReactNode {
     if (this.state.hasError) {
-      return (
-        <div style={{ height: this.props.height }}>Something went wrong loading the maps.</div>
-      );
+      return <ErrorDisplay>Something went wrong loading the maps.</ErrorDisplay>;
     } else {
       return this.props.children;
     }
