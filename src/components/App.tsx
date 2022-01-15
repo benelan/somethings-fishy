@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LazyLoad from "react-lazyload";
-import MapSwiperDeck from "../maps/MapSwiperDeck";
+import MapSwiperDeck from "./maps/MapSwiperDeck";
 import Landing from "./landing/Landing";
 import Introduction from "./InfoCards";
 import "@esri/calcite-components/dist/calcite/calcite.css";
