@@ -1,4 +1,5 @@
 import React from "react";
+import "@esri/calcite-components/dist/components/calcite-card";
 import { CalciteCard } from "@esri/calcite-components-react";
 import styled from "styled-components";
 

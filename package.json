@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@arcgis/core": "^4.22.2",
-    "@esri/calcite-components-react": "^0.12.0",
+    "@esri/calcite-components-react": "^0.15.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-lazyload": "^3.2.0",
@@ -49,10 +49,6 @@
     "lint:md": "prettier --write \"**/*.md\"",
     "lint:ts": "eslint --ext .ts,.tsx --fix . && prettier --write \"**/*.ts?(x)\"",
     "prepare": "husky install"
-  },
-  "resolutions": {
-    "styled-components": "^5",
-    "react-error-overlay": "6.0.9"
   },
   "eslintConfig": {
     "extends": [
