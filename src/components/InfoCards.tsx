@@ -23,18 +23,23 @@ const Card = styled.div`
   height: 100%;
 `;
 
+const ListItem = styled.li`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+
 const Link = styled.a`
   font-size: 0.7em;
   vertical-align: super;
 `;
 
-const Introduction: React.FC = (): JSX.Element => (
+const InfoCards: React.FC = (): JSX.Element => (
   <CardDeck>
     <div>
       <Card as={CalciteCard}>
-        <h3 slot="title">Research</h3>
+        <h3 slot="title">The Problem</h3>
         <ul>
-          <li>
+          <ListItem>
             Global warming may reduce fish and other sea life by 17% by the year 2100.{" "}
             <Link
               as={CalciteLink}
@@ -44,8 +49,8 @@ const Introduction: React.FC = (): JSX.Element => (
             >
               source
             </Link>
-          </li>
-          <li>
+          </ListItem>
+          <ListItem>
             Over the last decade, the rate of plastic consumption has doubled, increasing by 2.4
             percent every year.{" "}
             <Link
@@ -56,8 +61,8 @@ const Introduction: React.FC = (): JSX.Element => (
             >
               source
             </Link>
-          </li>
-          <li>
+          </ListItem>
+          <ListItem>
             386 marine fish species are known to have ingested plastic debris, including 210 species
             that are commercially important.{" "}
             <Link
@@ -69,40 +74,25 @@ const Introduction: React.FC = (): JSX.Element => (
             >
               source
             </Link>
-          </li>
+          </ListItem>
         </ul>
       </Card>
     </div>
     <div>
       <Card as={CalciteCard}>
-        <h3 slot="title">Lorem ipsum </h3>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Neque ornare aenean euismod elementum nisi quis eleifend quam
-        adipiscing. Quam nulla porttitor massa id neque aliquam. Diam quis enim lobortis scelerisque
-        fermentum dui faucibus. Massa tempor nec feugiat nisl pretium fusce. Integer quis auctor
-        elit sed vulputate mi sit. Sed felis eget velit aliquet sagittis id.
-      </Card>
-    </div>
-    <div>
-      <Card as={CalciteCard}>
-        <h3 slot="title">Lorem ipsum </h3>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Facilisis sed odio morbi quis commodo odio aenean sed. Nibh
-        nisl condimentum id venenatis. Penatibus et magnis dis parturient. Lectus arcu bibendum at
-        varius vel pharetra vel turpis nunc.
-      </Card>
-    </div>
-    <div>
-      <Card as={CalciteCard}>
-        <h3 slot="title">Lorem ipsum </h3>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa massa ultricies.
-        Feugiat pretium nibh ipsum consequat. Cursus risus at ultrices mi tempus imperdiet nulla
-        malesuada. Donec massa sapien faucibus et. Ligula ullamcorper malesuada proin libero nunc
-        consequat interdum varius sit.
+        <h3 slot="title">The Solutions</h3>
+        <ul>
+          <ListItem>Buy local, sustainable food and products.</ListItem>
+          <ListItem>Carry a reusable bottle instead of buying single-use plastics.</ListItem>
+          <ListItem>Volunteer your time to pickup trash at a local beach.</ListItem>
+          <ListItem>
+            Ask your representatives to create more protected areas to save endangered fish
+            populations.
+          </ListItem>
+        </ul>
       </Card>
     </div>
   </CardDeck>
 );
 
-export default Introduction;
+export default InfoCards;
