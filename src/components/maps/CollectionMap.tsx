@@ -41,13 +41,13 @@ const CollectionMap: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (mapDiv.current) {
       //Add global API key from environment variables to access data
-      const { REACT_APP_ROUTING_API_KEY } = process.env;
-      if (!REACT_APP_ROUTING_API_KEY) {
+      const { REACT_APP_GLOBAL_API_KEY } = process.env;
+      if (!REACT_APP_GLOBAL_API_KEY) {
         throw new Error("API key not found");
       }
-      esriConfig.apiKey = REACT_APP_ROUTING_API_KEY;
+      esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
       const authentication = new ApiKey({
-        key: REACT_APP_ROUTING_API_KEY
+        key: REACT_APP_GLOBAL_API_KEY
       });
 
       const map = new WebMap({
