@@ -88,16 +88,21 @@ const CollectionMap: React.FC = (): JSX.Element => {
           ) {
             const attributes = results[0].value.FeatureSet[0].features[0]
               .attributes as DataAttributes;
-            showData(city, attributes, point);
+            showData(address, city, attributes, point);
           } else {
             showAddress(address, point);
           }
         });
       };
 
-      const showData = (city: string, attributes: DataAttributes, location: Point) => {
+      const showData = (
+        address: string,
+        city: string,
+        attributes: DataAttributes,
+        location: Point
+      ) => {
         const title = `Global facts near ${city}`;
-        const content = `Population: ${attributes.TOTPOP}<br>Average Household Size: ${attributes.AVGHHSZ}`;
+        const content = `Address: ${address}<br>Population: ${attributes.TOTPOP}<br>Average Household Size: ${attributes.AVGHHSZ}`;
         view.popup.open({
           location,
           title,
