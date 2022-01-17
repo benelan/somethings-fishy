@@ -32,10 +32,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
 
       const view = new MapView({
         container: mapDiv?.current,
-        map: webmap,
-        constraints: {
-          minZoom: 5
-        }
+        map: webmap
       });
 
       view.when(() => console.log("loaded collection map..."));
