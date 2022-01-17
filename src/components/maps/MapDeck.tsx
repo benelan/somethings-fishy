@@ -14,10 +14,10 @@ const SectionContainer = styled.div`
 `;
 const MapContainer = styled.div<{ height: string }>`
   height: ${(props) => props.height};
-  text-align: center;
 `;
 
 const MapHeader = styled.div`
+  text-align: center;
   font-size: 2.5em;
   color: #237cbd;
 `;
