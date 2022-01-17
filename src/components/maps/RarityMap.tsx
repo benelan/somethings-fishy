@@ -20,6 +20,7 @@ import Legend from "@arcgis/core/widgets/Legend";
 import Expand from "@arcgis/core/widgets/Expand";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import * as relationshipRendererCreator from "@arcgis/core/smartMapping/renderers/relationship";
+import UniqueValueRenderer from "@arcgis/core/renderers/UniqueValueRenderer";
 
 import "./RarityMap.css";
 
@@ -94,25 +95,34 @@ const RarityMap: React.FC = (): JSX.Element => {
   function updateRenderer(event: Event) {
     const propName = (event.target as HTMLCalciteSliderElement).id;
     const propValue = (event.target as HTMLCalciteSliderElement).value;
+    const tempLayer = rarityLayer;
     if (propName && propValue != null) {
-      const tempLayer = rarityLayer;
+      const tempRenderer = (rarityLayer.renderer as UniqueValueRenderer).clone();
+      tempLayer.renderer = tempRenderer;
       tempLayer.definitionExpression = "Rar_all > " + propValue;
       //let tempRenderer = rarityLayer.renderer.clone();
       const params = {
         layer: tempLayer,
         view,
         field1: {
-          field: "Rar_all"
+          field: "Rar_all",
+          label: "All Species Rarity"
         },
         field2: {
           field: "sum_Area_SquareKilometers",
-          label: "Summarized Area"
+          normalizationField: "AREA_KM2",
+          label: "Protected Proportion"
         },
         focus: "HH", // changes orientation of the legend
-        numClasses: 3 // 2x2 grid (value can also be 3 or 4)
+        numClasses: 3,
+        defaultSymbolEnabled: false,
+        renderer: tempLayer.renderer
       };
       // That's it! Now apply the renderer to your layer
       relationshipRendererCreator.createRenderer(params).then((response) => {
+        response.renderer.uniqueValueInfos = (
+          tempLayer.renderer as UniqueValueRenderer
+        ).uniqueValueInfos;
         rarityLayer.renderer = response.renderer;
       });
     }
@@ -125,12 +135,13 @@ const RarityMap: React.FC = (): JSX.Element => {
       layer: rarityLayer,
       view,
       field1: {
-        field: "Rar_all"
+        field: "Rar_all",
+        label: "All Species Rarity"
       },
       field2: {
         field: "sum_Area_SquareKilometers",
-        label: "Summarized Area",
-        normalizationField: "AREA_KM2"
+        normalizationField: "AREA_KM2",
+        label: "Protected Proportion"
       },
       focus: "HH", // changes orientation of the legend
       numClasses: 3, // 2x2 grid (value can also be 3 or 4)
@@ -138,6 +149,9 @@ const RarityMap: React.FC = (): JSX.Element => {
     };
     // That's it! Now apply the renderer to your layer
     relationshipRendererCreator.createRenderer(params).then((response) => {
+      response.renderer.uniqueValueInfos = (
+        rarityLayer.renderer as UniqueValueRenderer
+      ).uniqueValueInfos;
       rarityLayer.renderer = response.renderer;
     });
   }
