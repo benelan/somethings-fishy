@@ -4,6 +4,7 @@ import "@esri/calcite-components/dist/components/calcite-button";
 import "@esri/calcite-components/dist/components/calcite-modal";
 import { CalciteButton, CalciteModal } from "@esri/calcite-components-react";
 import BioMap from "./BioMap";
+import RarityMap from "./RarityMap";
 import CollectionMap from "./CollectionMap";
 import Map from "./Map";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
@@ -73,6 +74,10 @@ const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element =>
           <SlideContainer height={height}>
             <SlideHeader>Biodiversity Map</SlideHeader>
             <BioMap />
+          </SlideContainer>
+          <SlideContainer height={height}>
+            <SlideHeader>Marine Species Rarity vs. Protected Area Map</SlideHeader>
+            <RarityMap />
           </SlideContainer>
         </SwiperSlide>
         <SwiperSlide>
