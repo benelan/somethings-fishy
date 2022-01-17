@@ -162,7 +162,8 @@ const RarityMap: React.FC = (): JSX.Element => {
       <CalciteCard class="calcite-theme-light" id="controls">
         <div slot="title">Relationship Filters</div>
         <div slot="subtitle">
-          This slider allows you to filter the renderer based on the rarity of all species.
+          This slider allows you to filter the renderer based on the rarity of all species that is
+          greater than the number selected.
         </div>
         <CalciteLabel>
           All Species
