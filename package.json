@@ -6,6 +6,10 @@
   "private": true,
   "dependencies": {
     "@arcgis/core": "^4.22.2",
+    "@esri/arcgis-rest-auth": "^3.4.3",
+    "@esri/arcgis-rest-demographics": "^3.4.3",
+    "@esri/arcgis-rest-request": "^3.4.3",
+    "@esri/arcgis-rest-routing": "^3.4.3",
     "@esri/calcite-components-react": "^0.15.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
