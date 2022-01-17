@@ -1,0 +1,5 @@
+#controls {
+    width: 300px;
+    max-height: 90vh;
+    overflow: auto;
+}
