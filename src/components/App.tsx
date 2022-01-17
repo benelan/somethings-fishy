@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LazyLoad from "react-lazyload";
-import MapSwiperDeck from "./maps/MapSwiperDeck";
+import MapDeck from "./maps/MapDeck";
 import Landing from "./landing/Landing";
 import InfoCards from "./InfoCards";
 import "@esri/calcite-components/dist/calcite/calcite.css";
@@ -27,9 +27,7 @@ const App: React.FC = (): JSX.Element => {
       </LazyLoad>
       <ContentContainer>
         <InfoCards />
-        <LazyLoad height={lazyHeight}>
-          <MapSwiperDeck height={lazyHeight} />
-        </LazyLoad>
+        <MapDeck height={lazyHeight} />
       </ContentContainer>
     </>
   );
