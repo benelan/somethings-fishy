@@ -52,7 +52,8 @@ const Map: React.FC = (): JSX.Element => {
       const lyrlistExpand = new Expand({
         view,
         content: layerList,
-        expanded: false
+        expanded: false,
+        expandTooltip: "LayerList Widget"
       });
       // time slider widget initialization
       const timeSlider = new TimeSlider({
@@ -65,7 +66,8 @@ const Map: React.FC = (): JSX.Element => {
       const timeExpand = new Expand({
         view,
         content: timeSlider.container,
-        expanded: true
+        expanded: true,
+        expandTooltip: "TimeSlider Widget"
       });
 
       const legend = new Legend({
