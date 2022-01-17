@@ -13,9 +13,15 @@ import Locate from "@arcgis/core/widgets/Locate";
 import * as locator from "@arcgis/core/rest/locator";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import Point from "@arcgis/core/geometry/Point";
+import Color from "@arcgis/core/Color";
+import ActionButton from "@arcgis/core/support/actions/ActionButton";
+import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 
 import { ApiKey } from "@esri/arcgis-rest-auth";
-import { queryDemographicData } from "@esri/arcgis-rest-demographics";
+import {
+  queryDemographicData,
+  IQueryDemographicDataResponse
+} from "@esri/arcgis-rest-demographics";
 
 import "@esri/calcite-components/dist/components/calcite-alert";
 import { CalciteAlert } from "@esri/calcite-components-react";
@@ -26,6 +32,8 @@ const MapDiv = styled.div`
   height: 100%;
   width: 100%;
 `;
+
+type DataAttributes = { TOTPOP: string; AVGHHSZ: string };
 
 const CollectionMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -51,7 +59,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
       // Create the MapView
       const view = new MapView({
         container: "viewDiv",
-        map: map
+        map
       });
 
       // GeoEnrichment
@@ -66,31 +74,32 @@ const CollectionMap: React.FC = (): JSX.Element => {
               }
             }
           ],
-          authentication: authentication
-        }).then((response: any) => {
+          authentication
+        }).then(({ results }: IQueryDemographicDataResponse) => {
           if (
-            response.results[0].value.FeatureSet.length > 0 &&
-            response.results[0].value.FeatureSet[0].features.length > 0
+            !!results &&
+            results[0].value.FeatureSet.length > 0 &&
+            results[0].value.FeatureSet[0].features.length > 0
           ) {
-            const attributes = response.results[0].value.FeatureSet[0].features[0].attributes;
+            const attributes = results[0].value.FeatureSet[0].features[0]
+              .attributes as DataAttributes;
             showData(city, attributes, point);
           } else {
             showAddress(address, point);
           }
         });
       };
-      type DataAttributes = { TOTPOP: string; AVGHHSZ: string };
 
-      const showData = (city: string, attributes: DataAttributes, point: Point) => {
+      const showData = (city: string, attributes: DataAttributes, location: Point) => {
         const title = `Global facts near ${city}`;
         const content = `Population: ${attributes.TOTPOP}<br>Average Household Size: ${attributes.AVGHHSZ}`;
         view.popup.open({
-          location: point,
-          title: title,
-          content: content
+          location,
+          title,
+          content
         });
 
-        const buffer: any = geometryEngine.geodesicBuffer(point, 1, "miles");
+        const buffer: any = geometryEngine.geodesicBuffer(location, 1, "miles");
         const graphicBuffer = new Graphic({
           geometry: buffer,
           symbol: new SimpleFillSymbol({
@@ -150,23 +159,19 @@ const CollectionMap: React.FC = (): JSX.Element => {
       });
       const routeUrl =
         "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
-      const routeParams: any = new RouteParameters({
+      const routeParams = new RouteParameters({
         stops: new FeatureSet(),
         outSpatialReference: {
           // autocasts as new SpatialReference()
           wkid: 3857
         }
       });
-      const routeSymbol = {
-        type: "simple-line", // autocasts as SimpleLineSymbol()
-        color: [200, 255, 255, 0.5],
-        width: 4
-      };
-      const routeToDebrisAction = {
+
+      const routeToDebrisAction = new ActionButton({
         title: "Route me",
         id: "route-to-debris",
         className: "esri-icon-directions2"
-      };
+      });
 
       const routeMe = () => {
         (document.getElementById("routing") as HTMLCalciteAlertElement).active = true;
@@ -175,22 +180,28 @@ const CollectionMap: React.FC = (): JSX.Element => {
           const userLocation = locate.graphic;
           const debrisLocation = view.popup.selectedFeature;
           //Add routeParamter stops
-          routeParams.stops.features.push(userLocation);
-          routeParams.stops.features.push(debrisLocation);
-          if (routeParams.stops.features.length >= 2) {
+          const stops = routeParams.stops as FeatureSet;
+          stops.features.push(userLocation);
+          stops.features.push(debrisLocation);
+          if (stops.features.length >= 2) {
             (document.getElementById("routing") as HTMLCalciteAlertElement).active = false;
             route
               .solve(routeUrl, routeParams)
-              .then((data: any) => {
+              .then((data) => {
                 // Adds the solved route to the map as a graphic
-                const routeResult = data.routeResults[0].route;
+                const routeResult = data.route;
 
                 view.goTo(routeResult.geometry, {
                   animate: true,
                   duration: 2000,
                   easing: "ease-in"
                 });
-                routeResult.symbol = routeSymbol;
+
+                routeResult.symbol = new SimpleLineSymbol({
+                  color: new Color({ r: 200, g: 255, b: 255, a: 0.5 }),
+                  width: "4px"
+                });
+
                 routeLayer.add(routeResult);
               })
               .catch(() => {
@@ -200,8 +211,8 @@ const CollectionMap: React.FC = (): JSX.Element => {
         });
       };
       view.when(() => {
-        const webMapLayers: any = map.layers;
-        webMapLayers.items[1].popupTemplate.actions = [routeToDebrisAction];
+        const layer = map.layers.getItemAt(1) as __esri.FeatureLayer;
+        layer.popupTemplate.actions.add(routeToDebrisAction);
         // Event handler that fires each time an action is clicked.
         view.popup.on("trigger-action", (event) => {
           // Execute the measureThis() function if the measure-this action is clicked
