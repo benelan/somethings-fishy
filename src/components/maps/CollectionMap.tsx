@@ -14,8 +14,8 @@ import * as locator from "@arcgis/core/rest/locator";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import Point from "@arcgis/core/geometry/Point";
 import Color from "@arcgis/core/Color";
-import ActionButton from "@arcgis/core/support/actions/ActionButton";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
+import ActionButton from "@arcgis/core/support/actions/ActionButton";
 
 import { ApiKey } from "@esri/arcgis-rest-auth";
 import {
@@ -38,6 +38,10 @@ type DataAttributes = { TOTPOP: string; AVGHHSZ: string };
 const CollectionMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
 
+  const routeUrl =
+    "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+  const geocoderUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+
   useEffect(() => {
     if (mapDiv.current) {
       //Add global API key from environment variables to access data
@@ -58,7 +62,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
       });
       // Create the MapView
       const view = new MapView({
-        container: "viewDiv",
+        container: mapDiv.current,
         map
       });
 
@@ -125,8 +129,6 @@ const CollectionMap: React.FC = (): JSX.Element => {
         });
       };
 
-      const geocoderUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-
       view.on("click", function (evt) {
         view.hitTest(evt).then(function (response) {
           if (response.results.length === 1) {
@@ -157,20 +159,13 @@ const CollectionMap: React.FC = (): JSX.Element => {
         useHeadingEnabled: false,
         goToLocationEnabled: false
       });
-      const routeUrl =
-        "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+
       const routeParams = new RouteParameters({
         stops: new FeatureSet(),
         outSpatialReference: {
           // autocasts as new SpatialReference()
           wkid: 3857
         }
-      });
-
-      const routeToDebrisAction = new ActionButton({
-        title: "Route me",
-        id: "route-to-debris",
-        className: "esri-icon-directions2"
       });
 
       const routeMe = () => {
@@ -211,8 +206,17 @@ const CollectionMap: React.FC = (): JSX.Element => {
         });
       };
       view.when(() => {
-        const layer = map.layers.getItemAt(1) as __esri.FeatureLayer;
-        layer.popupTemplate.actions.add(routeToDebrisAction);
+        const layer: any = map.layers.getItemAt(1);
+        // const layer = map.layers.getItemAt(1) as __esri.FeatureLayer;
+
+        layer.popupTemplate.actions = [
+          new ActionButton({
+            title: "Route me",
+            id: "route-to-debris",
+            className: "esri-icon-directions2"
+          })
+        ];
+
         // Event handler that fires each time an action is clicked.
         view.popup.on("trigger-action", (event) => {
           // Execute the measureThis() function if the measure-this action is clicked
