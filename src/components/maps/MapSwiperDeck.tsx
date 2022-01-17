@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BioMap from "./BioMap";
+import RarityMap from "./RarityMap";
 import CollectionMap from "./CollectionMap";
 import Map from "./Map";
 import MapSwiper from "./MapSwiper";
@@ -28,6 +29,10 @@ const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element =>
         <SlideContainer height={height}>
           <SlideHeader>Biodiversity Map</SlideHeader>
           <BioMap />
+        </SlideContainer>
+        <SlideContainer height={height}>
+          <SlideHeader>Marine Species Rarity vs. Protected Area Map</SlideHeader>
+          <RarityMap />
         </SlideContainer>
         <SlideContainer height={height}>
           <SlideHeader>Data Collection Map</SlideHeader>
