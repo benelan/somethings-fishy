@@ -26,7 +26,7 @@ import "./RarityMap.css";
 const MapDiv = styled.div`
   padding: 0;
   margin: 0;
-  height: 100%;
+  height: 95%;
   width: 100%;
 `;
 
