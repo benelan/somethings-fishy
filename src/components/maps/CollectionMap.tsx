@@ -16,6 +16,7 @@ import Point from "@arcgis/core/geometry/Point";
 import Color from "@arcgis/core/Color";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import ActionButton from "@arcgis/core/support/actions/ActionButton";
+import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 
 import { ApiKey } from "@esri/arcgis-rest-auth";
 import {
@@ -162,34 +163,29 @@ const CollectionMap: React.FC = (): JSX.Element => {
 
       const routeParams = new RouteParameters({
         stops: new FeatureSet(),
-        outSpatialReference: {
-          // autocasts as new SpatialReference()
-          wkid: 3857
-        }
+        outSpatialReference: new SpatialReference({ wkid: 3857 })
       });
 
       const routeMe = () => {
         (document.getElementById("routing") as HTMLCalciteAlertElement).active = true;
-        locate.locate().then(function () {
+        locate.locate().then(() => {
           //Get location of user and debris
           const userLocation = locate.graphic;
           const debrisLocation = view.popup.selectedFeature;
           //Add routeParamter stops
-          const stops = routeParams.stops as FeatureSet;
-          stops.features.push(userLocation);
-          stops.features.push(debrisLocation);
-          if (stops.features.length >= 2) {
+          (routeParams.stops as FeatureSet).features.push(userLocation, debrisLocation);
+          if ((routeParams.stops as FeatureSet).features.length >= 2) {
             (document.getElementById("routing") as HTMLCalciteAlertElement).active = false;
             route
               .solve(routeUrl, routeParams)
-              .then((data) => {
+              .then((data: any) => {
                 // Adds the solved route to the map as a graphic
-                const routeResult = data.route;
+                const routeResult = data.routeResults[0].route;
 
-                view.goTo(routeResult.geometry, {
+                view.goTo(routeResult, {
                   animate: true,
                   duration: 2000,
-                  easing: "ease-in"
+                  easing: "ease-in-out"
                 });
 
                 routeResult.symbol = new SimpleLineSymbol({
@@ -199,7 +195,8 @@ const CollectionMap: React.FC = (): JSX.Element => {
 
                 routeLayer.add(routeResult);
               })
-              .catch(() => {
+              .catch((e) => {
+                console.log(e);
                 (document.getElementById("routing_alert") as HTMLCalciteAlertElement).active = true;
               });
           }
