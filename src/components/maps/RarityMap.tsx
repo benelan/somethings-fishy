@@ -34,8 +34,8 @@ const MapDiv = styled.div`
 let rarityLayer: FeatureLayer;
 let view: MapView;
 
-let slider: any;
-let resetButton: any;
+let slider;
+let resetButton;
 
 const RarityMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -79,18 +79,18 @@ const RarityMap: React.FC = (): JSX.Element => {
           return layer.title === "Result_Protected_Areas_Rarity";
         });
         rarityLayer = layer as FeatureLayer;
-        slider = document.getElementById("all-species-slider");
+        slider = document.getElementById("all-species-slider") as HTMLCalciteSliderElement;
         slider.addEventListener("calciteSliderInput", updateRenderer);
-        resetButton = document.getElementById("reset-slider-button");
+        resetButton = document.getElementById("reset-slider-button") as HTMLCalciteButtonElement;
         resetButton.addEventListener("click", resetFilter);
       });
     }
   }, [mapDiv]);
 
   //Functions
-  function updateRenderer(event: any) {
-    const propName = event.target.id;
-    const propValue = event.target.value;
+  function updateRenderer(event: Event) {
+    const propName = (event.target as HTMLCalciteSliderElement).id;
+    const propValue = (event.target as HTMLCalciteSliderElement).value;
     if (propName && propValue != null) {
       const tempLayer = rarityLayer;
       tempLayer.definitionExpression = "Rar_all > " + propValue;
@@ -116,7 +116,7 @@ const RarityMap: React.FC = (): JSX.Element => {
   }
   function resetFilter() {
     rarityLayer.definitionExpression = "";
-    slider = document.getElementById("all-species-slider");
+    slider = document.getElementById("all-species-slider") as HTMLCalciteSliderElement;
     slider.value = 30;
     const params = {
       layer: rarityLayer,
