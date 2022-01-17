@@ -106,14 +106,12 @@ const Map: React.FC = (): JSX.Element => {
               mode: "position",
               values: [
                 // dates to be used for ticks and labels
-                new Date(2008, 0, 1),
                 new Date(2010, 0, 1),
                 new Date(2012, 0, 1),
                 new Date(2014, 0, 1),
                 new Date(2016, 0, 1),
                 new Date(2018, 0, 1),
                 new Date(2020, 0, 1),
-                new Date(2022, 0, 1)
               ].map((date) => date.getTime()),
               labelsVisible: true, // display labels for the ticks
               labelFormatFunction: (value) => {
