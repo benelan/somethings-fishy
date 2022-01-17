@@ -43,14 +43,14 @@ const RarityMap: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (mapDiv.current) {
-      //Add global API key from environment variables to access data
+      // Add global API key from environment variables to access data
       const { REACT_APP_GLOBAL_API_KEY } = process.env;
       if (!REACT_APP_GLOBAL_API_KEY) {
         throw new Error("API key not found");
       }
       esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
 
-      //Add webmap
+      // Add webmap
       const webmap = new WebMap({
         portalItem: {
           id: "f3845511fa5a43e8a41e4f2c4de1dff5"
@@ -62,10 +62,11 @@ const RarityMap: React.FC = (): JSX.Element => {
         map: webmap
       });
 
-      //Add legend from webmap
+      // Add legend from webmap
       const legend = new Legend({
         view
       });
+      // Add legend in expand widget
       const legendExpand = new Expand({
         view,
         content: legend,
@@ -75,15 +76,17 @@ const RarityMap: React.FC = (): JSX.Element => {
       view.ui.add(legendExpand, "top-right");
       view.ui.add("controls", "bottom-left");
 
+      // Load Webmap
       webmap.when(() => {
-        //Find rarity layer
+        //Find rarity layer from webmap
         const layer = webmap.allLayers.find((layer) => {
           return layer.title === "Spatial Analysis Result: Protected Proportion vs. Species Rarity";
         });
         rarityLayer = layer as FeatureLayer;
-        //console.log(rarityLayer);
+        // Update the renderer field labels to display correctly in the legend
         rarityLayer.renderer.authoringInfo.field1.label = "All Species Rarity";
         rarityLayer.renderer.authoringInfo.field2.label = "Protected Proportion";
+        // Create event listeners for slider and button
         slider = document.getElementById("all-species-slider") as HTMLCalciteSliderElement;
         slider.addEventListener("calciteSliderInput", updateRenderer);
         resetButton = document.getElementById("reset-slider-button") as HTMLCalciteButtonElement;
@@ -92,16 +95,21 @@ const RarityMap: React.FC = (): JSX.Element => {
     }
   }, [mapDiv]);
 
-  //Functions
+  // FUNCTIONS
+
+  // Update the renderer based on the slider value
   function updateRenderer(event: Event) {
+    // Get the current value in the slider
     const propName = (event.target as HTMLCalciteSliderElement).id;
     const propValue = (event.target as HTMLCalciteSliderElement).value;
     const tempLayer = rarityLayer;
     if (propName && propValue != null) {
+      // Clone the origional layer's renderer
       const tempRenderer = (rarityLayer.renderer as UniqueValueRenderer).clone();
       tempLayer.renderer = tempRenderer;
+      // Set defitintion expression so that only values greater than that of the slider value shows
       tempLayer.definitionExpression = "Rar_all > " + propValue;
-      //let tempRenderer = rarityLayer.renderer.clone();
+      // Define relationship renderer parameters
       const params = {
         layer: tempLayer,
         view,
@@ -117,10 +125,12 @@ const RarityMap: React.FC = (): JSX.Element => {
         focus: "HH", // changes orientation of the legend
         numClasses: 3,
         defaultSymbolEnabled: false,
+        //define the renderer so that the default renderer for relationshipRenderer is not used
         renderer: tempLayer.renderer
       };
       // That's it! Now apply the renderer to your layer
       relationshipRendererCreator.createRenderer(params).then((response) => {
+        // Set the renderer's uniqueValueInfos to that of the origional map
         response.renderer.uniqueValueInfos = (
           tempLayer.renderer as UniqueValueRenderer
         ).uniqueValueInfos;
@@ -128,10 +138,15 @@ const RarityMap: React.FC = (): JSX.Element => {
       });
     }
   }
+
+  // Reset the renderer
   function resetFilter() {
+    // Reset the definition expression so all features show
     rarityLayer.definitionExpression = "";
+    // Set slider value back
     slider = document.getElementById("all-species-slider") as HTMLCalciteSliderElement;
     slider.value = 30;
+    // Create renderer parameters
     const params = {
       layer: rarityLayer,
       view,

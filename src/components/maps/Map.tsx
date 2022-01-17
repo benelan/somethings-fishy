@@ -26,14 +26,14 @@ const Map: React.FC = (): JSX.Element => {
        * Initialize application
        */
 
-      //Add global API key from environment variables to access data
+      // Add global API key from environment variables to access data
       const { REACT_APP_GLOBAL_API_KEY } = process.env;
       if (!REACT_APP_GLOBAL_API_KEY) {
         throw new Error("API key not found");
       }
       esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
 
-      //Add webmap
+      // Add webmap
       const webmap = new WebMap({
         portalItem: {
           id: "91b99738c05c4f2a9d63c351947a08b6"
@@ -45,6 +45,7 @@ const Map: React.FC = (): JSX.Element => {
         map: webmap
       });
 
+      // Add Widgets
       const layerList = new LayerList({
         view
       });
@@ -55,7 +56,7 @@ const Map: React.FC = (): JSX.Element => {
         expanded: false,
         expandTooltip: "LayerList Widget"
       });
-      // time slider widget initialization
+
       const timeSlider = new TimeSlider({
         container: document.createElement("div"),
         mode: "instant",
@@ -74,15 +75,15 @@ const Map: React.FC = (): JSX.Element => {
         view
       });
 
+      // Add the widget to bottom left corner of view
       view.ui.add(legend, "bottom-left");
       // Add the widget to the top-right corner of the view
       view.ui.add(timeExpand, "top-right");
-      // Adds widget below other elements in the top left corner of the view
+      // Add the widget to the top left corner of the view
       view.ui.add(lyrlistExpand, "top-left");
 
-      // bonus - how many bookmarks in the webmap?
       webmap.when(() => {
-        //Find time aware layer
+        // Find time aware layer
         const layer = webmap.allLayers.find((layer) => {
           return layer.title === "Sea Surface Temperature (\u00B0C)";
         });
@@ -99,17 +100,20 @@ const Map: React.FC = (): JSX.Element => {
               unit: "years"
             })
           };
+          // Configure the ticks on the time slider so it goes once per year
           timeSlider.tickConfigs = [
             {
               mode: "position",
               values: [
                 // dates to be used for ticks and labels
+                new Date(2008, 0, 1),
                 new Date(2010, 0, 1),
                 new Date(2012, 0, 1),
                 new Date(2014, 0, 1),
                 new Date(2016, 0, 1),
                 new Date(2018, 0, 1),
-                new Date(2020, 0, 1)
+                new Date(2020, 0, 1),
+                new Date(2022, 0, 1)
               ].map((date) => date.getTime()),
               labelsVisible: true, // display labels for the ticks
               labelFormatFunction: (value) => {
