@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import MapView from "@arcgis/core/views/MapView";
-import Map from "@arcgis/core/Map";
-// import esriConfig from "@arcgis/core/config";
+import WebMap from "@arcgis/core/WebMap";
+import esriConfig from "@arcgis/core/config";
 
 const MapDiv = styled.div`
   padding: 0;
@@ -16,22 +16,26 @@ const CollectionMap: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (mapDiv.current) {
-      // Add global API key from environment variables to access data
-      // const { REACT_APP_GLOBAL_API_KEY } = process.env;
-      // if (!REACT_APP_GLOBAL_API_KEY) {
-      //   throw new Error("API key not found");
-      // }
-      // esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
+      //Add global API key from environment variables to access data
+      const { REACT_APP_GLOBAL_API_KEY } = process.env;
+      if (!REACT_APP_GLOBAL_API_KEY) {
+        throw new Error("API key not found");
+      }
+      esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
 
-      const map = new Map({
-        basemap: "streets-night-vector"
+      //Add webmap
+      const webmap = new WebMap({
+        portalItem: {
+          id: "a4d82c6dacf745798270ba3dcac4bd12"
+        }
       });
 
       const view = new MapView({
         container: mapDiv?.current,
-        map,
-        center: [-94, 32],
-        zoom: 6
+        map: webmap,
+        constraints: {
+          minZoom: 5
+        }
       });
 
       view.when(() => console.log("loaded collection map..."));

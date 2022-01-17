@@ -22,7 +22,7 @@ const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element =>
     <ErrorBoundary>
       <MapSwiper>
         <SlideContainer height={height}>
-          <SlideHeader>Sea Temperature Map</SlideHeader>
+          <SlideHeader>Sea Surface Temperature Map</SlideHeader>
           <Map />
         </SlideContainer>
         <SlideContainer height={height}>
