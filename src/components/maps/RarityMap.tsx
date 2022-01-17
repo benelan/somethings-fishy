@@ -76,9 +76,12 @@ const RarityMap: React.FC = (): JSX.Element => {
       webmap.when(() => {
         //Find rarity layer
         const layer = webmap.allLayers.find((layer) => {
-          return layer.title === "Result_Protected_Areas_Rarity";
+          return layer.title === "Spatial Analysis Result: Protected Proportion vs. Species Rarity";
         });
         rarityLayer = layer as FeatureLayer;
+        //console.log(rarityLayer);
+        rarityLayer.renderer.authoringInfo.field1.label = "All Species Rarity";
+        rarityLayer.renderer.authoringInfo.field2.label = "Protected Proportion";
         slider = document.getElementById("all-species-slider") as HTMLCalciteSliderElement;
         slider.addEventListener("calciteSliderInput", updateRenderer);
         resetButton = document.getElementById("reset-slider-button") as HTMLCalciteButtonElement;
