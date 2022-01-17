@@ -70,10 +70,8 @@ const webStyleSymbolUrl =
 // ui
 let rectangleBtn: any;
 let clearBtn: any;
-let cancelBtnOne: any;
 let cancelBtnTwo: any;
 let cancelBtnThree: any;
-let splashModal: any;
 let fishCard: any;
 let whaleCard: any;
 let lobsterCard: any;
@@ -225,14 +223,14 @@ const BioMap: React.FC = (): JSX.Element => {
       // ui
       rectangleBtn = document.getElementById("rectangleBtn");
       clearBtn = document.getElementById("clearBtn");
-      cancelBtnOne = document.getElementById("cancel-first-modal");
       cancelBtnTwo = document.getElementById("cancel-second-modal");
       cancelBtnThree = document.getElementById("cancel-screenshot-modal");
-      splashModal = document.getElementById("initial-area-modal");
       fishCard = document.getElementById("fishCard");
       whaleCard = document.getElementById("whaleCard");
       lobsterCard = document.getElementById("lobsterCard");
       turtleCard = document.getElementById("turtleCard");
+
+      openPopover("popover");
 
       rectangleBtn.onclick = () => {
         chooseArea();
@@ -240,18 +238,12 @@ const BioMap: React.FC = (): JSX.Element => {
       clearBtn.onclick = () => {
         clearAreas(highlight);
       };
-      cancelBtnOne.onclick = () => {
-        closeModal("initial-area-modal");
-      };
       cancelBtnTwo.onclick = () => {
         closeModal("second-area-modal");
       };
       cancelBtnThree.onclick = () => {
         closeModal("screenshot-index-modal");
       };
-      splashModal.addEventListener("calciteModalClose", () => {
-        openPopover("popover");
-      });
       fishCard.addEventListener("click", (evt: MouseEvent) => {
         handleCardSelection(evt, "Fish");
       });
@@ -516,8 +508,8 @@ const BioMap: React.FC = (): JSX.Element => {
       .applyEdits({
         addFeatures: [newMarineFeauture]
       })
-      .then((result) => console.log("added feature successfully"))
-      .catch((err) => console.log("failed to add this feature"));
+      .then(() => console.log("added feature successfully"))
+      .catch(() => console.log("failed to add this feature"));
   }
 
   function getSubtypeCode(name: string) {
@@ -721,18 +713,6 @@ const BioMap: React.FC = (): JSX.Element => {
           </p>
         </div>
       </CalcitePanel>
-      <CalciteModal aria-labelledby="modal-title" id="initial-area-modal">
-        <div id="modal-title" slot="header">
-          Choose a community!
-        </div>
-        <div slot="content">
-          Use the Area button to select a group of marine animal species! You will need to create
-          two areas in order to compare the Species Diversity Index.
-        </div>
-        <CalciteButton appearance="outline" id="cancel-first-modal" slot="secondary" width="full">
-          Okay
-        </CalciteButton>
-      </CalciteModal>
       <CalciteModal aria-labelledby="modal-title" id="second-area-modal">
         <div id="modal-title" slot="header">
           Choose Another Community!
@@ -772,7 +752,12 @@ const BioMap: React.FC = (): JSX.Element => {
         </CalciteButton>
       </CalciteModal>
       <CalcitePopoverManager>
-        <CalcitePopover id="popover" label="Example label" referenceElement="rectangleBtn">
+        <CalcitePopover
+          id="popover"
+          label="Example label"
+          placement="bottom-leading"
+          referenceElement="rectangleBtn"
+        >
           <h4 style={{ padding: "0 10px", display: "flex;flex-direction:row" }}>
             Click to start drawing your area!
           </h4>
