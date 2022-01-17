@@ -37,13 +37,16 @@ const Map: React.FC = (): JSX.Element => {
       //Add webmap
       const webmap = new WebMap({
         portalItem: {
-          id: "71be6dbf62ca43db8f2658e9e440f139"
+          id: "91b99738c05c4f2a9d63c351947a08b6"
         }
       });
 
       const view = new MapView({
         container: mapDiv?.current,
-        map: webmap
+        map: webmap,
+        constraints: {
+          minZoom: 6
+        }
       });
 
       const bookmarks = new Bookmarks({
@@ -85,9 +88,7 @@ const Map: React.FC = (): JSX.Element => {
       // Add the widget to the top-right corner of the view
       view.ui.add(bkExpand, "top-right");
       // Adds widget below other elements in the top left corner of the view
-      view.ui.add(lyrlistExpand, {
-        position: "top-left"
-      });
+      view.ui.add(lyrlistExpand, "top-left");
 
       // bonus - how many bookmarks in the webmap?
       webmap.when(() => {
@@ -98,7 +99,7 @@ const Map: React.FC = (): JSX.Element => {
         }
         //Find time aware layer
         const layer = webmap.allLayers.find((layer) => {
-          return layer.title === "REMSS_SeaSurfaceTemp";
+          return layer.title === "Sea Surface Temperature (\u00B0C)";
         });
 
         //Cast layer to MapImageLayer to access time info and set up TimeSlider
