@@ -75,6 +75,8 @@ const MapSwiperDeck: React.FC<{ height: string }> = ({ height }): JSX.Element =>
             <SlideHeader>Biodiversity Map</SlideHeader>
             <BioMap />
           </SlideContainer>
+        </SwiperSlide>
+        <SwiperSlide>
           <SlideContainer height={height}>
             <SlideHeader>Marine Species Rarity vs. Protected Area Map</SlideHeader>
             <RarityMap />
