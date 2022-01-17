@@ -38,6 +38,7 @@ import WebStyleSymbol from "@arcgis/core/symbols/WebStyleSymbol";
 import Geometry from "@arcgis/core/geometry/Geometry";
 import Collection from "@arcgis/core/core/Collection";
 import Extent from "@arcgis/core/geometry/Extent";
+import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
 // import esriConfig from "@arcgis/core/config";
 
 const MapDiv = styled.div`
@@ -48,9 +49,9 @@ const MapDiv = styled.div`
 `;
 
 interface featureSet {
-  features: any;
-  area: Extent | null;
-  screenshot: any;
+  features: Array<Graphic>;
+  area: Extent;
+  screenshot: __esri.Screenshot | null;
   H: number;
 }
 
@@ -70,17 +71,20 @@ interface speciesData {
 }
 
 // globals
-let selectedFeatures: any = [];
-let highlight: any;
+let selectedFeatures: Array<Graphic> = [];
+let highlight: __esri.Handle;
 let featureLayerView: FeatureLayerView;
 let graphicsLayer: GraphicsLayer;
 let view: MapView;
 let sketchViewModel: SketchViewModel;
 let stgl: SubtypeGroupLayer;
 
-const editableFeature: any = { feature: null, species: null };
-let featureSet1: featureSet = { features: null, area: null, screenshot: null, H: 0 };
-let featureSet2: featureSet = { features: null, area: null, screenshot: null, H: 0 };
+const editableFeature: { feature: Graphic | null; species: string } = {
+  feature: null,
+  species: ""
+};
+let featureSet1: featureSet = { features: [], area: new Extent(), screenshot: null, H: 0 };
+let featureSet2: featureSet = { features: [], area: new Extent(), screenshot: null, H: 0 };
 const webStyleSymbolUrl =
   "https://arcgis.com/sharing/rest/content/items/beb787401c41401ba1eef6ce161d6664/data";
 
@@ -101,67 +105,57 @@ const BioMap: React.FC = (): JSX.Element => {
     if (mapDiv.current) {
       graphicsLayer = new GraphicsLayer({ title: "Area Layer", listMode: "hide" });
 
-      const sublayers: any = [
-        {
+      const sublayers = [
+        new SubtypeSublayer({
           subtypeCode: 1, // Fish
-          visible: true,
           renderer: createMarineSymbol("Fish"),
           title: "Fish"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 2, // Dolphin
-          visible: true,
           renderer: createMarineSymbol("Dolphin"),
           title: "Dolphin"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 3, // Whale
-          visible: true,
           renderer: createMarineSymbol("Whale"),
           title: "Whale"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 4, // Crab
-          visible: true,
           renderer: createMarineSymbol("Crab"),
           title: "Crab"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 5, // Lobster
-          visible: true,
           renderer: createMarineSymbol("Lobster"),
           title: "Lobster"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 6, // Seal/Sea Lion
-          visible: true,
           renderer: createMarineSymbol("SealSeaLion"),
           title: "Seal/Sea Lion"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 7, // Manatee
-          visible: true,
           renderer: createMarineSymbol("Manatee"),
           title: "Manatee"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 8, // Oyster/Clam
-          visible: true,
           renderer: createMarineSymbol("OysterClam"),
           title: "Oyster/Clam"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 9, // Turtle
-          visible: true,
           renderer: createMarineSymbol("Turtle"),
           title: "Turtle"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 10, // Echinoderm
-          visible: false,
           renderer: createMarineSymbol("Echinoderm"),
           title: "Echinoderm"
-        }
+        })
       ];
 
       // initializing a SubtypeGroupLayer
@@ -290,7 +284,7 @@ const BioMap: React.FC = (): JSX.Element => {
     };
   }
 
-  function unselectFeatures(highlight: any) {
+  function unselectFeatures(highlight: __esri.Handle) {
     if (highlight) {
       highlight.remove();
     }
@@ -386,13 +380,13 @@ const BioMap: React.FC = (): JSX.Element => {
     return graphics.filter((graphic: Graphic) => graphic.geometry.type === "polygon");
   }
 
-  function clearAreas(highlight: any) {
+  function clearAreas(highlight: __esri.Handle) {
     graphicsLayer.removeAll();
     toggleAreaBtn(true);
     unselectFeatures(highlight);
     selectedFeatures = [];
-    featureSet1 = { features: null, area: null, screenshot: null, H: 0 };
-    featureSet2 = { features: null, area: null, screenshot: null, H: 0 };
+    featureSet1 = { features: [], area: new Extent(), screenshot: null, H: 0 };
+    featureSet2 = { features: [], area: new Extent(), screenshot: null, H: 0 };
   }
 
   function calculateProportion(frequency: number, total: number) {
@@ -447,7 +441,9 @@ const BioMap: React.FC = (): JSX.Element => {
     featureSet1.H = H1;
     featureSet2.H = H2;
     console.log(`community 1: ${H1} vs community 2: ${H2}`);
-    showPreview(featureSet1.screenshot, featureSet2.screenshot);
+    if (featureSet1.screenshot && featureSet2.screenshot) {
+      showPreview(featureSet1.screenshot, featureSet2.screenshot);
+    }
   }
 
   /**
@@ -482,7 +478,7 @@ const BioMap: React.FC = (): JSX.Element => {
     return data;
   }
 
-  function showPreview(screenshot1: any, screenshot2: any) {
+  function showPreview(screenshot1: __esri.Screenshot, screenshot2: __esri.Screenshot) {
     const img1 = document.getElementById("img1") as HTMLImageElement;
     const img2 = document.getElementById("img2") as HTMLImageElement;
     const indexDiv1 = document.getElementById("indexDiv1") as HTMLDivElement;
