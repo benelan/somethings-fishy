@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
@@ -43,22 +42,7 @@ const Map: React.FC = (): JSX.Element => {
 
       const view = new MapView({
         container: mapDiv?.current,
-        map: webmap,
-        constraints: {
-          minZoom: 6
-        }
-      });
-
-      const bookmarks = new Bookmarks({
-        view,
-        // allows bookmarks to be added, edited, or deleted
-        editingEnabled: true
-      });
-
-      const bkExpand = new Expand({
-        view,
-        content: bookmarks,
-        expanded: false
+        map: webmap
       });
 
       const layerList = new LayerList({
@@ -72,10 +56,16 @@ const Map: React.FC = (): JSX.Element => {
       });
       // time slider widget initialization
       const timeSlider = new TimeSlider({
-        container: "timeSlider",
+        container: document.createElement("div"),
         mode: "instant",
         view,
         timeVisible: true
+      });
+
+      const timeExpand = new Expand({
+        view,
+        content: timeSlider.container,
+        expanded: true
       });
 
       const legend = new Legend({
@@ -83,20 +73,13 @@ const Map: React.FC = (): JSX.Element => {
       });
 
       view.ui.add(legend, "bottom-left");
-      //Add widget to the bottom-left corner of view
-      view.ui.add(timeSlider, "bottom-right");
       // Add the widget to the top-right corner of the view
-      view.ui.add(bkExpand, "top-right");
+      view.ui.add(timeExpand, "top-right");
       // Adds widget below other elements in the top left corner of the view
       view.ui.add(lyrlistExpand, "top-left");
 
       // bonus - how many bookmarks in the webmap?
       webmap.when(() => {
-        if (webmap.bookmarks && webmap.bookmarks.length) {
-          console.log("Bookmarks: ", webmap.bookmarks.length);
-        } else {
-          console.log("No bookmarks in this webmap.");
-        }
         //Find time aware layer
         const layer = webmap.allLayers.find((layer) => {
           return layer.title === "Sea Surface Temperature (\u00B0C)";
