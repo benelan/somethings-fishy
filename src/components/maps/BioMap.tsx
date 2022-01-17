@@ -35,49 +35,68 @@ import LayerList from "@arcgis/core/widgets/LayerList";
 import Expand from "@arcgis/core/widgets/Expand";
 import FeatureLayerView from "@arcgis/core/views/layers/FeatureLayerView";
 import WebStyleSymbol from "@arcgis/core/symbols/WebStyleSymbol";
-
+import Geometry from "@arcgis/core/geometry/Geometry";
+import Collection from "@arcgis/core/core/Collection";
+import Extent from "@arcgis/core/geometry/Extent";
+import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
 // import esriConfig from "@arcgis/core/config";
 
 const MapDiv = styled.div`
   padding: 0;
   margin: 0;
-  height: 100%;
+  height: 95%;
   width: 100%;
 `;
 
 interface featureSet {
-  features: any;
-  area: any;
-  screenshot: any;
+  features: Array<Graphic>;
+  area: Extent;
+  screenshot: __esri.Screenshot | null;
   H: number;
 }
 
+interface ScreenshotArea {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+interface speciesData {
+  frequency: number;
+  species: number | null;
+  pi?: number;
+  ln_pi?: number;
+  pi_ln_pi?: number;
+}
+
 // globals
-let selectedFeatures: any = [];
-let highlight: any;
+let selectedFeatures: Array<Graphic> = [];
+let highlight: __esri.Handle;
 let featureLayerView: FeatureLayerView;
 let graphicsLayer: GraphicsLayer;
 let view: MapView;
 let sketchViewModel: SketchViewModel;
 let stgl: SubtypeGroupLayer;
 
-const editableFeature: any = { feature: null, species: null };
-let featureSet1: featureSet = { features: null, area: null, screenshot: null, H: 0 };
-let featureSet2: featureSet = { features: null, area: null, screenshot: null, H: 0 };
+const editableFeature: { feature: Graphic | null; species: string } = {
+  feature: null,
+  species: ""
+};
+let featureSet1: featureSet = { features: [], area: new Extent(), screenshot: null, H: 0 };
+let featureSet2: featureSet = { features: [], area: new Extent(), screenshot: null, H: 0 };
 const webStyleSymbolUrl =
   "https://arcgis.com/sharing/rest/content/items/beb787401c41401ba1eef6ce161d6664/data";
 
 // ui
-let rectangleBtn: any;
-let clearBtn: any;
-let cancelBtnOne: any;
-let cancelBtnTwo: any;
-let cancelBtnThree: any;
-let splashModal: any;
-let fishCard: any;
-let whaleCard: any;
-let lobsterCard: any;
-let turtleCard: any;
+let rectangleBtn: HTMLCalciteButtonElement;
+let clearBtn: HTMLCalciteButtonElement;
+let cancelBtnTwo: HTMLCalciteButtonElement;
+let cancelBtnThree: HTMLCalciteButtonElement;
+let fishCard: HTMLCalciteCardElement;
+let whaleCard: HTMLCalciteCardElement;
+let lobsterCard: HTMLCalciteCardElement;
+let turtleCard: HTMLCalciteCardElement;
 
 const BioMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -86,67 +105,57 @@ const BioMap: React.FC = (): JSX.Element => {
     if (mapDiv.current) {
       graphicsLayer = new GraphicsLayer({ title: "Area Layer", listMode: "hide" });
 
-      const sublayers: any = [
-        {
+      const sublayers = [
+        new SubtypeSublayer({
           subtypeCode: 1, // Fish
-          visible: true,
           renderer: createMarineSymbol("Fish"),
           title: "Fish"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 2, // Dolphin
-          visible: true,
           renderer: createMarineSymbol("Dolphin"),
           title: "Dolphin"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 3, // Whale
-          visible: true,
           renderer: createMarineSymbol("Whale"),
           title: "Whale"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 4, // Crab
-          visible: true,
           renderer: createMarineSymbol("Crab"),
           title: "Crab"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 5, // Lobster
-          visible: true,
           renderer: createMarineSymbol("Lobster"),
           title: "Lobster"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 6, // Seal/Sea Lion
-          visible: true,
           renderer: createMarineSymbol("SealSeaLion"),
           title: "Seal/Sea Lion"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 7, // Manatee
-          visible: true,
           renderer: createMarineSymbol("Manatee"),
           title: "Manatee"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 8, // Oyster/Clam
-          visible: true,
           renderer: createMarineSymbol("OysterClam"),
           title: "Oyster/Clam"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 9, // Turtle
-          visible: true,
           renderer: createMarineSymbol("Turtle"),
           title: "Turtle"
-        },
-        {
+        }),
+        new SubtypeSublayer({
           subtypeCode: 10, // Echinoderm
-          visible: false,
           renderer: createMarineSymbol("Echinoderm"),
           title: "Echinoderm"
-        }
+        })
       ];
 
       // initializing a SubtypeGroupLayer
@@ -187,7 +196,7 @@ const BioMap: React.FC = (): JSX.Element => {
           }
           queryIntersectingFeatures(createEvent.graphic.geometry);
           const filteredPolygons = filterPolygons(graphicsLayer.graphics);
-          if (filteredPolygons.items.length > 1) {
+          if (filteredPolygons.length > 1) {
             // disable the select area button
             // can only create two rectangles at a time
             toggleAreaBtn(false);
@@ -223,16 +232,18 @@ const BioMap: React.FC = (): JSX.Element => {
       });
 
       // ui
-      rectangleBtn = document.getElementById("rectangleBtn");
-      clearBtn = document.getElementById("clearBtn");
-      cancelBtnOne = document.getElementById("cancel-first-modal");
-      cancelBtnTwo = document.getElementById("cancel-second-modal");
-      cancelBtnThree = document.getElementById("cancel-screenshot-modal");
-      splashModal = document.getElementById("initial-area-modal");
-      fishCard = document.getElementById("fishCard");
-      whaleCard = document.getElementById("whaleCard");
-      lobsterCard = document.getElementById("lobsterCard");
-      turtleCard = document.getElementById("turtleCard");
+      rectangleBtn = document.getElementById("rectangleBtn") as HTMLCalciteButtonElement;
+      clearBtn = document.getElementById("clearBtn") as HTMLCalciteButtonElement;
+      cancelBtnTwo = document.getElementById("cancel-second-modal") as HTMLCalciteButtonElement;
+      cancelBtnThree = document.getElementById(
+        "cancel-screenshot-modal"
+      ) as HTMLCalciteButtonElement;
+      fishCard = document.getElementById("fishCard") as HTMLCalciteCardElement;
+      whaleCard = document.getElementById("whaleCard") as HTMLCalciteCardElement;
+      lobsterCard = document.getElementById("lobsterCard") as HTMLCalciteCardElement;
+      turtleCard = document.getElementById("turtleCard") as HTMLCalciteCardElement;
+
+      openPopover("popover");
 
       rectangleBtn.onclick = () => {
         chooseArea();
@@ -240,18 +251,12 @@ const BioMap: React.FC = (): JSX.Element => {
       clearBtn.onclick = () => {
         clearAreas(highlight);
       };
-      cancelBtnOne.onclick = () => {
-        closeModal("initial-area-modal");
-      };
       cancelBtnTwo.onclick = () => {
         closeModal("second-area-modal");
       };
       cancelBtnThree.onclick = () => {
         closeModal("screenshot-index-modal");
       };
-      splashModal.addEventListener("calciteModalClose", () => {
-        openPopover("popover");
-      });
       fishCard.addEventListener("click", (evt: MouseEvent) => {
         handleCardSelection(evt, "Fish");
       });
@@ -279,17 +284,17 @@ const BioMap: React.FC = (): JSX.Element => {
     };
   }
 
-  function unselectFeatures(highlight: any) {
+  function unselectFeatures(highlight: __esri.Handle) {
     if (highlight) {
       highlight.remove();
     }
   }
 
-  async function queryIntersectingFeatures(area: any) {
+  async function queryIntersectingFeatures(geometry: Geometry) {
     // Query for the features in the layerview that are within the extent of
     // the area drawn
     const intersectingFeatures = await featureLayerView.queryFeatures({
-      geometry: area,
+      geometry,
       outFields: featureLayerView.availableFields,
       returnGeometry: true
     });
@@ -298,7 +303,7 @@ const BioMap: React.FC = (): JSX.Element => {
     // workaround to highlight clearing issue
     unselectFeatures(highlight);
 
-    intersectingFeatures.features.forEach((feature: any) => {
+    intersectingFeatures.features.forEach((feature: Graphic) => {
       selectedFeatures.push(feature);
     });
     highlight = featureLayerView.highlight(selectedFeatures);
@@ -307,22 +312,22 @@ const BioMap: React.FC = (): JSX.Element => {
     // modal instruction display timing and store the two datasets
     // to calculate and screenshot the areas
     const filteredPolygons = filterPolygons(graphicsLayer.graphics);
-    if (filteredPolygons.items.length === 1) {
+    if (filteredPolygons.length === 1) {
       openModal("second-area-modal");
       featureSet1.features = intersectingFeatures.features;
-      featureSet1.area = area.extent;
-    } else if (filteredPolygons.items.length === 2) {
+      featureSet1.area = geometry.extent;
+    } else if (filteredPolygons.length === 2) {
       featureSet2.features = intersectingFeatures.features;
-      featureSet2.area = area.extent;
+      featureSet2.area = geometry.extent;
       calculateShannonIndex(featureSet1, featureSet2);
     }
   }
 
-  function clamp(value: any, from: any, to: any) {
+  function clamp(value: number, from: number, to: number) {
     return value < from ? from : value > to ? to : value;
   }
 
-  async function storeScreenshot(area: any) {
+  async function storeScreenshot(area: ScreenshotArea) {
     const screenshot = await view.takeScreenshot({ area: area, format: "png" });
     return screenshot;
   }
@@ -334,7 +339,7 @@ const BioMap: React.FC = (): JSX.Element => {
   function chooseArea() {
     closePopover("popover");
 
-    let area: any = null;
+    let area: ScreenshotArea;
 
     // listen for drag events and compute the selected area
     const dragHandler = view.on("drag", async (event) => {
@@ -360,9 +365,9 @@ const BioMap: React.FC = (): JSX.Element => {
         // remove the drag event listener from the SceneView
         dragHandler.remove();
         const filteredPolygons = filterPolygons(graphicsLayer.graphics);
-        if (filteredPolygons.items.length === 1) {
+        if (filteredPolygons.length === 1) {
           featureSet1.screenshot = await storeScreenshot(area);
-        } else if (filteredPolygons.items.length === 2) {
+        } else if (filteredPolygons.length === 2) {
           featureSet2.screenshot = await storeScreenshot(area);
         }
       }
@@ -371,17 +376,17 @@ const BioMap: React.FC = (): JSX.Element => {
     sketchViewModel.create("rectangle");
   }
 
-  function filterPolygons(graphics: any) {
+  function filterPolygons(graphics: Collection<Graphic>) {
     return graphics.filter((graphic: Graphic) => graphic.geometry.type === "polygon");
   }
 
-  function clearAreas(highlight: any) {
+  function clearAreas(highlight: __esri.Handle) {
     graphicsLayer.removeAll();
     toggleAreaBtn(true);
     unselectFeatures(highlight);
     selectedFeatures = [];
-    featureSet1 = { features: null, area: null, screenshot: null, H: 0 };
-    featureSet2 = { features: null, area: null, screenshot: null, H: 0 };
+    featureSet1 = { features: [], area: new Extent(), screenshot: null, H: 0 };
+    featureSet2 = { features: [], area: new Extent(), screenshot: null, H: 0 };
   }
 
   function calculateProportion(frequency: number, total: number) {
@@ -390,9 +395,9 @@ const BioMap: React.FC = (): JSX.Element => {
 
   // get total number of individuals (N)
   // also known as total biomass
-  function getTotalNumOfSpecies(speciesData: any) {
+  function getTotalNumOfSpecies(speciesData: Array<speciesData>) {
     let sum = 0;
-    speciesData.forEach((record: any) => {
+    speciesData.forEach((record: speciesData) => {
       sum += record.frequency;
     });
     return sum;
@@ -403,15 +408,15 @@ const BioMap: React.FC = (): JSX.Element => {
     return Math.log(proportion);
   }
 
-  function getSWIndex(data: any): number {
-    let H: any = 0;
+  function getSWIndex(data: Array<speciesData>): number {
+    let H = 0;
 
-    data.forEach((record: any) => {
+    data.forEach((record: speciesData) => {
       // 1. Add proportion to the dataset
       const totalSpecies = getTotalNumOfSpecies(data);
       record["pi"] = calculateProportion(record.frequency, totalSpecies);
 
-      // 2. Calculate the naturla log of each proportion
+      // 2. Calculate the natural log of each proportion
       // and add it to the dataset
       record["ln_pi"] = calculateNaturalLog(record.pi);
 
@@ -422,11 +427,10 @@ const BioMap: React.FC = (): JSX.Element => {
       // 4. Add the sum of the (pi) * ln(pi)
       H += record.pi_ln_pi;
     });
-
-    return (H = H.toFixed(2) * -1);
+    return +H.toFixed(2) * -1;
   }
 
-  // formula to calulate Shannon-Weiner Index
+  // formula to calculate Shannon-Weiner Index
   function calculateShannonIndex(fs1: featureSet, fs2: featureSet) {
     const community1 = createDataSchema(fs1.features);
     const community2 = createDataSchema(fs2.features);
@@ -437,7 +441,9 @@ const BioMap: React.FC = (): JSX.Element => {
     featureSet1.H = H1;
     featureSet2.H = H2;
     console.log(`community 1: ${H1} vs community 2: ${H2}`);
-    showPreview(featureSet1.screenshot, featureSet2.screenshot);
+    if (featureSet1.screenshot && featureSet2.screenshot) {
+      showPreview(featureSet1.screenshot, featureSet2.screenshot);
+    }
   }
 
   /**
@@ -448,10 +454,11 @@ const BioMap: React.FC = (): JSX.Element => {
    *  ...
    * ]
    */
-  function createDataSchema(features: any) {
-    const speciesTempStore: any = [];
-    const data: any = [];
-    features.forEach((feature: any) => {
+
+  function createDataSchema(features: Array<Graphic>) {
+    const speciesTempStore: Array<number | null> = [];
+    const data: Array<speciesData> = [];
+    features.forEach((feature: Graphic) => {
       const speciesType = feature.attributes.TYPE;
       // species does not exist in the store yet
       if (!speciesTempStore.includes(speciesType)) {
@@ -459,19 +466,24 @@ const BioMap: React.FC = (): JSX.Element => {
         data.push({ species: speciesType, frequency: 1 });
       } else {
         // species is already in the store, increment the frequency
-        const existingSpeciesRecord = data.find((element: any) => element.species === speciesType);
-        existingSpeciesRecord.frequency += 1;
+        const existingSpeciesRecord = data.find(
+          (element: speciesData) => element.species === speciesType
+        );
+
+        if (!!existingSpeciesRecord) {
+          existingSpeciesRecord.frequency += 1;
+        }
       }
     });
     return data;
   }
 
-  function showPreview(screenshot1: any, screenshot2: any) {
-    const img1: any = document.getElementById("img1");
-    const img2: any = document.getElementById("img2");
-    const indexDiv1: any = document.getElementById("indexDiv1");
-    const indexDiv2: any = document.getElementById("indexDiv2");
-    const resultSpan: any = document.getElementById("resultsSpan");
+  function showPreview(screenshot1: __esri.Screenshot, screenshot2: __esri.Screenshot) {
+    const img1 = document.getElementById("img1") as HTMLImageElement;
+    const img2 = document.getElementById("img2") as HTMLImageElement;
+    const indexDiv1 = document.getElementById("indexDiv1") as HTMLDivElement;
+    const indexDiv2 = document.getElementById("indexDiv2") as HTMLDivElement;
+    const resultSpan = document.getElementById("resultsSpan") as HTMLSpanElement;
 
     if (img1 && img2) {
       img1.width = screenshot1.data.width;
@@ -482,8 +494,8 @@ const BioMap: React.FC = (): JSX.Element => {
       img2.src = screenshot2.dataUrl;
 
       if (indexDiv1 && indexDiv2 && resultSpan) {
-        indexDiv1.innerHTML = featureSet1.H;
-        indexDiv2.innerHTML = featureSet2.H;
+        indexDiv1.innerHTML = `${featureSet1.H}`;
+        indexDiv2.innerHTML = `${featureSet2.H}`;
         resultSpan.innerText =
           featureSet1.H > featureSet2.H
             ? "Community 1 has a better species diversity index!"
@@ -494,7 +506,7 @@ const BioMap: React.FC = (): JSX.Element => {
     }
   }
 
-  function handleCardSelection(evt: any, speciesName: string) {
+  function handleCardSelection(evt: Event, speciesName: string) {
     if (sketchViewModel.state === "active") {
       sketchViewModel.cancel();
     }
@@ -503,25 +515,23 @@ const BioMap: React.FC = (): JSX.Element => {
     editableFeature.species = speciesName;
   }
 
-  function handlePointCreate(geometry: any) {
-    const attributes: any = {};
-    attributes["TYPE"] = getSubtypeCode(editableFeature.species);
-
-    const newMarineFeauture = new Graphic({
+  function handlePointCreate(geometry: Geometry) {
+    const type = getSubtypeCode(editableFeature.species);
+    const newMarineFeature = new Graphic({
       geometry,
-      attributes
+      attributes: { type }
     });
 
     stgl
       .applyEdits({
-        addFeatures: [newMarineFeauture]
+        addFeatures: [newMarineFeature]
       })
-      .then((result) => console.log("added feature successfully"))
-      .catch((err) => console.log("failed to add this feature"));
+      .then(() => console.log("added feature successfully"))
+      .catch(() => console.log("failed to add this feature"));
   }
 
   function getSubtypeCode(name: string) {
-    let code: any = null;
+    let code: number | null = null;
     switch (name) {
       case "Fish":
         code = 1;
@@ -565,28 +575,28 @@ const BioMap: React.FC = (): JSX.Element => {
   }
 
   function openModal(id: string) {
-    const modal: any = document.getElementById(id);
+    const modal = document.getElementById(id) as HTMLCalciteModalElement;
     if (modal) {
       modal.active = true;
     }
   }
 
   function closeModal(id: string) {
-    const modal: any = document.getElementById(id);
+    const modal = document.getElementById(id) as HTMLCalciteModalElement;
     if (modal) {
       modal.active = false;
     }
   }
 
   function closePopover(id: string) {
-    const popover: any = document.getElementById(id);
+    const popover = document.getElementById(id) as HTMLCalcitePopoverElement;
     if (popover) {
       popover.open = false;
     }
   }
 
   function openPopover(id: string) {
-    const popover: any = document.getElementById(id);
+    const popover = document.getElementById(id) as HTMLCalcitePopoverElement;
     if (popover) {
       popover.open = true;
     }
@@ -721,18 +731,6 @@ const BioMap: React.FC = (): JSX.Element => {
           </p>
         </div>
       </CalcitePanel>
-      <CalciteModal aria-labelledby="modal-title" id="initial-area-modal">
-        <div id="modal-title" slot="header">
-          Choose a community!
-        </div>
-        <div slot="content">
-          Use the Area button to select a group of marine animal species! You will need to create
-          two areas in order to compare the Species Diversity Index.
-        </div>
-        <CalciteButton appearance="outline" id="cancel-first-modal" slot="secondary" width="full">
-          Okay
-        </CalciteButton>
-      </CalciteModal>
       <CalciteModal aria-labelledby="modal-title" id="second-area-modal">
         <div id="modal-title" slot="header">
           Choose Another Community!
@@ -772,7 +770,12 @@ const BioMap: React.FC = (): JSX.Element => {
         </CalciteButton>
       </CalciteModal>
       <CalcitePopoverManager>
-        <CalcitePopover id="popover" label="Example label" referenceElement="rectangleBtn">
+        <CalcitePopover
+          id="popover"
+          label="Example label"
+          placement="bottom-leading"
+          referenceElement="rectangleBtn"
+        >
           <h4 style={{ padding: "0 10px", display: "flex;flex-direction:row" }}>
             Click to start drawing your area!
           </h4>
