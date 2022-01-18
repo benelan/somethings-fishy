@@ -22,6 +22,14 @@ export default (): JSX.Element => (
     <div style={{ textAlign: "center" }}>
       <h2>How are we doing in protecting living areas of rare species? </h2>
       <p>
+        <b>
+          <i>
+            We are trying to answer this question with spatial analysis and display the results
+            using the map below.
+          </i>
+        </b>
+      </p>
+      <p>
         The concept of rarity has several definitions in common usage, but in the lexicon of
         conservation biology a species' rarity is most simply based on its distribution and
         abundance (Gaston 1994). According to Reveal (1981,42) "rarity is merely the current status
@@ -34,14 +42,61 @@ export default (): JSX.Element => (
         <b>Our Spatial Analysis Workflow</b>
       </h3>
       <p>
-        The World Wildlife Fund’s (WWF) study in 2018 found that an average of 60% decline in global
-        populations of birds, reptiles, fish, mammals, and amphibians since 1970. More than a third
-        of the world’s land surface and about 75% of freshwater is used for crop or livestock
-        production (Hancock, L.). Overfishing, deforestation, and water pollution are all human
-        caused factors that are significantly impacting biodiversity around the world. The Natural
-        Resources Defense Council (NRDC) published an article in 2019 detailing that overfishing in
-        the ocean had the single greatest impact on biodiversity in the last 50 years. It is
-        important that sustainable fishing and food production is taken seriously.
+        <ol>
+          <li>
+            <p>
+              We acquired the protected areas and rarity scores within the Gulf of Mexico, using the
+              Overlay Layers tool on our input data, which are worldwide Protected Areas, a grid
+              cell layer with species rarity scores, and the Gulf of Mexico boundary.
+            </p>
+          </li>
+          <li>
+            <p>
+              1 Draw an area around the species you would like to use as your first community to
+              compare.
+            </p>
+          </li>
+          <li>
+            <p>
+              After drawing the first area, click on the area button to draw an area around the
+              second community of species you would like to compare the first community with.
+            </p>
+          </li>
+          <li>
+            <p>Once the second area is drawn, you will see the results!</p>
+          </li>
+          <li>
+            <p>
+              The Shannon Index numbers for both communities will be shown, along with screen
+              captures of the area you selected.
+            </p>
+          </li>
+          <li>
+            <p>
+              Click on the trash button to clear the areas and start drawing another two areas of
+              interest if you would like to compare another two communities.
+            </p>
+          </li>
+          <li>
+            <p>
+              You can click on the animal images on the right to start adding new points on the map!
+            </p>
+          </li>
+          <li>
+            <p>
+              The LayerList widget can be used to show and hide some of the species on the map as
+              well.
+            </p>
+          </li>
+        </ol>
+        1. We acquired the protected areas and rarity scores within the Gulf of Mexico, using the
+        Overlay Layers tool on our input data, which are worldwide Protected Areas, a grid cell
+        layer with species rarity scores, and the Gulf of Mexico boundary. 2. Considering that we
+        used the gird cells as the unit of analysis, and since some protected areas spread across
+        multiple cells, we called Overlay Layers again to split the protected areas by cells. 3.
+        Then, we dissolved the areas that were within the same cell, using Dissolve Boundaries." 4.
+        Finally, we called the Summarize Within tool to generate a layer that includes both the
+        portion of areas being protected and marine species rarity score, within each grid cells.
       </p>
     </InfoItem>
     <InfoItem>
@@ -89,16 +144,33 @@ export default (): JSX.Element => (
 
     <InfoItem>
       <h3>
-        <b>Education</b>
+        <b>Input Date Source</b>
       </h3>
-      <p>
-        Maintaining high levels of Biodiversity on Earth is important for the future of the planet,
-        and sustainability is key to doing this. Another key factor is education. Educating the
-        current and next generations will help bring awareness and help avoid some of the current
-        and past mistakes. The Shannon-Wiener Index Comparison application below is an example of
-        content we can create in order to help educate and bring awareness to the ocean
-        sustainability goal.
-      </p>
+      <ul>
+        <li>
+          <a
+            href="https://www.arcgis.com/home/item.html?id=bf2862f403b94411ac2428dc9c9bce03"
+            target="_blank"
+          >
+            Global Marine Species Patterns (55km), by Map of Life (MoL)
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.arcgis.com/home/item.html?id=ae78aeb913a343d69e950b53e29076f7"
+            target="_blank"
+          >
+            WDPA - World Database of Protected Areas, by UN Environment World Conservation
+            Monitoring Centre
+          </a>
+        </li>
+        <li>
+          <a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html" target="_blank">
+            Gulf of Mexico region with GSHHS and/or NaturalEarth shorelines, by GSHHG - A Global
+            Self-consistent, Hierarchical, High-resolution Geography Database
+          </a>
+        </li>
+      </ul>
     </InfoItem>
 
     <InfoItem>
