@@ -47,6 +47,7 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
           <MapHeader>Marine Species Rarity vs. Protected Area Map</MapHeader>
+          <RarityMapInfo />
           <MapContainer height={height}>
             <RarityMap />
           </MapContainer>
