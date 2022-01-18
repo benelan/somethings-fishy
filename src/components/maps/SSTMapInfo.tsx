@@ -26,21 +26,21 @@ export default (): JSX.Element => (
       <p>
         <b>
           <i>
-            Sea Surface Tempurature (SST) is the water temperature close to the ocean's surface. The
+            Sea Surface Temperature (SST) is the water temperature close to the ocean's surface. The
             "surface" can range from 1 millimeter to 20 meters below the sea level. SST provides
             fundamental information about our global climate system and how it is changing.
           </i>
         </b>
       </p>
     </div>
-    <InfoItem style={{ textAlign: "center" }}>
+    <InfoItem>
       <h3>
         <b>Effects of Global Sea Temperatures Rising</b>
       </h3>
       <img
         alt="Effects of global sea temperatures rising."
         src="/img/GlobalSurfaceTemperatureRising.png"
-        style={{ objectFit: "scale-down" }}
+        style={{ height: "auto", width: "100%", maxWidth: "900px" }}
       />
       <p>
         {"   "}
@@ -62,7 +62,6 @@ export default (): JSX.Element => (
         fundamental benefits humans get from the ocean.
       </p>
     </InfoItem>
-
     <InfoItem>
       <h3>
         <b>How Humans Impact Sea Surface Temperature</b>
@@ -107,14 +106,35 @@ export default (): JSX.Element => (
           </Link>
         </li>
       </ul>
+      <h3>
+        <b>Trends in Global Emissions</b>
+      </h3>
+      <div style={{ alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+        <img
+          alt="Trends of Global Emissions."
+          src="/img/EmissionsTrends.png"
+          style={{ height: "auto", width: "100%", maxWidth: "500px" }}
+        />
+        <p style={{ textAlign: "center" }}>
+          {"   "}
+          <Link
+            as={CalciteLink}
+            href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </p>
+      </div>
+    </InfoItem>
+    <div>
       <h3>How to use the Application</h3>
-      <p>
-        The Sea Surface Temperature Map Application allows you to visualize how the SST has
-        fluctuated over the last decade.
-      </p>
+      The Sea Surface Temperature Map Application allows you to visualize how the SST has fluctuated
+      over the last decade.
       <ol>
         <li>
-          <p>Zoom to an area of intersest to visualize Sea Surface Temperature (SST).</p>
+          <p>Zoom to an area of intersect to visualize Sea Surface Temperature (SST).</p>
         </li>
         <li>
           <p>
@@ -129,24 +149,6 @@ export default (): JSX.Element => (
           </p>
         </li>
       </ol>
-    </InfoItem>
-
-    <InfoItem style={{ textAlign: "center" }}>
-      <h3>
-        <b>Trends in Global Emissions</b>
-      </h3>
-      <img alt="Trends of Global Emissions." src="/img/EmissionsTrends.png" style={{}} />
-      <p style={{ textAlign: "center" }}>
-        {"   "}
-        <Link
-          as={CalciteLink}
-          href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          source
-        </Link>
-      </p>
-    </InfoItem>
+    </div>
   </InfoContainer>
 );
