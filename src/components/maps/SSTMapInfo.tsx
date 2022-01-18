@@ -1,6 +1,6 @@
 import React from "react";
-import "@esri/calcite-components/dist/components/calcite-panel";
-import { CalcitePanel } from "@esri/calcite-components-react";
+import "@esri/calcite-components/dist/components/calcite-link";
+import { CalciteLink } from "@esri/calcite-components-react";
 import styled from "styled-components";
 
 const InfoContainer = styled.div`
@@ -14,6 +14,10 @@ const InfoContainer = styled.div`
 const InfoItem = styled.div`
   flex: 1 1 40vw;
   margin: 1rem;
+`;
+const Link = styled.a`
+  font-size: 0.7em;
+  vertical-align: super;
 `;
 
 export default (): JSX.Element => (
@@ -32,9 +36,24 @@ export default (): JSX.Element => (
     </div>
     <InfoItem>
       <h3>
-        <b>Title</b>
+        <b>Effects of Global Sea Temperatures Rising</b>
       </h3>
-      <p>Image</p>
+      <img
+        alt="Effects of global sea temperatures rising."
+        src="../../../public/img/EmissionsTrends.png"
+        style={{}}
+      />
+      <p>
+        {"   "}
+        <Link
+          as={CalciteLink}
+          href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          source
+        </Link>
+      </p>
     </InfoItem>
 
     <InfoItem>
@@ -50,79 +69,86 @@ export default (): JSX.Element => (
 
     <InfoItem>
       <h3>
-        <b>Shannon-Wiener Diversity Index</b>
+        <b>How Humans Impact Sea Surface Temperature</b>
       </h3>
-      <p>
-        The Shannon-Wiener Index is one of the most widely used indices. It is used to measure and
-        compare species evenness, or the relative abundance of species. The following is the Shannon
-        Index formula:
-      </p>
-      <p>
-        If H = 0, then this means the community only has one species. There is no diversity because
-        all the living organism in the community belong to the same species. The higher the value of
-        H, the more diverse the community is (webpages.uidaho.edu).
-      </p>
-    </InfoItem>
-    <InfoItem as={CalcitePanel} heading="Shannon-Wiener Index">
-      <div id="info-panel-content">
-        <p className="p-math">
-          H = &#8212;<span className="span-math">&Sigma;</span>P<sub>i</sub> ln(P<sub>i</sub>)
-        </p>
-        <p>
-          <b>
-            P<sub>i</sub>
-          </b>{" "}
-          - the proportion of individuals in a species
-          <br />
-          <b>H</b> - the index
-        </p>
-      </div>
+      <ul>
+        <li>
+          The ocean absorbs most of the excess heat from greenhouse gas emissions, leading to rising
+          ocean temperatures.{"   "}
+          <Link
+            as={CalciteLink}
+            href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>
+          Increasing ocean temperatures affect marine species and ecosystems. Rising temperatures
+          cause coral bleaching and the loss of breeding grounds for marine fishes and mammals.
+          {"   "}
+          <Link
+            as={CalciteLink}
+            href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>
+          Rising ocean temperatures also affect the benefits humans derive from the ocean -
+          threatening food security, increasing the prevalence of diseases and causing more extreme
+          weather events and the loss of coastal protection.{"   "}
+          <Link
+            as={CalciteLink}
+            href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+      </ul>
     </InfoItem>
 
     <InfoItem>
+      <h3>
+        <b>Trends in Global Emissions</b>
+      </h3>
+      <img alt="Trends of Global Emissions." src="../../../public/img/" style={{}} />
+      {"   "}
+      <Link
+        as={CalciteLink}
+        href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        source
+      </Link>
+    </InfoItem>
+
+    <InfoItem>
+      <h3>How to use the Application</h3>
       <p>
-        <h3>How to use the App</h3>
+        The Sea Surface Temperature Map Application allows you to visualize how the SST has
+        fluctuated over the last decade.
       </p>
       <ol>
         <li>
-          <p>Click on the area button to start drawing your first area of interest.</p>
+          <p>Zoom to an area of intersest to visualize Sea Surface Temperature (SST).</p>
         </li>
         <li>
           <p>
-            Draw an area around the species you would like to use as your first community to
-            compare.
+            Click the "Play" button on the Time Slider to visualize the change in SST from March 31,
+            2008 to present.
           </p>
         </li>
         <li>
           <p>
-            After drawing the first area, click on the area button to draw an area around the second
-            community of species you would like to compare the first community with.
-          </p>
-        </li>
-        <li>
-          <p>Once the second area is drawn, you will see the results!</p>
-        </li>
-        <li>
-          <p>
-            The Shannon Index numbers for both communities will be shown, along with screen captures
-            of the area you selected.
-          </p>
-        </li>
-        <li>
-          <p>
-            Click on the trash button to clear the areas and start drawing another two areas of
-            interest if you would like to compare another two communities.
-          </p>
-        </li>
-        <li>
-          <p>
-            You can click on the animal images on the right to start adding new points on the map!
-          </p>
-        </li>
-        <li>
-          <p>
-            The LayerList widget can be used to show and hide some of the species on the map as
-            well.
+            Alternatively, click and drag the marker on the slider to choose a specific date within
+            the time range to visualize.
           </p>
         </li>
       </ol>
