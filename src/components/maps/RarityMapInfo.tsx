@@ -237,17 +237,18 @@ export default (): JSX.Element => (
       </p>
       <ol>
         <li>
+          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up. </p>
           <p>
-            Click on the cell grids to see our spatial anlaysis results on a pop-up. The result
-            includes the propertion of area that has been marked as protected area, and marine
-            species rarity scores of all taxa, fish, and mammals.
+            The result includes the propertion of area that has been marked as protected area, and
+            marine species rarity scores of all taxa, fish, and mammals.
           </p>
         </li>
         <li>
           <p>
-            Consult the relationship renderer on the legend widget and interpret patterns of the
-            spatial analysis result. The grid cells that need the most attention are the ones in
-            dark red. These cells have high rarity score but low protected propertion.
+            Consult the relationship renderer on the legend widget (which is on the right) and
+            interpret patterns of the spatial analysis result. The grid cells that need the most
+            attention are the ones in dark red. These cells have high rarity scores but low
+            protected propertions.
           </p>
         </li>
         <li>
