@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
 
 // arcgis js api
 import MapView from "@arcgis/core/views/MapView";
@@ -30,13 +29,7 @@ import {
 // calcite
 import "@esri/calcite-components/dist/components/calcite-alert";
 import { CalciteAlert } from "@esri/calcite-components-react";
-
-const MapDiv = styled.div`
-  padding: 0;
-  margin: 0;
-  height: 95%;
-  width: 100%;
-`;
+import { MapDiv } from "../../sharedStyledComponents";
 
 type DataAttributes = { TOTPOP: string; AVGHHSZ: string };
 

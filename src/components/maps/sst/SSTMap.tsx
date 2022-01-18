@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
@@ -9,13 +8,7 @@ import TimeSlider from "@arcgis/core/widgets/TimeSlider";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TimeInterval from "@arcgis/core/TimeInterval";
 import Legend from "@arcgis/core/widgets/Legend";
-
-const MapDiv = styled.div`
-  padding: 0;
-  margin: 0;
-  height: 95%;
-  width: 100%;
-`;
+import { MapDiv } from "../../sharedStyledComponents";
 
 const SSTMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
