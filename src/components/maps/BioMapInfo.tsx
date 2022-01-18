@@ -17,6 +17,11 @@ const InfoItem = styled.div`
   margin: 1rem;
 `;
 
+const StepsImg = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+`;
+
 export default (): JSX.Element => (
   <InfoContainer>
     <div style={{ textAlign: "center" }}>
@@ -168,13 +173,13 @@ export default (): JSX.Element => (
             You can click on the animal images on the right to start adding new points on the map!
           </p>
         </li>
-        <li>
-          <p>
-            The LayerList widget can be used to show and hide some of the species on the map as
-            well.
-          </p>
-        </li>
       </ol>
+    </InfoItem>
+    <InfoItem>
+      <h3>
+        <b>Biodiversity App Demo</b>
+      </h3>
+      <StepsImg src={process.env.PUBLIC_URL + "/img/biodiversity-app-steps.gif"} />
     </InfoItem>
   </InfoContainer>
 );
