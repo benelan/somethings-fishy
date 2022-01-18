@@ -101,6 +101,8 @@ Information prompted by the hackathon submission form.
 
 - How heavily humans have impacted the aquatic ecosystem.
 
+- 
+
 ### Next steps
 
 - Adding more data as factors that could affect some of the data in our applications. For example, adding a layer for ocean salinity, ocean acidity, and pollution into some of the applications. There are more factors contributing to sustainability issues in our oceans that we did not have time to illustrate.
@@ -116,6 +118,8 @@ Information prompted by the hackathon submission form.
 - Route to the closest land point when the debris is in the ocean.
 
 - Spatial Analysis: How are we doing in protecting rare species’ living areas?
+
+- Add Directions Widget to display directions when routed to the nearest debris.
 
 ## Mapping data sources
 
@@ -136,6 +140,12 @@ Information prompted by the hackathon submission form.
 - Dominance diversity. Retrieved Jan 17, 2022. [source](https://www.webpages.uidaho.edu/~beth/REM357_lectures_files/17Dominance%20diversity.pdf)
 
 - Kubiak, L. (2019, May 6) Marine Biodiversity in Dangerous Decline, Finds New Report. NRDC. [source](https://www.nrdc.org/experts/lauren-kubiak/marine-biodiversity-dangerous-decline-finds-new-report)
+
+- Ocean warming. International Union for Conservation of Nature. Retrieved Jan 17, 2022. [source](https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases)
+
+- Global Greenhouse Gas Emissions Data. United States Environmental Protection Agency. Retrieved Jan 17, 2022. [source](https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data)
+
+- How do We Reduce Greenhouse Gases? UCAR Center for Science Education. Retrieved Jan 17, 2022. [source](https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases)
 
 ## Run the app locally
 
