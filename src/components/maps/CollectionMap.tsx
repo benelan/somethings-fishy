@@ -1,29 +1,33 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
+
+// arcgis js api
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
-import * as geometryEngine from "@arcgis/core/geometry/geometryEngine";
 import Graphic from "@arcgis/core/Graphic";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
-import * as route from "@arcgis/core/rest/route";
 import RouteParameters from "@arcgis/core/rest/support/RouteParameters";
 import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import Locate from "@arcgis/core/widgets/Locate";
-import * as locator from "@arcgis/core/rest/locator";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import Point from "@arcgis/core/geometry/Point";
 import Color from "@arcgis/core/Color";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import ActionButton from "@arcgis/core/support/actions/ActionButton";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
+import * as geometryEngine from "@arcgis/core/geometry/geometryEngine";
+import * as locator from "@arcgis/core/rest/locator";
+import * as route from "@arcgis/core/rest/route";
 
+// arcgis rest js
 import { ApiKey } from "@esri/arcgis-rest-auth";
 import {
   queryDemographicData,
   IQueryDemographicDataResponse
 } from "@esri/arcgis-rest-demographics";
 
+// calcite
 import "@esri/calcite-components/dist/components/calcite-alert";
 import { CalciteAlert } from "@esri/calcite-components-react";
 
@@ -50,6 +54,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
       if (!REACT_APP_GLOBAL_API_KEY) {
         throw new Error("API key not found");
       }
+
       esriConfig.apiKey = REACT_APP_GLOBAL_API_KEY;
       const authentication = new ApiKey({
         key: REACT_APP_GLOBAL_API_KEY
@@ -61,11 +66,18 @@ const CollectionMap: React.FC = (): JSX.Element => {
           id: "fa1a0336d3a9475ca4099c9fe1ee697f"
         }
       });
+
       // Create the MapView
       const view = new MapView({
         container: mapDiv.current,
         map
       });
+
+      // don't zoom while scrolling until map is clicked
+      const wheelEvtHandler = view.on("mouse-wheel", (event) => {
+        event.stopPropagation();
+      });
+      view.on("click", () => wheelEvtHandler.remove());
 
       // GeoEnrichment
       const getDemographicData = (address: string, city: string, point: Point) => {
@@ -88,6 +100,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
           ) {
             const attributes = results[0].value.FeatureSet[0].features[0]
               .attributes as DataAttributes;
+
             showData(address, city, attributes, point);
           } else {
             showAddress(address, point);
@@ -102,6 +115,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
         location: Point
       ) => {
         const title = `Global facts near ${city}`;
+
         const content = `Address: ${address}<br>Population: ${attributes.TOTPOP}<br>Average Household Size: ${attributes.AVGHHSZ}`;
         view.popup.open({
           location,
@@ -109,7 +123,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
           content
         });
 
-        const buffer: any = geometryEngine.geodesicBuffer(location, 1, "miles");
+        const buffer = geometryEngine.geodesicBuffer(location, 1, "miles") as __esri.Geometry;
         const graphicBuffer = new Graphic({
           geometry: buffer,
           symbol: new SimpleFillSymbol({
@@ -141,6 +155,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
             const params = {
               location: evt.mapPoint
             };
+
             locator.locationToAddress(geocoderUrl, params).then(
               function (response) {
                 // Show the address found
@@ -148,6 +163,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
                 const city = response.attributes.City || response.attributes.Region;
                 getDemographicData(address, city, params.location);
               },
+
               function () {
                 // Show no address found
                 showAddress("No address found.", evt.mapPoint);
@@ -160,6 +176,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
       // Routing
       const routeLayer = new GraphicsLayer();
       map.add(routeLayer);
+
       const locate = new Locate({
         view,
         useHeadingEnabled: false,
@@ -173,12 +190,15 @@ const CollectionMap: React.FC = (): JSX.Element => {
 
       const routeMe = () => {
         (document.getElementById("routing") as HTMLCalciteAlertElement).active = true;
+
         locate.locate().then(() => {
           //Get location of user and debris
           const userLocation = locate.graphic;
           const debrisLocation = view.popup.selectedFeature;
+
           //Add routeParamter stops
           (routeParams.stops as FeatureSet).features.push(userLocation, debrisLocation);
+
           if ((routeParams.stops as FeatureSet).features.length >= 2) {
             (document.getElementById("routing") as HTMLCalciteAlertElement).active = false;
             route
@@ -201,15 +221,14 @@ const CollectionMap: React.FC = (): JSX.Element => {
                 routeLayer.add(routeResult);
               })
               .catch((e) => {
-                console.log(e);
+                console.log(`Routing error: ${e}`);
                 (document.getElementById("routing_alert") as HTMLCalciteAlertElement).active = true;
               });
           }
         });
       };
       view.when(() => {
-        const layer: any = map.layers.getItemAt(1);
-        // const layer = map.layers.getItemAt(1) as __esri.FeatureLayer;
+        const layer: any = map.layers.getItemAt(1); // as __esri.FeatureLayer;
 
         layer.popupTemplate.actions = [
           new ActionButton({
@@ -231,8 +250,7 @@ const CollectionMap: React.FC = (): JSX.Element => {
   }, [mapDiv]);
 
   return (
-    <>
-      <MapDiv ref={mapDiv} />
+    <MapDiv ref={mapDiv}>
       <CalciteAlert color="green" icon="route-to" id="routing" label="">
         <div slot="message">Calculating route... </div>
       </CalciteAlert>
@@ -240,10 +258,10 @@ const CollectionMap: React.FC = (): JSX.Element => {
       <CalciteAlert color="red" icon="information" id="routing_alert" label="">
         <div slot="message">
           Oops! No route was found to this point. Please try again with other points that are on or
-          closer to the continent.{" "}
+          closer to the continent.
         </div>
       </CalciteAlert>
-    </>
+    </MapDiv>
   );
 };
 
