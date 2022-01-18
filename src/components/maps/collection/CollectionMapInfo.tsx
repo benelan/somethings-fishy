@@ -33,7 +33,7 @@ export default (): JSX.Element => (
         Survey123. Click on the points to see further details (debris type, photo, etc.) in a
         pop-up. Click on other places on the map to see demographic data of the area (if they are
         available).
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginTop: "1rem" }}>
           <a href="https://arcg.is/1T8nfr0" rel="noopener noreferrer" target="_blank">
             <img
               alt="QR Code"
