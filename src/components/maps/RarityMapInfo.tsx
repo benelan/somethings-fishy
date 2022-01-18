@@ -196,7 +196,7 @@ export default (): JSX.Element => (
       <img
         alt="Flowchart"
         height="300"
-        src={process.env.PUBLIC_URL + '/img/spatial_analysis_flowchart_rarity_protection.png'}
+        src={process.env.PUBLIC_URL + "/img/spatial_analysis_flowchart_rarity_protection.png"}
         style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
         width="300"
       />
@@ -244,7 +244,7 @@ export default (): JSX.Element => (
       </p>
       <ol>
         <li>
-          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up.</p>
+          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up!</p>
           <p>
             The result includes the propertion of area that has been marked as protected area, and
             marine species rarity scores of all taxa (all species), fish, and mammals.
