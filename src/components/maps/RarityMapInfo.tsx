@@ -237,50 +237,32 @@ export default (): JSX.Element => (
       </p>
       <ol>
         <li>
-          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up. </p>
+          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up.</p>
           <p>
             The result includes the propertion of area that has been marked as protected area, and
-            marine species rarity scores of all taxa, fish, and mammals.
+            marine species rarity scores of all taxa (all species), fish, and mammals.
           </p>
         </li>
         <li>
           <p>
             Consult the relationship renderer on the legend widget (which is on the right) and
-            interpret patterns of the spatial analysis result. The grid cells that need the most
-            attention are the ones in dark red. These cells have high rarity scores but low
-            protected propertions.
+            interpret patterns of the spatial analysis result.{" "}
+          </p>
+          <p>
+            The grid cells that need the most attention are the ones in dark red. These cells have
+            high rarity scores but low protected propertions.
           </p>
         </li>
         <li>
+          <p>There is also a filtering tool in the lower left of the app!</p>
           <p>
-            After drawing the first area, click on the area button to draw an area around the second
-            community of species you would like to compare the first community with.
-          </p>
-        </li>
-        <li>
-          <p>Once the second area is drawn, you will see the results!</p>
-        </li>
-        <li>
-          <p>
-            The Shannon Index numbers for both communities will be shown, along with screen captures
-            of the area you selected.
-          </p>
-        </li>
-        <li>
-          <p>
-            Click on the trash button to clear the areas and start drawing another two areas of
-            interest if you would like to compare another two communities.
-          </p>
-        </li>
-        <li>
-          <p>
-            You can click on the animal images on the right to start adding new points on the map!
-          </p>
-        </li>
-        <li>
-          <p>
-            The LayerList widget can be used to show and hide some of the species on the map as
-            well.
+            {" "}
+            Drag the slider to a number to show only the cell grids where rarity of all species is
+            greater than the number selected.
+            <p>
+              The renderer will be updated according to the filter you set. Click "Reset Filter" to
+              reverse back to the default symbology.
+            </p>
           </p>
         </li>
       </ol>
