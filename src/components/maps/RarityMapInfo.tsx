@@ -22,6 +22,11 @@ const Link = styled.a`
   vertical-align: super;
 `;
 
+const StepsImg = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+`;
+
 export default (): JSX.Element => (
   <InfoContainer>
     <div style={{ textAlign: "center" }}>
@@ -198,7 +203,7 @@ export default (): JSX.Element => (
       <h3>
         <b>Step-by-step Screen Record</b>
       </h3>
-      <p />
+      <StepsImg src={process.env.PUBLIC_URL + "/img/biodiversity-app-steps.gif"} />
     </InfoItem>
     <InfoItem>
       <h3>
