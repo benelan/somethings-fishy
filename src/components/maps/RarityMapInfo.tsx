@@ -196,7 +196,7 @@ export default (): JSX.Element => (
       <img
         alt="Flowchart"
         height="300"
-        src="public/img/spatial_analysis_flowchart_rarity_protection.png"
+        src={process.env.PUBLIC_URL + '/img/spatial_analysis_flowchart_rarity_protection.png'}
         style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
         width="300"
       />
