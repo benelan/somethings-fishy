@@ -4,6 +4,7 @@ import LazyLoad from "react-lazyload";
 import BioMap from "./BioMap";
 import BioMapInfo from "./BioMapInfo";
 import RarityMap from "./RarityMap";
+import RarityMapInfo from "./RarityMapInfo";
 import CollectionMap from "./CollectionMap";
 import CollectionMapInfo from "./CollectionMapInfo";
 import SSTMap from "./SSTMap";
@@ -56,6 +57,7 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
           <MapHeader>Marine Species Rarity vs. Protected Area Map</MapHeader>
+          <MapInfo as={RarityMapInfo} />
           <MapContainer height={height}>
             <RarityMap />
           </MapContainer>
