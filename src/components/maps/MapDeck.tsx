@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import LazyLoad from "react-lazyload";
-import BioMap from "./BioMap";
-import BioMapInfo from "./BioMapInfo";
-import RarityMap from "./RarityMap";
-import CollectionMap from "./CollectionMap";
-import CollectionMapInfo from "./CollectionMapInfo";
-import SSTMap from "./SSTMap";
-import SSTMapInfo from "./SSTMapInfo";
+import BioMap from "./bio/BioMap";
+import BioMapInfo from "./bio/BioMapInfo";
+import RarityMap from "./rarity/RarityMap";
+import CollectionMap from "./collection/CollectionMap";
+import CollectionMapInfo from "./collection/CollectionMapInfo";
+import SSTMap from "./sst/SSTMap";
+import SSTMapInfo from "./sst/SSTMapInfo";
 import ErrorBoundary from "../ErrorBoundary";
 
 import "@arcgis/core/assets/esri/themes/light/main.css";
