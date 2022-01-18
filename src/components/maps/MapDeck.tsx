@@ -45,16 +45,6 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
 
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
-          <MapHeader>Biodiversity Map</MapHeader>
-          <MapInfo as={BioMapInfo} />
-          <MapContainer height={height}>
-            <BioMap />
-          </MapContainer>
-        </LazyLoad>
-      </ErrorBoundary>
-
-      <ErrorBoundary>
-        <LazyLoad height={height} offset={100}>
           <MapHeader>Marine Species Rarity vs. Protected Area Map</MapHeader>
           <MapContainer height={height}>
             <RarityMap />
@@ -68,6 +58,16 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
           <MapInfo as={CollectionMapInfo} />
           <MapContainer height={height}>
             <CollectionMap />
+          </MapContainer>
+        </LazyLoad>
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <LazyLoad height={height} offset={100}>
+          <MapHeader>Biodiversity Map</MapHeader>
+          <MapInfo as={BioMapInfo} />
+          <MapContainer height={height}>
+            <BioMap />
           </MapContainer>
         </LazyLoad>
       </ErrorBoundary>
