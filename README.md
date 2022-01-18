@@ -144,7 +144,7 @@ Information prompted by the hackathon submission form.
 
 - Global Greenhouse Gas Emissions Data. United States Environmental Protection Agency. Retrieved Jan 17, 2022. [source](https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data)
 
-- How do We Reduce Greenhouse Gases? UCAR Center for Science Education
+- How do We Reduce Greenhouse Gases? UCAR Center for Science Education. Retrieved Jan 17, 2022. [source](https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases)
 
 ## Run the app locally
 
