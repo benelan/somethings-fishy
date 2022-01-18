@@ -44,14 +44,30 @@ export default (): JSX.Element => (
     </div>
     <InfoItem>
       <h3>
-        <b>Why marine protected areas are important? </b>
+        <b>Why protect the ocean? </b>{" "}
+        <Link
+          as={CalciteLink}
+          href="https://marine-conservation.org/why-protect-the-ocean/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          source
+        </Link>
       </h3>
       <ul>
         <li> Item 1 </li>
         <li> Item 2 </li>
         <li>
           To provide opportunities for people to experience and study marine life that are
-          undisturbed by human activity.
+          undisturbed by human activity.{" "}
+          <Link
+            as={CalciteLink}
+            href="https://wildcoast.org/why-marine-protected-areas-are-important-for-the-future/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
         </li>
       </ul>
     </InfoItem>
@@ -63,7 +79,7 @@ export default (): JSX.Element => (
       <ul>
         <li>
           Rare species contribute a lot to the ecosystems; rare species loss reduces the functional
-          diversity of communities."{" "}
+          diversity of communities.{" "}
           <Link
             as={CalciteLink}
             href="https://phys.org/news/2016-04-rare-species-important-believed.html"
@@ -100,7 +116,7 @@ export default (): JSX.Element => (
         <li>
           Contribution to medicine: Each living thing contains a unique reservoir of genetic
           material that has evolved over eons. This material cannot be retrieved or duplicated if
-          lost.
+          lost.{" "}
           <Link
             as={CalciteLink}
             href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
