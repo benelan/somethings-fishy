@@ -195,8 +195,10 @@ export default (): JSX.Element => (
       </h3>
       <img
         alt="Flowchart"
+        height="300"
         src="public/img/spatial_analysis_flowchart_rarity_protection.png"
         style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
+        width="300"
       />
     </InfoItem>
     <InfoItem>
