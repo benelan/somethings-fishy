@@ -58,8 +58,8 @@ export default (): JSX.Element => (
       </h3>
       <p>
         Rising sea temperature leads to a reduction in the amount of oxygen dissolved in the ocean
-        and sea level rise causing negative effects for marine species and ecosystems along with the
-        fundamental benefits humans get from the ocean.
+        and sea level rise, which causes negative effects for marine species and ecosystems.
+        Additionally, this harms fundamental benefits that humans get from the ocean.
       </p>
     </InfoItem>
     <InfoItem>
@@ -94,8 +94,8 @@ export default (): JSX.Element => (
         </li>
         <li>
           Rising ocean temperatures also affect the benefits humans derive from the ocean -
-          threatening food security, increasing the prevalence of diseases and causing more extreme
-          weather events and the loss of coastal protection.{"   "}
+          threatening food security, increasing the prevalence of diseases, and causing extreme
+          weather events and loss of coastal protection.{"   "}
           <Link
             as={CalciteLink}
             href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
@@ -134,7 +134,7 @@ export default (): JSX.Element => (
       over the last decade.
       <ol>
         <li>
-          <p>Zoom to an area of intersect to visualize Sea Surface Temperature (SST).</p>
+          <p>Zoom to an area of interest to visualize Sea Surface Temperature (SST).</p>
         </li>
         <li>
           <p>
@@ -144,8 +144,8 @@ export default (): JSX.Element => (
         </li>
         <li>
           <p>
-            Alternatively, click and drag the marker on the slider to choose a specific date within
-            the time range to visualize.
+            Alternatively, click and drag the marker on the slider to see a specific date within the
+            time range.
           </p>
         </li>
       </ol>
