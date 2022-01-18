@@ -64,6 +64,7 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
           <MapHeader>Data Collection Map</MapHeader>
+          <MapInfo as={CollectionMapInfo} />
           <MapContainer height={height}>
             <CollectionMap />
           </MapContainer>

@@ -19,10 +19,6 @@ img {
   max-height: 100;
 }
 
-.editable-card {
-  cursor: pointer;
-}
-
 .p-math {
     height: 50px;
     line-height: 50px;
