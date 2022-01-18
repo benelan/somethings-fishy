@@ -34,13 +34,13 @@ export default (): JSX.Element => (
         </b>
       </p>
     </div>
-    <InfoItem>
+    <InfoItem style={{ textAlign: "center" }}>
       <h3>
         <b>Effects of Global Sea Temperatures Rising</b>
       </h3>
       <img
         alt="Effects of global sea temperatures rising."
-        src="/img/EmissionsTrends.png"
+        src="/img/GlobalSurfaceTemperatureRising.png"
         style={{}}
       />
       <p>
@@ -58,7 +58,7 @@ export default (): JSX.Element => (
 
     <InfoItem>
       <h3>
-        <b>Why is the sea temperature rising important?</b>
+        <b>Why is the rise in sea temperature important?</b>
       </h3>
       <p>
         Rising sea temperature leads to a reduction in the amount of oxygen dissolved in the ocean
@@ -117,16 +117,18 @@ export default (): JSX.Element => (
       <h3>
         <b>Trends in Global Emissions</b>
       </h3>
-      <img alt="Trends of Global Emissions." src="../../../public/img/" style={{}} />
-      {"   "}
-      <Link
-        as={CalciteLink}
-        href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        source
-      </Link>
+      <img alt="Trends of Global Emissions." src="/img/EmissionsTrends.png" style={{}} />
+      <p style={{ textAlign: "center" }}>
+        {"   "}
+        <Link
+          as={CalciteLink}
+          href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          source
+        </Link>
+      </p>
     </InfoItem>
 
     <InfoItem>
