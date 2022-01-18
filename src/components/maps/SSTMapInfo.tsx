@@ -41,7 +41,7 @@ export default (): JSX.Element => (
       <img
         alt="Effects of global sea temperatures rising."
         src="/img/GlobalSurfaceTemperatureRising.png"
-        style={{}}
+        style={{ objectFit: "scale-down" }}
       />
       <p>
         {"   "}
