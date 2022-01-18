@@ -205,7 +205,7 @@ export default (): JSX.Element => (
       <h3>
         <b>Step-by-step Screen Record</b>
       </h3>
-      <StepsImg src={process.env.PUBLIC_URL + "/img/biodiversity-app-steps.gif"} />
+      <StepsImg src={process.env.PUBLIC_URL + "/img/rarity-analysis-steps.gif"} />
     </InfoItem>
     <InfoItem>
       <h3>
