@@ -1,23 +1,15 @@
 import React, { useRef, useEffect } from "react";
-import "@esri/calcite-components/dist/components/calcite-card";
 import "@esri/calcite-components/dist/components/calcite-action";
 import "@esri/calcite-components/dist/components/calcite-panel";
 import "@esri/calcite-components/dist/components/calcite-icon";
 import "@esri/calcite-components/dist/components/calcite-block";
-import "@esri/calcite-components/dist/components/calcite-button";
-import "@esri/calcite-components/dist/components/calcite-link";
-import "@esri/calcite-components/dist/components/calcite-modal";
 import "@esri/calcite-components/dist/components/calcite-popover";
 import "@esri/calcite-components/dist/components/calcite-popover-manager";
 import {
-  CalciteCard,
   CalciteAction,
   CalcitePanel,
   CalciteIcon,
   CalciteBlock,
-  CalciteButton,
-  CalciteLink,
-  CalciteModal,
   CalcitePopover,
   CalcitePopoverManager
 } from "@esri/calcite-components-react";
@@ -37,8 +29,10 @@ import Geometry from "@arcgis/core/geometry/Geometry";
 import Collection from "@arcgis/core/core/Collection";
 import Extent from "@arcgis/core/geometry/Extent";
 import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
-// import esriConfig from "@arcgis/core/config";
+
 import "./BioMap.css";
+import BioCardList from "./BioCardList";
+import ScreenshotModal from "./ScreenshotModal";
 
 const MapDiv = styled.div`
   padding: 0;
@@ -69,6 +63,102 @@ interface speciesData {
   pi_ln_pi?: number;
 }
 
+interface InfoCard {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+  species: string;
+}
+
+const cards: InfoCard[] = [
+  {
+    id: "fishCard",
+    title: "Red Snapper",
+    description: "Yound red snappers are food for large fish that share their habitat.",
+    imageUrl: "/red_snapper.png",
+    link: "https://www.fisheries.noaa.gov/species/red-snapper",
+    species: "Fish"
+  },
+  {
+    id: "turtleCard",
+    title: "Green Turtle",
+    description: "Green turtles can live for 70 years or more!",
+    imageUrl: "/green_turtle.jpg",
+    link: "https://www.fisheries.noaa.gov/species/green-turtle",
+    species: "Turtle"
+  },
+  {
+    id: "whaleCard",
+    title: "Baleen Whale",
+    description: "The Baleen whale can weight up to 60,000 pounds! (5 times an elephant)",
+    imageUrl: "/baleen_whale.jpg",
+    link: "https://www.fisheries.noaa.gov/feature-story/new-species-baleen-whale-gulf-mexico",
+    species: "Whale"
+  },
+  {
+    id: "lobsterCard",
+    title: "Spiny Lobster",
+    description: "Spiny lobster is a common lobster found in the Gulf of Mexico<",
+    imageUrl: "/spiny_lobster.jpg",
+    link: "https://www.fisheries.noaa.gov/management-plan/gulf-mexico-and-south-atlantic-spiny-lobster-fishery-management-plan",
+    species: "Lobster"
+  },
+  {
+    id: "dolphinCard",
+    title: "Common Bottlenose Dolphin",
+    description:
+      "The Common Bottlenose Dolphin can be spotted along coastal waters, harbors, bays, gulfs, estuaries, and in the open ocean!",
+    imageUrl: "/bottlenose_dolphin.jpg",
+    link: "https://www.fisheries.noaa.gov/species/common-bottlenose-dolphin",
+    species: "Dolphin"
+  },
+  {
+    id: "crabCard",
+    title: "Blue Crab",
+    description:
+      "Do distinguish between a male and female blue crab, just look for the red color tips on the claws. Only females will have the red color!",
+    imageUrl: "/blue_crab.jpg",
+    link: "https://www.fisheries.noaa.gov/species/blue-crab",
+    species: "Crab"
+  },
+  {
+    id: "sealCard",
+    title: "Harbor Seal",
+    description: "Harbor seal pups can swim at birth!",
+    imageUrl: "/harbor_seal.jpg",
+    link: "https://www.fisheries.noaa.gov/species/harbor-seal",
+    species: "SealSeaLion"
+  },
+  {
+    id: "manateeCard",
+    title: "West Indian Manatee",
+    description:
+      "Some manatees live near the Florida shore, and preferably on submergent vegetation.",
+    imageUrl: "/manatee.jpg",
+    link: "https://www.fws.gov/southeast/wildlife/mammals/manatee/",
+    species: "Manatee"
+  },
+  {
+    id: "oysterCard",
+    title: "Oyster",
+    description:
+      "Oysters can merge together to form oyster reefs that serve as habitats for other marine life! These are called Oyster Reefs!",
+    imageUrl: "/oyster.jpg",
+    link: "https://www.fisheries.noaa.gov/national/habitat-conservation/oyster-reef-habitat",
+    species: "OysterClam"
+  },
+  {
+    id: "echinodermCard",
+    title: "Abyssal Stars",
+    description: "New species have been recently found in the Gulf of Mexico!",
+    imageUrl: "/echinoderm.jpg",
+    link: "https://oceanexplorer.noaa.gov/okeanos/explorations/ex1803/logs/apr29/welcome.html",
+    species: "Echinoderm"
+  }
+];
+
 // globals
 let selectedFeatures: Array<Graphic> = [];
 let highlight: __esri.Handle;
@@ -90,15 +180,13 @@ const webStyleSymbolUrl =
 // ui
 let rectangleBtn: HTMLCalciteButtonElement;
 let clearBtn: HTMLCalciteButtonElement;
-let cancelBtnTwo: HTMLCalciteButtonElement;
-let cancelBtnThree: HTMLCalciteButtonElement;
-let fishCard: HTMLCalciteCardElement;
-let whaleCard: HTMLCalciteCardElement;
-let lobsterCard: HTMLCalciteCardElement;
-let turtleCard: HTMLCalciteCardElement;
 
 const BioMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  const onCardSelect = (card: any) => {
+    handleCardSelection(card.species);
+  };
 
   useEffect(() => {
     if (mapDiv.current) {
@@ -176,12 +264,6 @@ const BioMap: React.FC = (): JSX.Element => {
         center: [-90.21093696355662, 27.08863619791193]
       });
 
-      // don't zoom while scrolling until map is clicked
-      const wheelEvtHandler = view.on("mouse-wheel", (event) => {
-        event.stopPropagation();
-      });
-      view.on("click", () => wheelEvtHandler.remove());
-
       sketchViewModel = new SketchViewModel({
         view,
         layer: graphicsLayer
@@ -211,26 +293,15 @@ const BioMap: React.FC = (): JSX.Element => {
       view.ui.add(layerList, "bottom-left");
 
       view.when(() => {
-        console.log("loaded biodiversity map");
         // set the layerview for client-side querying and highlighting
         view.whenLayerView(stgl).then((layerView) => {
           featureLayerView = layerView as FeatureLayerView;
         });
-
-        openModal("initial-area-modal");
       });
 
       // ui
       rectangleBtn = document.getElementById("rectangleBtn") as HTMLCalciteButtonElement;
       clearBtn = document.getElementById("clearBtn") as HTMLCalciteButtonElement;
-      cancelBtnTwo = document.getElementById("cancel-second-modal") as HTMLCalciteButtonElement;
-      cancelBtnThree = document.getElementById(
-        "cancel-screenshot-modal"
-      ) as HTMLCalciteButtonElement;
-      fishCard = document.getElementById("fishCard") as HTMLCalciteCardElement;
-      whaleCard = document.getElementById("whaleCard") as HTMLCalciteCardElement;
-      lobsterCard = document.getElementById("lobsterCard") as HTMLCalciteCardElement;
-      turtleCard = document.getElementById("turtleCard") as HTMLCalciteCardElement;
 
       openPopover("popover");
 
@@ -240,24 +311,6 @@ const BioMap: React.FC = (): JSX.Element => {
       clearBtn.onclick = () => {
         clearAreas(highlight);
       };
-      cancelBtnTwo.onclick = () => {
-        closeModal("second-area-modal");
-      };
-      cancelBtnThree.onclick = () => {
-        closeModal("screenshot-index-modal");
-      };
-      fishCard.addEventListener("click", (evt: MouseEvent) => {
-        handleCardSelection(evt, "Fish");
-      });
-      whaleCard.addEventListener("click", (evt: MouseEvent) => {
-        handleCardSelection(evt, "Whale");
-      });
-      lobsterCard.addEventListener("click", (evt: MouseEvent) => {
-        handleCardSelection(evt, "Lobster");
-      });
-      turtleCard.addEventListener("click", (evt: MouseEvent) => {
-        handleCardSelection(evt, "Turtle");
-      });
     }
   }, [mapDiv]);
 
@@ -302,7 +355,6 @@ const BioMap: React.FC = (): JSX.Element => {
     // to calculate and screenshot the areas
     const filteredPolygons = filterPolygons(graphicsLayer.graphics);
     if (filteredPolygons.length === 1) {
-      openModal("second-area-modal");
       featureSet1.features = intersectingFeatures.features;
       featureSet1.area = geometry.extent;
     } else if (filteredPolygons.length === 2) {
@@ -429,7 +481,7 @@ const BioMap: React.FC = (): JSX.Element => {
 
     featureSet1.H = H1;
     featureSet2.H = H2;
-    console.log(`community 1: ${H1} vs community 2: ${H2}`);
+
     if (featureSet1.screenshot && featureSet2.screenshot) {
       showPreview(featureSet1.screenshot, featureSet2.screenshot);
     }
@@ -487,15 +539,15 @@ const BioMap: React.FC = (): JSX.Element => {
         indexDiv2.innerHTML = `${featureSet2.H}`;
         resultSpan.innerText =
           featureSet1.H > featureSet2.H
-            ? "Community 1 has a better species diversity index!"
-            : "Community 2 has a better species diversity index!";
+            ? "Community 1 has a higher species diversity index!"
+            : "Community 2 has a higher species diversity index!";
 
         openModal("screenshot-index-modal");
       }
     }
   }
 
-  function handleCardSelection(evt: Event, speciesName: string) {
+  function handleCardSelection(speciesName: string) {
     if (sketchViewModel.state === "active") {
       sketchViewModel.cancel();
     }
@@ -564,16 +616,9 @@ const BioMap: React.FC = (): JSX.Element => {
   }
 
   function openModal(id: string) {
-    const modal = document.getElementById(id) as HTMLCalciteModalElement;
+    const modal: any = document.getElementById(id) as HTMLCalciteModalElement;
     if (modal) {
       modal.active = true;
-    }
-  }
-
-  function closeModal(id: string) {
-    const modal = document.getElementById(id) as HTMLCalciteModalElement;
-    if (modal) {
-      modal.active = false;
     }
   }
 
@@ -602,137 +647,11 @@ const BioMap: React.FC = (): JSX.Element => {
             <CalciteAction id="clearBtn" slot="control" text="" title="Clear areas">
               <CalciteIcon icon="trash" scale="m" />
             </CalciteAction>
-            <CalciteAction id="infoBtn" slot="control" text="" title="About">
-              <CalciteIcon icon="information" scale="m" />
-            </CalciteAction>
           </CalciteBlock>
-          <CalciteCard className="editable-card" id="fishCard">
-            <span slot="title">Red Snapper</span>
-            <div slot="subtitle">
-              Yound red snappers are food for large fish that share their habitat.
-            </div>
-            <img
-              alt="fish"
-              slot="thumbnail"
-              src="https://jbanuelos1.esri.com/images/red_snapper.png"
-            />
-            <div slot="footer-leading">
-              <CalciteButton icon-start="plus" scale="s" slot="footer-leading" />
-            </div>
-            <div slot="footer-trailing">
-              <CalciteLink
-                href="https://www.fisheries.noaa.gov/species/red-snapper"
-                target="_blank"
-              >
-                About the Species
-              </CalciteLink>
-            </div>
-          </CalciteCard>
-
-          <CalciteCard className="editable-card" id="turtleCard">
-            <span slot="title">Green Turtle</span>
-            <div slot="subtitle">Green turtles can live for 70 years or more!</div>
-            <img
-              alt="turtle"
-              slot="thumbnail"
-              src="https://jbanuelos1.esri.com/images/green_turtle.jpg"
-            />
-            <div slot="footer-leading">
-              <CalciteButton icon-start="plus" scale="s" slot="footer-leading" />
-            </div>
-            <div slot="footer-trailing">
-              <CalciteLink
-                href="https://www.fisheries.noaa.gov/species/green-turtle"
-                target="_blank"
-              >
-                About the Species
-              </CalciteLink>
-            </div>
-          </CalciteCard>
-
-          <CalciteCard class="editable-card" id="whaleCard">
-            <span slot="title">Baleen Whale</span>
-            <div slot="subtitle">
-              The Baleen whale can weight up to 60,000 pounds! (5 times an elephant)
-            </div>
-            <img
-              alt="whale"
-              slot="thumbnail"
-              src="https://jbanuelos1.esri.com/images/baleen_whale.jpg"
-            />
-            <div slot="footer-leading">
-              <CalciteButton icon-start="plus" scale="s" slot="footer-leading" />
-            </div>
-            <div slot="footer-trailing">
-              <CalciteLink
-                href="https://www.fisheries.noaa.gov/feature-story/new-species-baleen-whale-gulf-mexico"
-                target="_blank"
-              >
-                About the Species
-              </CalciteLink>
-            </div>
-          </CalciteCard>
-
-          <CalciteCard class="editable-card" id="lobsterCard">
-            <span slot="title">Spiny Lobster</span>
-            <div>Spiny lobster is a common lobster found in the Gulf of Mexico</div>
-            <img
-              alt="lobster"
-              slot="thumbnail"
-              src="https://jbanuelos1.esri.com/images/spiny_lobster.jpg"
-            />
-            <div slot="footer-leading">
-              <CalciteButton icon-start="plus" scale="s" slot="footer-leading" />
-            </div>
-            <div slot="footer-trailing">
-              <CalciteLink
-                href="https://www.fisheries.noaa.gov/management-plan/gulf-mexico-and-south-atlantic-spiny-lobster-fishery-management-plan"
-                target="_blank"
-              >
-                About the Species
-              </CalciteLink>
-            </div>
-          </CalciteCard>
+          <BioCardList cards={cards} onCardSelect={onCardSelect} />
         </CalcitePanel>
       </MapDiv>
-      <CalciteModal aria-labelledby="modal-title" id="second-area-modal">
-        <div id="modal-title" slot="header">
-          Choose Another Community!
-        </div>
-        <div slot="content">Almost Done! Draw your second area to compare communities!</div>
-        <CalciteButton appearance="outline" id="cancel-second-modal" slot="secondary" width="full">
-          Okay
-        </CalciteButton>
-      </CalciteModal>
-      <CalciteModal aria-labelledby="modal-title" id="screenshot-index-modal">
-        <div id="modal-title" slot="header">
-          <span id="resultsSpan" />
-        </div>
-        <div className="card-container" id="screenshotDiv" slot="content">
-          <CalciteCard>
-            <img alt="community1" id="img1" slot="thumbnail" />
-            <h3 slot="title">
-              Diversity Index: <span id="indexDiv1" />
-            </h3>
-            <span slot="subtitle">Community 1</span>
-          </CalciteCard>
-          <CalciteCard>
-            <img alt="community2" id="img2" slot="thumbnail" />
-            <h3 slot="title">
-              Diversity Index: <span id="indexDiv2" />
-            </h3>
-            <span slot="subtitle">Community 2</span>
-          </CalciteCard>
-        </div>
-        <CalciteButton
-          appearance="outline"
-          id="cancel-screenshot-modal"
-          slot="secondary"
-          width="full"
-        >
-          Okay
-        </CalciteButton>
-      </CalciteModal>
+      <ScreenshotModal id="screenshot-index-modal" />
       <CalcitePopoverManager>
         <CalcitePopover
           id="popover"
