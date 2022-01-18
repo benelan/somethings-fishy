@@ -5,6 +5,7 @@ import BioMap from "./BioMap";
 import BioMapInfo from "./BioMapInfo";
 import RarityMap from "./RarityMap";
 import CollectionMap from "./CollectionMap";
+import CollectionMapInfo from "./CollectionMapInfo";
 import SSTMap from "./SSTMap";
 import SSTMapInfo from "./SSTMapInfo";
 import ErrorBoundary from "../ErrorBoundary";

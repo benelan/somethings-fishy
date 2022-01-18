@@ -40,7 +40,7 @@ export default (): JSX.Element => (
       </h3>
       <img
         alt="Effects of global sea temperatures rising."
-        src="../../../public/img/EmissionsTrends.png"
+        src="/img/EmissionsTrends.png"
         style={{}}
       />
       <p>
