@@ -148,10 +148,11 @@ export default (): JSX.Element => (
         <ol>
           <li>
             <p>
-              Acquired the protected areas and rarity scores within the Gulf of Mexico, using the
+              Acquired the protected areas and marine species rarity scores within the Gulf of
+              Mexico, using the
               <b>Overlay Layers</b> tool on the input data (see below for the sources of the input
-              data): a layer of worldwide protected areas, a grid cell layer with species rarity
-              scores, and the Gulf of Mexico boundary.
+              data): a layer of worldwide protected areas, a grid cell layer with marine species
+              rarity scores, and the Gulf of Mexico boundary.
             </p>
           </li>
           <li>
@@ -163,41 +164,24 @@ export default (): JSX.Element => (
           </li>
           <li>
             <p>
-              After drawing the first area, click on the area button to draw an area around the
-              second community of species you would like to compare the first community with.
-            </p>
-          </li>
-          <li>
-            <p>Once the second area is drawn, you will see the results!</p>
-          </li>
-          <li>
-            <p>
-              The Shannon Index numbers for both communities will be shown, along with screen
-              captures of the area you selected.
+              Dissolved the protected areas that were within the same cell, using{" "}
+              <b>Dissolve Boundaries.</b>
             </p>
           </li>
           <li>
             <p>
-              Click on the trash button to clear the areas and start drawing another two areas of
-              interest if you would like to compare another two communities.
+              Used the <b>Summarize Within</b> tool to generate the result layer that includes both
+              the portion of areas that have been marked as protected area, and marine species
+              rarity score, within each grid cells.
             </p>
           </li>
           <li>
             <p>
-              You can click on the animal images on the right to start adding new points on the map!
-            </p>
-          </li>
-          <li>
-            <p>
-              The LayerList widget can be used to show and hide some of the species on the map as
-              well.
+              Added the result layer to a map and configured symbology to show the relationship
+              between the protected propertion and marine species rarity score.
             </p>
           </li>
         </ol>
-        2. 3. Then, we dissolved the areas that were within the same cell, using Dissolve
-        Boundaries." 4. Finally, we called the Summarize Within tool to generate a layer that
-        includes both the portion of areas being protected and marine species rarity score, within
-        each grid cells.
       </p>
     </InfoItem>
     <InfoItem>
@@ -211,22 +195,6 @@ export default (): JSX.Element => (
           style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
         />
       </p>
-    </InfoItem>
-
-    <InfoItem as={CalcitePanel} heading="Shannon-Wiener Index">
-      <div id="info-panel-content">
-        <p className="p-math">
-          H = &#8212;<span className="span-math">&Sigma;</span>P<sub>i</sub> ln(P<sub>i</sub>)
-        </p>
-        <p>
-          <b>
-            P<sub>i</sub>
-          </b>{" "}
-          - the proportion of individuals in a species
-          <br />
-          <b>H</b> - the index
-        </p>
-      </div>
     </InfoItem>
 
     <InfoItem>
@@ -260,22 +228,6 @@ export default (): JSX.Element => (
       </ul>
     </InfoItem>
 
-    <InfoItem>
-      <h3>
-        <b>Shannon-Wiener Index Comparison App</b>
-      </h3>
-      <p>
-        The app below allows users to measure and compare species diversity with the Shannon-Wiener
-        Index formula. The app is simple and easy to use and helps illustrate some of the work
-        scientists do when comparing species diversity. It is intended to allow the user to feel
-        like they are scientists on the field comparing species evenness. The app also has some
-        great information on actual species in the Gulf of Mexico with links to the{" "}
-        <a href="https://www.noaa.gov/" target="_blank">
-          NOAA
-        </a>{" "}
-        site. It allows users to add more living organism onto the map with some editing features.
-      </p>
-    </InfoItem>
     <InfoItem>
       <p>
         <h3>How to use the App</h3>
