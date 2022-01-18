@@ -204,7 +204,7 @@ export default (): JSX.Element => (
 
     <InfoItem>
       <h3>
-        <b>Input Date Source</b>
+        <b>Input Data Source</b>
       </h3>
       <ul>
         <li>
