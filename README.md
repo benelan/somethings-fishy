@@ -31,6 +31,7 @@ Investigating the impact of human influence on aquatic ecosystems in the Gulf of
 - Carry a reusable bottle instead of buying single-use plastics. [source](https://blogs.nicholas.duke.edu/env212/single-use-plastic-and-its-effects-on-our-oceans)
 - Ask your representatives to create and fund more Marine Protected Areas to save endangered aquatic ecosystems. [source](https://www.americanprogress.org/article/marine-protected-areas-help-fisheries-ocean-ecosystems/)
 - Volunteer your time to pickup trash at a local beach (more info below). [source](https://oceanconservancy.org/trash-free-seas/)
+- Reduce greenhouse gas emissions one step at a time. [source](https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases)
 
 ## Marine Debris
 

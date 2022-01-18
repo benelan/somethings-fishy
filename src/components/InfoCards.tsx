@@ -139,7 +139,7 @@ const InfoCards: React.FC = (): JSX.Element => (
             </Link>
           </ListItem>
           <ListItem>
-            Reduce greenhouse gasses one step at a time.{"   "}
+            Reduce greenhouse gas emissions one step at a time.{"   "}
             <Link
               as={CalciteLink}
               href="https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases/"
