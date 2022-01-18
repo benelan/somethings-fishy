@@ -6,7 +6,8 @@ import BioMapInfo from "./BioMapInfo";
 import RarityMap from "./RarityMap";
 import CollectionMap from "./CollectionMap";
 import CollectionMapInfo from "./CollectionMapInfo";
-import Map from "./Map";
+import SSTMap from "./SSTMap";
+import SSTMapInfo from "./SSTMapInfo";
 import ErrorBoundary from "../ErrorBoundary";
 
 import "@arcgis/core/assets/esri/themes/light/main.css";
@@ -35,8 +36,9 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
           <MapHeader>Sea Surface Temperature Map</MapHeader>
+          <MapInfo as={SSTMapInfo} />
           <MapContainer height={height}>
-            <Map />
+            <SSTMap />
           </MapContainer>
         </LazyLoad>
       </ErrorBoundary>
