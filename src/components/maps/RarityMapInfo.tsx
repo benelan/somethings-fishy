@@ -1,8 +1,8 @@
 import React from "react";
-import "@esri/calcite-components/dist/components/calcite-panel";
-import { CalcitePanel, CalciteLink } from "@esri/calcite-components-react";
-import "./RarityMap.css";
 import styled from "styled-components";
+import "@esri/calcite-components/dist/components/calcite-link";
+import { CalciteLink } from "@esri/calcite-components-react";
+import "./RarityMap.css";
 
 const InfoContainer = styled.div`
   display: flex;
@@ -88,9 +88,6 @@ export default (): JSX.Element => (
           </Link>
         </li>
       </ul>
-    </InfoItem>
-
-    <InfoItem>
       <h3>
         <b>Why species rarity is important?</b>
       </h3>
@@ -144,50 +141,47 @@ export default (): JSX.Element => (
         </li>
       </ul>
     </InfoItem>
-
     <InfoItem>
       <h3>
         <b>Our Spatial Analysis Workflow</b>
       </h3>
-      <p>
-        <ol>
-          <li>
-            <p>
-              Acquired the protected areas and marine species rarity scores within the Gulf of
-              Mexico, using the
-              <b>Overlay Layers</b> tool on the input data (see below for the sources of the input
-              data): a layer of worldwide protected areas, a grid cell layer with marine species
-              rarity scores, and the Gulf of Mexico boundary.
-            </p>
-          </li>
-          <li>
-            <p>
-              Considering that we used the gird cells as the unit of analysis, and since some
-              protected areas spread across multiple cells, called <b>Overlay Layers</b> again to
-              split the protected areas by cells.
-            </p>
-          </li>
-          <li>
-            <p>
-              Dissolved the protected areas that were within the same cell, using{" "}
-              <b>Dissolve Boundaries.</b>
-            </p>
-          </li>
-          <li>
-            <p>
-              Used the <b>Summarize Within</b> tool to generate the result layer that includes both
-              the portion of areas that have been marked as protected area, and marine species
-              rarity score, within each grid cells.
-            </p>
-          </li>
-          <li>
-            <p>
-              Added the result layer to a map and configured symbology to show the relationship
-              between the protected propertion and marine species rarity score.
-            </p>
-          </li>
-        </ol>
-      </p>
+      <ol>
+        <li>
+          <p>
+            Acquired the protected areas and marine species rarity scores within the Gulf of Mexico,
+            using the
+            <b>Overlay Layers</b> tool on the input data (see below for the sources of the input
+            data): a layer of worldwide protected areas, a grid cell layer with marine species
+            rarity scores, and the Gulf of Mexico boundary.
+          </p>
+        </li>
+        <li>
+          <p>
+            Considering that we used the gird cells as the unit of analysis, and since some
+            protected areas spread across multiple cells, called <b>Overlay Layers</b> again to
+            split the protected areas by cells.
+          </p>
+        </li>
+        <li>
+          <p>
+            Dissolved the protected areas that were within the same cell, using{" "}
+            <b>Dissolve Boundaries.</b>
+          </p>
+        </li>
+        <li>
+          <p>
+            Used the <b>Summarize Within</b> tool to generate the result layer that includes both
+            the portion of areas that have been marked as protected area, and marine species rarity
+            score, within each grid cells.
+          </p>
+        </li>
+        <li>
+          <p>
+            Added the result layer to a map and configured symbology to show the relationship
+            between the protected propertion and marine species rarity score.
+          </p>
+        </li>
+      </ol>
     </InfoItem>
     <InfoItem>
       <h3>
@@ -195,19 +189,9 @@ export default (): JSX.Element => (
       </h3>
       <img
         alt="Flowchart"
-        height="300"
         src={process.env.PUBLIC_URL + "/img/spatial_analysis_flowchart_rarity_protection.png"}
-        style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
-        width="300"
+        style={{ height: "auto", width: "100%", maxWidth: "800px" }}
       />
-    </InfoItem>
-    <InfoItem>
-      <h3>
-        <b>Step-by-step Screen Record</b>
-      </h3>
-      <StepsImg src={process.env.PUBLIC_URL + "/img/rarity-analysis-steps.gif"} />
-    </InfoItem>
-    <InfoItem>
       <h3>
         <b>Input Data Source</b>
       </h3>
@@ -237,11 +221,12 @@ export default (): JSX.Element => (
         </li>
       </ul>
     </InfoItem>
-
     <InfoItem>
-      <p>
-        <h3>How to use the App</h3>
-      </p>
+      <h3>
+        <b>Step-by-step Screen Record</b>
+      </h3>
+      <StepsImg src={process.env.PUBLIC_URL + "/img/rarity-analysis-steps.gif"} />
+      <h3>How to use the App</h3>
       <ol>
         <li>
           <p>Click on the cell grids to see our spatial anlaysis results on a pop-up!</p>
@@ -266,10 +251,10 @@ export default (): JSX.Element => (
             {" "}
             Drag the slider to a number to show only the cell grids where rarity of all species is
             greater than the number selected.
-            <p>
-              The renderer will be updated according to the filter you set. Click "Reset Filter" to
-              reverse back to the default symbology.
-            </p>
+          </p>
+          <p>
+            The renderer will be updated according to the filter you set. Click "Reset Filter" to
+            reverse back to the default symbology.
           </p>
         </li>
       </ol>
