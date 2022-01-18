@@ -5,6 +5,7 @@ import BioMap from "./BioMap";
 import BioMapInfo from "./BioMapInfo";
 import RarityMap from "./RarityMap";
 import CollectionMap from "./CollectionMap";
+import CollectionMapInfo from "./CollectionMapInfo";
 import Map from "./Map";
 import ErrorBoundary from "../ErrorBoundary";
 
@@ -62,6 +63,7 @@ const MapDeck: React.FC<{ height: string }> = ({ height }): JSX.Element => {
       <ErrorBoundary>
         <LazyLoad height={height} offset={100}>
           <MapHeader>Data Collection Map</MapHeader>
+          <MapInfo as={CollectionMapInfo} />
           <MapContainer height={height}>
             <CollectionMap />
           </MapContainer>
