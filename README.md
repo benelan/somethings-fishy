@@ -1,6 +1,6 @@
 # Something's Fishy
 
-Investigating the impact of human influence on aquatic ecosystems in the Golf of Mexico. This project was created by Ben, Jose, Lauren, Lingtao, and TJ for [Hack the Map 5](https://hack-the-map-5.devpost.com/).
+Investigating the impact of human influence on aquatic ecosystems in the Gulf of Mexico. This project was created by Ben, Jose, Lauren, Lingtao, and TJ for [Hack the Map 5](https://hack-the-map-5.devpost.com/).
 
 - [Something's Fishy](#somethings-fishy)
   - [The Problem](#the-problem)
