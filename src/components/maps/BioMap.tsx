@@ -161,7 +161,7 @@ const BioMap: React.FC = (): JSX.Element => {
       stgl = new SubtypeGroupLayer({
         url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/ArcGIS/rest/services/MarineLife/FeatureServer/0",
         outFields: ["*"],
-        sublayers: sublayers
+        sublayers
       });
 
       const map = new Map({
@@ -176,9 +176,9 @@ const BioMap: React.FC = (): JSX.Element => {
         center: [-90.21093696355662, 27.08863619791193]
       });
 
+      // don't zoom while scrolling until map is clicked
       const wheelEvtHandler = view.on("mouse-wheel", (event) => {
         event.stopPropagation();
-        window.scrollBy(0, 30);
       });
       view.on("click", () => wheelEvtHandler.remove());
 
@@ -205,7 +205,7 @@ const BioMap: React.FC = (): JSX.Element => {
 
       // initializing the LayerList widget
       const layerList = new LayerList({
-        view: view
+        view
       });
       // add the widget to the view
       view.ui.add(layerList, "bottom-left");
@@ -268,7 +268,7 @@ const BioMap: React.FC = (): JSX.Element => {
       type: "simple",
       symbol: new WebStyleSymbol({
         styleUrl: webStyleSymbolUrl,
-        name: name
+        name
       })
     };
   }
