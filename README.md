@@ -126,6 +126,8 @@ Information prompted by the hackathon submission form.
 
 - Depth Contour at multiple intervals of GEBCO 2020 Bathymetry - Gulf of Mexico, by GCOOS - Gulf of Mexico Coastal Ocean Observing System [source](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 
+- - Sea Surface Temperature (°C), by Naval Oceanographic Office [source](https://www.arcgis.com/home/item.html?id=7b421e42c17b43f8ad7222b8f71d09e7)
+
 ## Run the app locally
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
