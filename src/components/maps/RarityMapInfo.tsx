@@ -188,15 +188,18 @@ export default (): JSX.Element => (
       <h3>
         <b>Flowchart</b>
       </h3>
-      <p>
-        <img
-          alt="Flowchart"
-          src="public/img/spatial_analysis_flowchart_rarity_protection.png"
-          style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
-        />
-      </p>
+      <img
+        alt="Flowchart"
+        src="public/img/spatial_analysis_flowchart_rarity_protection.png"
+        style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
+      />
     </InfoItem>
-
+    <InfoItem>
+      <h3>
+        <b>Step-by-step Screen Record</b>
+      </h3>
+      <p />
+    </InfoItem>
     <InfoItem>
       <h3>
         <b>Input Data Source</b>
@@ -234,12 +237,17 @@ export default (): JSX.Element => (
       </p>
       <ol>
         <li>
-          <p>Click on the area button to start drawing your first area of interest.</p>
+          <p>
+            Click on the cell grids to see our spatial anlaysis results on a pop-up. The result
+            includes the propertion of area that has been marked as protected area, and marine
+            species rarity scores of all taxa, fish, and mammals.
+          </p>
         </li>
         <li>
           <p>
-            Draw an area around the species you would like to use as your first community to
-            compare.
+            Consult the relationship renderer on the legend widget and interpret patterns of the
+            spatial analysis result. The grid cells that need the most attention are the ones in
+            dark red. These cells have high rarity score but low protected propertion.
           </p>
         </li>
         <li>
