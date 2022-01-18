@@ -48,7 +48,6 @@ const Map: React.FC = (): JSX.Element => {
       // don't zoom while scrolling until map is clicked
       const wheelEvtHandler = view.on("mouse-wheel", (event) => {
         event.stopPropagation();
-        window.scrollBy(0, 30);
       });
       view.on("click", () => wheelEvtHandler.remove());
 
