@@ -203,6 +203,7 @@ export default (): JSX.Element => (
           <li>
             <a
               href="https://www.arcgis.com/home/item.html?id=bf2862f403b94411ac2428dc9c9bce03"
+              rel="noopener noreferrer"
               target="_blank"
             >
               Global Marine Species Patterns (55km), by Map of Life (MoL)
@@ -211,6 +212,7 @@ export default (): JSX.Element => (
           <li>
             <a
               href="https://www.arcgis.com/home/item.html?id=ae78aeb913a343d69e950b53e29076f7"
+              rel="noopener noreferrer"
               target="_blank"
             >
               WDPA - World Database of Protected Areas, by UN Environment World Conservation
@@ -218,7 +220,11 @@ export default (): JSX.Element => (
             </a>
           </li>
           <li>
-            <a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html" target="_blank">
+            <a
+              href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               Gulf of Mexico region with GSHHS and/or NaturalEarth shorelines, by GSHHG - A Global
               Self-consistent, Hierarchical, High-resolution Geography Database
             </a>
