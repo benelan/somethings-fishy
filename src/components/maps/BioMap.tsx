@@ -3,15 +3,11 @@ import "@esri/calcite-components/dist/components/calcite-action";
 import "@esri/calcite-components/dist/components/calcite-panel";
 import "@esri/calcite-components/dist/components/calcite-icon";
 import "@esri/calcite-components/dist/components/calcite-block";
-import "@esri/calcite-components/dist/components/calcite-popover";
-import "@esri/calcite-components/dist/components/calcite-popover-manager";
 import {
   CalciteAction,
   CalcitePanel,
   CalciteIcon,
-  CalciteBlock,
-  CalcitePopover,
-  CalcitePopoverManager
+  CalciteBlock
 } from "@esri/calcite-components-react";
 import styled from "styled-components";
 
@@ -73,14 +69,6 @@ interface InfoCard {
 }
 
 const cards: InfoCard[] = [
-  {
-    id: "fishCard",
-    title: "Red Snapper",
-    description: "Yound red snappers are food for large fish that share their habitat.",
-    imageUrl: "/red_snapper.png",
-    link: "https://www.fisheries.noaa.gov/species/red-snapper",
-    species: "Fish"
-  },
   {
     id: "turtleCard",
     title: "Green Turtle",
@@ -156,6 +144,14 @@ const cards: InfoCard[] = [
     imageUrl: "/echinoderm.jpg",
     link: "https://oceanexplorer.noaa.gov/okeanos/explorations/ex1803/logs/apr29/welcome.html",
     species: "Echinoderm"
+  },
+  {
+    id: "fishCard",
+    title: "Red Snapper",
+    description: "Yound red snappers are food for large fish that share their habitat.",
+    imageUrl: "/red_snapper.png",
+    link: "https://www.fisheries.noaa.gov/species/red-snapper",
+    species: "Fish"
   }
 ];
 
@@ -303,8 +299,6 @@ const BioMap: React.FC = (): JSX.Element => {
       rectangleBtn = document.getElementById("rectangleBtn") as HTMLCalciteButtonElement;
       clearBtn = document.getElementById("clearBtn") as HTMLCalciteButtonElement;
 
-      openPopover("popover");
-
       rectangleBtn.onclick = () => {
         chooseArea();
       };
@@ -378,8 +372,6 @@ const BioMap: React.FC = (): JSX.Element => {
   }
 
   function chooseArea() {
-    closePopover("popover");
-
     let area: ScreenshotArea;
 
     // listen for drag events and compute the selected area
@@ -622,20 +614,6 @@ const BioMap: React.FC = (): JSX.Element => {
     }
   }
 
-  function closePopover(id: string) {
-    const popover = document.getElementById(id) as HTMLCalcitePopoverElement;
-    if (popover) {
-      popover.open = false;
-    }
-  }
-
-  function openPopover(id: string) {
-    const popover = document.getElementById(id) as HTMLCalcitePopoverElement;
-    if (popover) {
-      popover.open = true;
-    }
-  }
-
   return (
     <>
       <MapDiv ref={mapDiv}>
@@ -652,18 +630,6 @@ const BioMap: React.FC = (): JSX.Element => {
         </CalcitePanel>
       </MapDiv>
       <ScreenshotModal id="screenshot-index-modal" />
-      <CalcitePopoverManager>
-        <CalcitePopover
-          id="popover"
-          label="Example label"
-          placement="bottom-leading"
-          referenceElement="rectangleBtn"
-        >
-          <h4 style={{ padding: "0 10px", display: "flex;flex-direction:row" }}>
-            Click to start drawing your area!
-          </h4>
-        </CalcitePopover>
-      </CalcitePopoverManager>
     </>
   );
 };
