@@ -17,7 +17,7 @@ const MapDiv = styled.div`
   width: 100%;
 `;
 
-const Map: React.FC = (): JSX.Element => {
+const SSTMap: React.FC = (): JSX.Element => {
   const mapDiv = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
@@ -129,4 +129,4 @@ const Map: React.FC = (): JSX.Element => {
   return <MapDiv ref={mapDiv} />;
 };
 
-export default Map;
+export default SSTMap;
