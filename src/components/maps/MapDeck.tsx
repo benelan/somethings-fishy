@@ -11,6 +11,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const MapContainer = styled.div<{ height: string }>`
+  margin-top: 2rem;
   height: ${(props) => props.height};
 `;
 
@@ -20,6 +21,7 @@ const MapInfo = styled.div`
 `;
 
 const MapHeader = styled.div`
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
   text-align: center;
   font-size: 2.5em;

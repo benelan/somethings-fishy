@@ -6,13 +6,15 @@ import styled from "styled-components";
 
 const InfoContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-between;
+  margin: -1rem;
+  overflow: hidden;
 `;
 
 const InfoItem = styled.div`
-  flex: 0 44%;
-  margin: 3%;
+  flex: 1 1 40vw;
+  margin: 1rem;
 `;
 
 export default (): JSX.Element => (
@@ -38,6 +40,16 @@ export default (): JSX.Element => (
       </div>
     </InfoItem>
 
+    <InfoItem>
+      blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+      blah blah blah blah blah blah blah blah blah blah blah blah blah dur dur dur dur dur dur dur
+      dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur
+    </InfoItem>
+    <InfoItem>
+      blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+      blah blah blah blah blah blah blah blah blah blah blah blah blah dur dur dur dur dur dur dur
+      dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur dur
+    </InfoItem>
     <InfoItem>
       blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
       blah blah blah blah blah blah blah blah blah blah blah blah blah dur dur dur dur dur dur dur
