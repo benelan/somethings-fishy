@@ -59,7 +59,17 @@ export default (): JSX.Element => (
             source
           </Link>
         </li>
-        <li>The ocean contains more than 97% of the world’s water.</li>
+        <li>
+          Marine animals can help protect us from the impacts of climate change.{" "}
+          <Link
+            as={CalciteLink}
+            href="https://www.onegreenplanet.org/environment/saving-marine-animals-can-protect-us-from-climate-change/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
         <li>
           To provide opportunities for people to experience and study marine life that are
           undisturbed by human activity.{" "}
