@@ -30,12 +30,12 @@ const StepsImg = styled.img`
 export default (): JSX.Element => (
   <InfoContainer>
     <div style={{ textAlign: "center" }}>
-      <h2>How are we doing in protecting living areas of rare species? </h2>
+      <h2> Are we protecting the aquatic ecosystems of endangered/rare species? </h2>
       <p>
         <b>
           <i>
-            We are trying to answer this question with spatial analysis and display the results
-            using the map below.
+            We investigate this question with spatial analysis and display the results using the map
+            below.
           </i>
         </b>
       </p>
@@ -117,7 +117,7 @@ export default (): JSX.Element => (
         </li>
         <li>
           A well-balanced ecosystem maintains the health of the environment. This ensures that human
-          beings have access to clean air and water, and fertile land for agriculture.{" "}
+          beings have access to clean air and water, as well as fertile land for agriculture.{" "}
           <Link
             as={CalciteLink}
             href="https://www.gviusa.com/blog/why-should-we-save-endangered-species/"
@@ -150,15 +150,15 @@ export default (): JSX.Element => (
           <p>
             Acquired the protected areas and marine species rarity scores within the Gulf of Mexico,
             using the
-            <b>Overlay Layers</b> tool on the input data (see below for the sources of the input
-            data): a layer of worldwide protected areas, a grid cell layer with marine species
-            rarity scores, and the Gulf of Mexico boundary.
+            <b>Overlay Layers</b> tool on the input data (sources below): a layer of worldwide
+            protected areas, a grid cell layer with marine species rarity scores, and the Gulf of
+            Mexico boundary.
           </p>
         </li>
         <li>
           <p>
-            Considering that we used the gird cells as the unit of analysis, and since some
-            protected areas spread across multiple cells, called <b>Overlay Layers</b> again to
+            Considering that we used the grid cells as the unit of analysis, and since some
+            protected areas spread across multiple cells, we used <b>Overlay Layers</b> again to
             split the protected areas by cells.
           </p>
         </li>
@@ -170,15 +170,15 @@ export default (): JSX.Element => (
         </li>
         <li>
           <p>
-            Used the <b>Summarize Within</b> tool to generate the result layer that includes both
-            the portion of areas that have been marked as protected area, and marine species rarity
-            score, within each grid cells.
+            Used the <b>Summarize Within</b> tool to generate the result layer, which includes the
+            areas that have been marked as protected and the marine species rarity score, within
+            each grid cells.
           </p>
         </li>
         <li>
           <p>
             Added the result layer to a map and configured symbology to show the relationship
-            between the protected propertion and marine species rarity score.
+            between the protected proportion and marine species rarity score.
           </p>
         </li>
       </ol>
@@ -229,10 +229,10 @@ export default (): JSX.Element => (
       <h3>How to use the App</h3>
       <ol>
         <li>
-          <p>Click on the cell grids to see our spatial anlaysis results on a pop-up!</p>
+          <p>Click on the cell grids to see our spatial analysis results on a pop-up!</p>
           <p>
-            The result includes the propertion of area that has been marked as protected area, and
-            marine species rarity scores of all taxa (all species), fish, and mammals.
+            The result includes the proportion of area that has been marked as protected area, and
+            the marine species rarity scores of all taxa (all species), fish, and mammals.
           </p>
         </li>
         <li>
@@ -242,7 +242,7 @@ export default (): JSX.Element => (
           </p>
           <p>
             The grid cells that need the most attention are the ones in dark red. These cells have
-            high rarity scores but low protected propertions.
+            high rarity scores but low protected proportions.
           </p>
         </li>
         <li>
