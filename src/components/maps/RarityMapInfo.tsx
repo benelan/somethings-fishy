@@ -44,19 +44,22 @@ export default (): JSX.Element => (
     </div>
     <InfoItem>
       <h3>
-        <b>Why protect the ocean? </b>{" "}
-        <Link
-          as={CalciteLink}
-          href="https://marine-conservation.org/why-protect-the-ocean/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          source
-        </Link>
+        <b>Why protect marine life? </b>
       </h3>
       <ul>
-        <li> Item 1 </li>
-        <li> Item 2 </li>
+        <li>
+          Healthy marine species like whales, sea turtles, coral, and salmon are important for
+          maintaining balanced and thriving ocean ecosystems.{" "}
+          <Link
+            as={CalciteLink}
+            href="https://www.fisheries.noaa.gov/protecting-marine-life"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>The ocean contains more than 97% of the world’s water.</li>
         <li>
           To provide opportunities for people to experience and study marine life that are
           undisturbed by human activity.{" "}
@@ -90,8 +93,7 @@ export default (): JSX.Element => (
           </Link>
         </li>
         <li>
-          Enrivonmental monitors: Many individual species are uniquely important as indicators of
-          environmental quality.{" "}
+          Many individual species are uniquely important as indicators of environmental quality.{" "}
           <Link
             as={CalciteLink}
             href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
@@ -114,9 +116,8 @@ export default (): JSX.Element => (
           </Link>
         </li>
         <li>
-          Contribution to medicine: Each living thing contains a unique reservoir of genetic
-          material that has evolved over eons. This material cannot be retrieved or duplicated if
-          lost.{" "}
+          Each living thing contains a unique reservoir of genetic material that has evolved over
+          eons. This material cannot be retrieved or duplicated if lost.{" "}
           <Link
             as={CalciteLink}
             href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
