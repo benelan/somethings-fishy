@@ -16,9 +16,6 @@ Investigating the impact of human influence on aquatic ecosystems in the Golf of
     - [Next steps](#next-steps)
   - [Mapping data sources](#mapping-data-sources)
   - [Run the app locally](#run-the-app-locally)
-    - [`npm install`](#npm-install)
-    - [`npm start`](#npm-start)
-    - [`npm run build`](#npm-run-build)
   - [Built with](#built-with)
 
 ## The Problem
@@ -135,9 +132,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-#### `npm install`
+**`npm install`**
 
-#### `npm start`
+**`npm start`**
 
 Starts the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -145,7 +142,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-#### `npm run build`
+**`npm run build`**
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
