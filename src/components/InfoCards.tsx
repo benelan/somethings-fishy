@@ -138,6 +138,17 @@ const InfoCards: React.FC = (): JSX.Element => (
               source
             </Link>
           </ListItem>
+          <ListItem>
+            Reduce greenhouse gasses one step at a time.{"   "}
+            <Link
+              as={CalciteLink}
+              href="https://scied.ucar.edu/learning-zone/climate-solutions/reduce-greenhouse-gases/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              source
+            </Link>
+          </ListItem>
         </ul>
       </Card>
     </div>
