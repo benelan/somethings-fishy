@@ -4,30 +4,33 @@ import "@esri/calcite-components/dist/components/calcite-card";
 import { CalciteLink, CalciteCard } from "@esri/calcite-components-react";
 import styled from "styled-components";
 
-const InfoContainer = styled.div`
+const CardDeck = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  overflow-x: hidden;
   margin: -1rem;
-  overflow: hidden;
+
+  & > * {
+    flex: 1 1 300px;
+    margin: 1rem;
+    --calcite-font-size--2: 1em;
+    --calcite-font-size--1: 1.3em;
+  }
 `;
 
-const InfoItem = styled.div`
-  flex: 1 1 40vw;
-  margin: 1rem;
-  --calcite-font-size--2: 1em;
-  --calcite-font-size--1: 1.3em;
+const Card = styled.div`
+  height: 100%;
 `;
-
 const SourceLink = styled.a`
   font-size: 0.7em;
   vertical-align: super;
 `;
 
 export default (): JSX.Element => (
-  <InfoContainer>
-    <InfoItem>
-      <CalciteCard>
+  <CardDeck>
+    <div>
+      <Card as={CalciteCard}>
         <h3 slot="title">
           Marine Debris: If you see something, pick it up and/or let others know!
         </h3>
@@ -44,17 +47,15 @@ export default (): JSX.Element => (
         >
           source
         </SourceLink>
-      </CalciteCard>
-      <CalciteCard style={{ marginTop: "2rem" }}>
+      </Card>
+    </div>
+    <div>
+      <Card as={CalciteCard}>
         <h3 slot="title">About the map</h3>
         This mapping application shows marine debris data points that we collected via ArcGIS
         Survey123. Click on the points to see further details (debris type, photo, etc.) in a
         pop-up. Click on other places on the map to see demographic data of the area (if they are
         available).
-      </CalciteCard>
-    </InfoItem>
-    <InfoItem>
-      <CalciteCard>
         <div style={{ textAlign: "center" }}>
           <a href="https://arcg.is/1T8nfr0" rel="noopener noreferrer" target="_blank">
             <img
@@ -71,7 +72,7 @@ export default (): JSX.Element => (
             </CalciteLink>
           </p>
         </div>
-      </CalciteCard>
-    </InfoItem>
-  </InfoContainer>
+      </Card>
+    </div>
+  </CardDeck>
 );
