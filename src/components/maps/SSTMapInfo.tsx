@@ -23,7 +23,6 @@ const Link = styled.a`
 export default (): JSX.Element => (
   <InfoContainer>
     <div style={{ textAlign: "center" }}>
-      <h2>Ocean Warming</h2>
       <p>
         <b>
           <i>
@@ -54,9 +53,6 @@ export default (): JSX.Element => (
           source
         </Link>
       </p>
-    </InfoItem>
-
-    <InfoItem>
       <h3>
         <b>Why is the rise in sea temperature important?</b>
       </h3>
@@ -111,27 +107,6 @@ export default (): JSX.Element => (
           </Link>
         </li>
       </ul>
-    </InfoItem>
-
-    <InfoItem>
-      <h3>
-        <b>Trends in Global Emissions</b>
-      </h3>
-      <img alt="Trends of Global Emissions." src="/img/EmissionsTrends.png" style={{}} />
-      <p style={{ textAlign: "center" }}>
-        {"   "}
-        <Link
-          as={CalciteLink}
-          href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          source
-        </Link>
-      </p>
-    </InfoItem>
-
-    <InfoItem>
       <h3>How to use the Application</h3>
       <p>
         The Sea Surface Temperature Map Application allows you to visualize how the SST has
@@ -154,6 +129,24 @@ export default (): JSX.Element => (
           </p>
         </li>
       </ol>
+    </InfoItem>
+
+    <InfoItem style={{ textAlign: "center" }}>
+      <h3>
+        <b>Trends in Global Emissions</b>
+      </h3>
+      <img alt="Trends of Global Emissions." src="/img/EmissionsTrends.png" style={{}} />
+      <p style={{ textAlign: "center" }}>
+        {"   "}
+        <Link
+          as={CalciteLink}
+          href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          source
+        </Link>
+      </p>
     </InfoItem>
   </InfoContainer>
 );
