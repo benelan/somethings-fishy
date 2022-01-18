@@ -70,7 +70,7 @@ const RarityMap: React.FC = (): JSX.Element => {
       const legendExpand = new Expand({
         view,
         content: legend,
-        expanded: true,
+        expanded: window.innerWidth > 650,
         expandTooltip: "Legend Widget"
       });
       view.ui.add(legendExpand, "top-right");

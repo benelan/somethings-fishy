@@ -67,7 +67,7 @@ const Map: React.FC = (): JSX.Element => {
       const timeExpand = new Expand({
         view,
         content: timeSlider.container,
-        expanded: true,
+        expanded: window.innerWidth > 650,
         expandTooltip: "TimeSlider Widget"
       });
 
@@ -111,7 +111,7 @@ const Map: React.FC = (): JSX.Element => {
                 new Date(2014, 0, 1),
                 new Date(2016, 0, 1),
                 new Date(2018, 0, 1),
-                new Date(2020, 0, 1),
+                new Date(2020, 0, 1)
               ].map((date) => date.getTime()),
               labelsVisible: true, // display labels for the ticks
               labelFormatFunction: (value) => {
