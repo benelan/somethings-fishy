@@ -1,6 +1,6 @@
 import React from "react";
 import "@esri/calcite-components/dist/components/calcite-panel";
-import { CalcitePanel } from "@esri/calcite-components-react";
+import { CalcitePanel, CalciteLink } from "@esri/calcite-components-react";
 import "./RarityMap.css";
 import styled from "styled-components";
 
@@ -15,6 +15,11 @@ const InfoContainer = styled.div`
 const InfoItem = styled.div`
   flex: 1 1 40vw;
   margin: 1rem;
+`;
+
+const Link = styled.a`
+  font-size: 0.7em;
+  vertical-align: super;
 `;
 
 export default (): JSX.Element => (
@@ -39,21 +44,94 @@ export default (): JSX.Element => (
     </div>
     <InfoItem>
       <h3>
+        <b>Why marine protected areas are important? </b>
+      </h3>
+      <ul>
+        <li> Item 1 </li>
+        <li> Item 2 </li>
+        <li>
+          To provide opportunities for people to experience and study marine life that are
+          undisturbed by human activity.
+        </li>
+      </ul>
+    </InfoItem>
+
+    <InfoItem>
+      <h3>
+        <b>Why species rarity is important?</b>
+      </h3>
+      <ul>
+        <li>
+          Rare species contribute a lot to the ecosystems; rare species loss reduces the functional
+          diversity of communities."{" "}
+          <Link
+            as={CalciteLink}
+            href="https://phys.org/news/2016-04-rare-species-important-believed.html"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>
+          Enrivonmental monitors: Many individual species are uniquely important as indicators of
+          environmental quality.{" "}
+          <Link
+            as={CalciteLink}
+            href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>
+          A well-balanced ecosystem maintains the health of the environment. This ensures that human
+          beings have access to clean air and water, and fertile land for agriculture.{" "}
+          <Link
+            as={CalciteLink}
+            href="https://www.gviusa.com/blog/why-should-we-save-endangered-species/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+        <li>
+          Contribution to medicine: Each living thing contains a unique reservoir of genetic
+          material that has evolved over eons. This material cannot be retrieved or duplicated if
+          lost.
+          <Link
+            as={CalciteLink}
+            href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </Link>
+        </li>
+      </ul>
+    </InfoItem>
+
+    <InfoItem>
+      <h3>
         <b>Our Spatial Analysis Workflow</b>
       </h3>
       <p>
         <ol>
           <li>
             <p>
-              We acquired the protected areas and rarity scores within the Gulf of Mexico, using the
-              Overlay Layers tool on our input data, which are worldwide Protected Areas, a grid
-              cell layer with species rarity scores, and the Gulf of Mexico boundary.
+              Acquired the protected areas and rarity scores within the Gulf of Mexico, using the
+              <b>Overlay Layers</b> tool on the input data (see below for the sources of the input
+              data): a layer of worldwide protected areas, a grid cell layer with species rarity
+              scores, and the Gulf of Mexico boundary.
             </p>
           </li>
           <li>
             <p>
-              1 Draw an area around the species you would like to use as your first community to
-              compare.
+              Considering that we used the gird cells as the unit of analysis, and since some
+              protected areas spread across multiple cells, called <b>Overlay Layers</b> again to
+              split the protected areas by cells.
             </p>
           </li>
           <li>
@@ -89,14 +167,10 @@ export default (): JSX.Element => (
             </p>
           </li>
         </ol>
-        1. We acquired the protected areas and rarity scores within the Gulf of Mexico, using the
-        Overlay Layers tool on our input data, which are worldwide Protected Areas, a grid cell
-        layer with species rarity scores, and the Gulf of Mexico boundary. 2. Considering that we
-        used the gird cells as the unit of analysis, and since some protected areas spread across
-        multiple cells, we called Overlay Layers again to split the protected areas by cells. 3.
-        Then, we dissolved the areas that were within the same cell, using Dissolve Boundaries." 4.
-        Finally, we called the Summarize Within tool to generate a layer that includes both the
-        portion of areas being protected and marine species rarity score, within each grid cells.
+        2. 3. Then, we dissolved the areas that were within the same cell, using Dissolve
+        Boundaries." 4. Finally, we called the Summarize Within tool to generate a layer that
+        includes both the portion of areas being protected and marine species rarity score, within
+        each grid cells.
       </p>
     </InfoItem>
     <InfoItem>
@@ -111,21 +185,7 @@ export default (): JSX.Element => (
         />
       </p>
     </InfoItem>
-    <InfoItem>
-      <h3>
-        <b>Shannon-Wiener Diversity Index</b>
-      </h3>
-      <p>
-        The Shannon-Wiener Index is one of the most widely used indices. It is used to measure and
-        compare species evenness, or the relative abundance of species. The following is the Shannon
-        Index formula:
-      </p>
-      <p>
-        If H = 0, then this means the community only has one species. There is no diversity because
-        all the living organism in the community belong to the same species. The higher the value of
-        H, the more diverse the community is (webpages.uidaho.edu).
-      </p>
-    </InfoItem>
+
     <InfoItem as={CalcitePanel} heading="Shannon-Wiener Index">
       <div id="info-panel-content">
         <p className="p-math">
