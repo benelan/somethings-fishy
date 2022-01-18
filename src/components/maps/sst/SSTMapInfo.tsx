@@ -56,8 +56,8 @@ export default (): JSX.Element => (
           <h3 slot="title">How Humans Impact Sea Surface Temperature</h3>
           <ul>
             <li>
-              The ocean absorbs most of the excess heat from greenhouse gas emissions, leading to
-              rising ocean temperatures.{"   "}
+              "The ocean absorbs most of the excess heat from greenhouse gas emissions, leading to
+              rising ocean temperatures."{"   "}
               <SourceLink
                 as={CalciteLink}
                 href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
@@ -68,9 +68,9 @@ export default (): JSX.Element => (
               </SourceLink>
             </li>
             <li>
-              Increasing ocean temperatures affect marine species and ecosystems. Rising
+              "Increasing ocean temperatures affect marine species and ecosystems. Rising
               temperatures cause coral bleaching and the loss of breeding grounds for marine fishes
-              and mammals.
+              and mammals."
               {"   "}
               <SourceLink
                 as={CalciteLink}
@@ -82,9 +82,9 @@ export default (): JSX.Element => (
               </SourceLink>
             </li>
             <li>
-              Rising ocean temperatures also affect the benefits humans derive from the ocean -
+              "Rising ocean temperatures also affect the benefits humans derive from the ocean -
               threatening food security, increasing the prevalence of diseases, and causing extreme
-              weather events and loss of coastal protection.{"   "}
+              weather events and loss of coastal protection."{"   "}
               <SourceLink
                 as={CalciteLink}
                 href="https://www.iucn.org/resources/issues-briefs/ocean-warming"

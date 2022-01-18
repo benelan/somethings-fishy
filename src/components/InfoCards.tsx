@@ -17,7 +17,7 @@ const InfoCards: React.FC = (): JSX.Element => (
         <h3 slot="title">The Problem</h3>
         <ul>
           <ListItem>
-            Global warming may reduce fish and other sea life by 17% by the year 2100.{"   "}
+            "Global warming may reduce fish and other sea life by 17% by the year 2100."{"   "}
             <SourceLink
               as={CalciteLink}
               href="https://www.pnas.org/content/116/26/12907.short?rss=1"
@@ -28,8 +28,8 @@ const InfoCards: React.FC = (): JSX.Element => (
             </SourceLink>
           </ListItem>
           <ListItem>
-            Over the last decade, the rate of plastic consumption [by fish] has doubled, increasing
-            by 2.4 percent every year.{"   "}
+            "Over the last decade, the rate of plastic consumption [by fish] has doubled, increasing
+            by 2.4 percent every year."{"   "}
             <SourceLink
               as={CalciteLink}
               href="https://news.stanford.edu/2021/02/09/plastic-ingestion-fish-growing-problem/"
@@ -40,8 +40,8 @@ const InfoCards: React.FC = (): JSX.Element => (
             </SourceLink>
           </ListItem>
           <ListItem>
-            386 marine fish species are known to have ingested plastic debris, including 210 species
-            that are commercially important.{"   "}
+            "386 marine fish species are known to have ingested plastic debris, including 210
+            species that are commercially important."{"   "}
             <SourceLink
               as={CalciteLink}
               href="https://onlinelibrary.wiley.com/doi/full/10.1111/gcb.15533"
@@ -52,8 +52,8 @@ const InfoCards: React.FC = (): JSX.Element => (
             </SourceLink>
           </ListItem>
           <ListItem>
-            Ocean pollution is a widespread, worsening, and poorly controlled problem that is
-            directly affecting human and ecosystem health.{"   "}
+            "Ocean pollution is a widespread, worsening, and poorly controlled problem that is
+            directly affecting human and ecosystem health."{"   "}
             <SourceLink
               as={CalciteLink}
               href="https://www.niehs.nih.gov/research/programs/geh/geh_newsletter/2021/2/articles/new_study_finds_ocean_pollution_a_threat_to_human_health.cfm"
