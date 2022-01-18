@@ -122,16 +122,16 @@ export default (): JSX.Element => (
         scientists do when comparing species diversity. It is intended to allow the user to feel
         like they are scientists on the field comparing species evenness. The app also has some
         great information on actual species in the Gulf of Mexico with links to the{" "}
-        <a href="https://www.noaa.gov/" target="_blank">
+        <a href="https://www.noaa.gov/" rel="noopener noreferrer" target="_blank">
           NOAA
         </a>{" "}
         site. It allows users to add more living organism onto the map with some editing features.
       </p>
     </InfoItem>
     <InfoItem>
-      <p>
-        <h3>How to use the App</h3>
-      </p>
+      <h3>
+        <b>How to use the App</b>
+      </h3>
       <ol>
         <li>
           <p>Click on the area button to start drawing your first area of interest.</p>
