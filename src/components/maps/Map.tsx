@@ -64,7 +64,6 @@ const Map: React.FC = (): JSX.Element => {
         timeVisible: true
       });
 
-      console.log(window.innerWidth);
       const timeExpand = new Expand({
         view,
         content: timeSlider.container,
