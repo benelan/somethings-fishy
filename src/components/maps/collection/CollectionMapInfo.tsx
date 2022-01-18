@@ -46,7 +46,7 @@ export default (): JSX.Element => (
         </SourceLink>
       </CalciteCard>
       <CalciteCard style={{ marginTop: "2rem" }}>
-        \<h3 slot="title">About the map</h3>
+        <h3 slot="title">About the map</h3>
         This mapping application shows marine debris data points that we collected via ArcGIS
         Survey123. Click on the points to see further details (debris type, photo, etc.) in a
         pop-up. Click on other places on the map to see demographic data of the area (if they are
