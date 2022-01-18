@@ -45,6 +45,12 @@ const Map: React.FC = (): JSX.Element => {
         map: webmap
       });
 
+      // don't zoom while scrolling until map is clicked
+      const wheelEvtHandler = view.on("mouse-wheel", (event) => {
+        event.stopPropagation();
+      });
+      view.on("click", () => wheelEvtHandler.remove());
+
       // Add Widgets
       const layerList = new LayerList({
         view

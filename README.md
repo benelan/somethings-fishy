@@ -1,6 +1,6 @@
 # Something's Fishy
 
-Investigating the impact of human influence on aquatic ecosystems in the Golf of Mexico. This project was created by Ben, Jose, Lauren, Lingtao, and TJ for [Hack the Map 5](https://hack-the-map-5.devpost.com/).
+Investigating the impact of human influence on aquatic ecosystems in the Gulf of Mexico. This project was created by Ben, Jose, Lauren, Lingtao, and TJ for [Hack the Map 5](https://hack-the-map-5.devpost.com/).
 
 - [Something's Fishy](#somethings-fishy)
   - [The Problem](#the-problem)
@@ -16,9 +16,6 @@ Investigating the impact of human influence on aquatic ecosystems in the Golf of
     - [Next steps](#next-steps)
   - [Mapping data sources](#mapping-data-sources)
   - [Run the app locally](#run-the-app-locally)
-    - [`npm install`](#npm-install)
-    - [`npm start`](#npm-start)
-    - [`npm run build`](#npm-run-build)
   - [Built with](#built-with)
 
 ## The Problem
@@ -129,15 +126,17 @@ Information prompted by the hackathon submission form.
 
 - Depth Contour at multiple intervals of GEBCO 2020 Bathymetry - Gulf of Mexico, by GCOOS - Gulf of Mexico Coastal Ocean Observing System [source](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 
+- Sea Surface Temperature (°C), by Naval Oceanographic Office [source](https://www.arcgis.com/home/item.html?id=7b421e42c17b43f8ad7222b8f71d09e7)
+
 ## Run the app locally
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
-#### `npm install`
+**`npm install`**
 
-#### `npm start`
+**`npm start`**
 
 Starts the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -145,7 +144,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-#### `npm run build`
+**`npm run build`**
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
