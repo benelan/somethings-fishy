@@ -1,4 +1,3 @@
-import "./BioMap.css";
 import React, { useRef, useEffect } from "react";
 import "@esri/calcite-components/dist/components/calcite-card";
 import "@esri/calcite-components/dist/components/calcite-action";
@@ -32,7 +31,6 @@ import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
 import SketchViewModel from "@arcgis/core/widgets/Sketch/SketchViewModel";
 import LayerList from "@arcgis/core/widgets/LayerList";
-import Expand from "@arcgis/core/widgets/Expand";
 import FeatureLayerView from "@arcgis/core/views/layers/FeatureLayerView";
 import WebStyleSymbol from "@arcgis/core/symbols/WebStyleSymbol";
 import Geometry from "@arcgis/core/geometry/Geometry";
@@ -40,6 +38,7 @@ import Collection from "@arcgis/core/core/Collection";
 import Extent from "@arcgis/core/geometry/Extent";
 import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
 // import esriConfig from "@arcgis/core/config";
+import "./BioMap.css";
 
 const MapDiv = styled.div`
   padding: 0;
@@ -210,16 +209,6 @@ const BioMap: React.FC = (): JSX.Element => {
       });
       // add the widget to the view
       view.ui.add(layerList, "bottom-left");
-
-      const infoExpand = new Expand({
-        view,
-        content: "info-panel",
-        expanded: false,
-        expandIconClass: "esri-icon-description",
-        expandTooltip: "About the Diversity Index"
-      });
-
-      view.ui.add(infoExpand, "top-left");
 
       view.when(() => {
         console.log("loaded biodiversity map");
@@ -602,23 +591,21 @@ const BioMap: React.FC = (): JSX.Element => {
     }
   }
 
-  //return <MapDiv ref={mapDiv} />;
   return (
-    <div style={{ padding: "0", margin: "0", height: "100%", width: "100%" }}>
-      <MapDiv ref={mapDiv} />
-      <CalcitePanel heading="Shannon Diversity Index" id="cardPanel">
-        <CalciteBlock heading="" id="headingBlock">
-          <CalciteAction id="rectangleBtn" slot="control" text="" title="Draw an area">
-            <CalciteIcon icon="cursor-marquee" scale="m" />
-          </CalciteAction>
-          <CalciteAction id="clearBtn" slot="control" text="" title="Clear areas">
-            <CalciteIcon icon="trash" scale="m" />
-          </CalciteAction>
-          <CalciteAction id="infoBtn" slot="control" text="" title="About">
-            <CalciteIcon icon="information" scale="m" />
-          </CalciteAction>
-        </CalciteBlock>
-        <div id="fishCard" style={{ width: "280px" }}>
+    <>
+      <MapDiv ref={mapDiv}>
+        <CalcitePanel heading="Shannon Diversity Index" id="cardPanel">
+          <CalciteBlock heading="" id="headingBlock">
+            <CalciteAction id="rectangleBtn" slot="control" text="" title="Draw an area">
+              <CalciteIcon icon="cursor-marquee" scale="m" />
+            </CalciteAction>
+            <CalciteAction id="clearBtn" slot="control" text="" title="Clear areas">
+              <CalciteIcon icon="trash" scale="m" />
+            </CalciteAction>
+            <CalciteAction id="infoBtn" slot="control" text="" title="About">
+              <CalciteIcon icon="information" scale="m" />
+            </CalciteAction>
+          </CalciteBlock>
           <CalciteCard className="editable-card" id="fishCard">
             <span slot="title">Red Snapper</span>
             <div slot="subtitle">
@@ -641,8 +628,7 @@ const BioMap: React.FC = (): JSX.Element => {
               </CalciteLink>
             </div>
           </CalciteCard>
-        </div>
-        <div style={{ width: "280px" }}>
+
           <CalciteCard className="editable-card" id="turtleCard">
             <span slot="title">Green Turtle</span>
             <div slot="subtitle">Green turtles can live for 70 years or more!</div>
@@ -663,8 +649,7 @@ const BioMap: React.FC = (): JSX.Element => {
               </CalciteLink>
             </div>
           </CalciteCard>
-        </div>
-        <div style={{ width: "280px" }}>
+
           <CalciteCard class="editable-card" id="whaleCard">
             <span slot="title">Baleen Whale</span>
             <div slot="subtitle">
@@ -687,8 +672,7 @@ const BioMap: React.FC = (): JSX.Element => {
               </CalciteLink>
             </div>
           </CalciteCard>
-        </div>
-        <div style={{ width: "280px" }}>
+
           <CalciteCard class="editable-card" id="lobsterCard">
             <span slot="title">Spiny Lobster</span>
             <div>Spiny lobster is a common lobster found in the Gulf of Mexico</div>
@@ -709,28 +693,8 @@ const BioMap: React.FC = (): JSX.Element => {
               </CalciteLink>
             </div>
           </CalciteCard>
-        </div>
-      </CalcitePanel>
-      <CalcitePanel heading="Shannon-Wiener Index" id="info-panel">
-        <div id="info-panel-content">
-          <p className="p-math">
-            `H = &#8212;<span className="span-math">&Sigma;</span>P<sub>i</sub> ln(P<sub>i</sub>)`
-          </p>
-          <p>
-            <b>
-              P<sub>i</sub>
-            </b>{" "}
-            - the proportion of individuals in a species
-            <br />
-            <b>H</b> - the index
-          </p>
-          <p>
-            The <b>Shannon-Wiener Index</b> is a diversity index widely used to compare species
-            diversity. This index is not meant to be a measurement of diversity, but a tool to
-            compare diversity between one or more communities of species.
-          </p>
-        </div>
-      </CalcitePanel>
+        </CalcitePanel>
+      </MapDiv>
       <CalciteModal aria-labelledby="modal-title" id="second-area-modal">
         <div id="modal-title" slot="header">
           Choose Another Community!
@@ -781,7 +745,7 @@ const BioMap: React.FC = (): JSX.Element => {
           </h4>
         </CalcitePopover>
       </CalcitePopoverManager>
-    </div>
+    </>
   );
 };
 
