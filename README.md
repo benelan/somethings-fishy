@@ -128,6 +128,14 @@ Information prompted by the hackathon submission form.
 
 - Sea Surface Temperature (°C), by Naval Oceanographic Office [source](https://www.arcgis.com/home/item.html?id=7b421e42c17b43f8ad7222b8f71d09e7)
 
+- Biodiversity. Cofrin Center for Biodiversity. Retrieved Jan 17, 2022. [source](https://www.uwgb.edu/biodiversity/about/biodiversity.asp)
+
+- Hancock, L. What is Biodiversity. WorldWildlife.org. [source](https://www.worldwildlife.org/pages/what-is-biodiversity)
+
+- Dominance diversity. Retrieved Jan 17, 2022. [source](https://www.webpages.uidaho.edu/~beth/REM357_lectures_files/17Dominance%20diversity.pdf)
+
+- Kubiak, L. (2019, May 6) Marine Biodiversity in Dangerous Decline, Finds New Report. NRDC. [source](https://www.nrdc.org/experts/lauren-kubiak/marine-biodiversity-dangerous-decline-finds-new-report)
+
 ## Run the app locally
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
