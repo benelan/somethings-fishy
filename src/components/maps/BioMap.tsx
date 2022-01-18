@@ -37,8 +37,9 @@ import Geometry from "@arcgis/core/geometry/Geometry";
 import Collection from "@arcgis/core/core/Collection";
 import Extent from "@arcgis/core/geometry/Extent";
 import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
-// import esriConfig from "@arcgis/core/config";
+
 import "./BioMap.css";
+import BioCardList from "./BioCardList";
 
 const MapDiv = styled.div`
   padding: 0;
