@@ -2,46 +2,7 @@ import React from "react";
 import "@esri/calcite-components/dist/components/calcite-link";
 import "@esri/calcite-components/dist/components/calcite-card";
 import { CalciteLink, CalciteCard } from "@esri/calcite-components-react";
-import styled from "styled-components";
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  margin: -1rem;
-  overflow: hidden;
-`;
-
-const InfoItem = styled.div`
-  flex: 1 1 40vw;
-  margin: 1rem;
-  --calcite-font-size--2: 1em;
-  --calcite-font-size--1: 1.3em;
-`;
-
-const CardDeck = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  overflow-x: hidden;
-  margin: -1rem;
-
-  & > * {
-    flex: 1 1 30vw;
-    margin: 1rem;
-    --calcite-font-size--2: 1em;
-    --calcite-font-size--1: 1.3em;
-  }
-`;
-
-const Card = styled.div`
-  height: 100%;
-`;
-
-const Link = styled.a`
-  font-size: 0.7em;
-  vertical-align: super;
-`;
+import { CardDeck, Card, SourceLink } from "../../sharedStyledComponents";
 
 export default (): JSX.Element => (
   <>
@@ -67,14 +28,14 @@ export default (): JSX.Element => (
           />
           <p>
             {"   "}
-            <Link
+            <SourceLink
               as={CalciteLink}
               href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
               rel="noopener noreferrer"
               target="_blank"
             >
               source
-            </Link>
+            </SourceLink>
           </p>
         </Card>
       </div>
@@ -97,41 +58,41 @@ export default (): JSX.Element => (
             <li>
               The ocean absorbs most of the excess heat from greenhouse gas emissions, leading to
               rising ocean temperatures.{"   "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               Increasing ocean temperatures affect marine species and ecosystems. Rising
               temperatures cause coral bleaching and the loss of breeding grounds for marine fishes
               and mammals.
               {"   "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               Rising ocean temperatures also affect the benefits humans derive from the ocean -
               threatening food security, increasing the prevalence of diseases, and causing extreme
               weather events and loss of coastal protection.{"   "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.iucn.org/resources/issues-briefs/ocean-warming"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
           </ul>
         </Card>
@@ -147,14 +108,14 @@ export default (): JSX.Element => (
             />
             <p style={{ textAlign: "center" }}>
               {"   "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </p>
           </div>
         </Card>

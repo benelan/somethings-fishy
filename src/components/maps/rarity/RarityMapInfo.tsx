@@ -1,38 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import "@esri/calcite-components/dist/components/calcite-link";
 import "@esri/calcite-components/dist/components/calcite-card";
 import { CalciteLink, CalciteCard } from "@esri/calcite-components-react";
-import "./RarityMap.css";
-
-const CardDeck = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  overflow-x: hidden;
-  margin: -1rem;
-
-  & > * {
-    flex: 1 1 30vw;
-    margin: 1rem;
-    --calcite-font-size--2: 1em;
-    --calcite-font-size--1: 1.3em;
-  }
-`;
-
-const Card = styled.div`
-  height: 100%;
-`;
-
-const Link = styled.a`
-  font-size: 0.7em;
-  vertical-align: super;
-`;
-
-const StepsImg = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-`;
+import { CardDeck, Card, SourceLink, StepsImg } from "../../sharedStyledComponents";
 
 export default (): JSX.Element => (
   <>
@@ -62,37 +32,37 @@ export default (): JSX.Element => (
             <li>
               Healthy marine species like whales, sea turtles, coral, and salmon are important for
               maintaining balanced and thriving ocean ecosystems.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.fisheries.noaa.gov/protecting-marine-life"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               Marine animals can help protect us from the impacts of climate change.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.onegreenplanet.org/environment/saving-marine-animals-can-protect-us-from-climate-change/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               To provide opportunities for people to experience and study marine life that are
               undisturbed by human activity.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://wildcoast.org/why-marine-protected-areas-are-important-for-the-future/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
           </ul>
         </Card>
@@ -104,50 +74,50 @@ export default (): JSX.Element => (
             <li>
               Rare species contribute a lot to the ecosystems; rare species loss reduces the
               functional diversity of communities.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://phys.org/news/2016-04-rare-species-important-believed.html"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               Many individual species are uniquely important as indicators of environmental quality.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               A well-balanced ecosystem maintains the health of the environment. This ensures that
               human beings have access to clean air and water, as well as fertile land for
               agriculture.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.gviusa.com/blog/why-should-we-save-endangered-species/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
             <li>
               Each living thing contains a unique reservoir of genetic material that has evolved
               over eons. This material cannot be retrieved or duplicated if lost.{" "}
-              <Link
+              <SourceLink
                 as={CalciteLink}
                 href="https://www.worldanimalfoundation.org/advocate/wild-earth/params/post/1285404/why-save-endangered-species"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 source
-              </Link>
+              </SourceLink>
             </li>
           </ul>
         </Card>

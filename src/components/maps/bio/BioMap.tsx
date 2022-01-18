@@ -9,7 +9,6 @@ import {
   CalciteIcon,
   CalciteBlock
 } from "@esri/calcite-components-react";
-import styled from "styled-components";
 
 // jsapi imports
 import MapView from "@arcgis/core/views/MapView";
@@ -25,17 +24,10 @@ import Geometry from "@arcgis/core/geometry/Geometry";
 import Collection from "@arcgis/core/core/Collection";
 import Extent from "@arcgis/core/geometry/Extent";
 import SubtypeSublayer from "@arcgis/core/layers/support/SubtypeSublayer";
-
+import { MapDiv } from "../../sharedStyledComponents";
 import "./BioMap.css";
 import BioCardList from "./BioCardList";
 import ScreenshotModal from "./ScreenshotModal";
-
-const MapDiv = styled.div`
-  padding: 0;
-  margin: 0;
-  height: 95%;
-  width: 100%;
-`;
 
 interface featureSet {
   features: Array<Graphic>;

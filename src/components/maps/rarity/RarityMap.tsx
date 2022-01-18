@@ -10,7 +10,6 @@ import {
   CalciteLabel,
   CalciteSlider
 } from "@esri/calcite-components-react";
-import styled from "styled-components";
 
 //JS API Imports
 import MapView from "@arcgis/core/views/MapView";
@@ -22,14 +21,8 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import * as relationshipRendererCreator from "@arcgis/core/smartMapping/renderers/relationship";
 import UniqueValueRenderer from "@arcgis/core/renderers/UniqueValueRenderer";
 
+import { MapDiv } from "../../sharedStyledComponents";
 import "./RarityMap.css";
-
-const MapDiv = styled.div`
-  padding: 0;
-  margin: 0;
-  height: 95%;
-  width: 100%;
-`;
 
 //Global Vars
 let rarityLayer: FeatureLayer;

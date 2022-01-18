@@ -2,30 +2,7 @@ import React from "react";
 import "@esri/calcite-components/dist/components/calcite-link";
 import "@esri/calcite-components/dist/components/calcite-card";
 import { CalciteLink, CalciteCard } from "@esri/calcite-components-react";
-import styled from "styled-components";
-
-const CardDeck = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  overflow-x: hidden;
-  margin: -1rem;
-
-  & > * {
-    flex: 1 1 300px;
-    margin: 1rem;
-    --calcite-font-size--2: 1em;
-    --calcite-font-size--1: 1.3em;
-  }
-`;
-
-const Card = styled.div`
-  height: 100%;
-`;
-const SourceLink = styled.a`
-  font-size: 0.7em;
-  vertical-align: super;
-`;
+import { CardDeck, Card, SourceLink } from "../../sharedStyledComponents";
 
 export default (): JSX.Element => (
   <CardDeck>
