@@ -4,6 +4,7 @@ import LazyLoad from "react-lazyload";
 import BioMap from "./bio/BioMap";
 import BioMapInfo from "./bio/BioMapInfo";
 import RarityMap from "./rarity/RarityMap";
+import RarityMapInfo from "./rarity/RarityMapInfo";
 import CollectionMap from "./collection/CollectionMap";
 import CollectionMapInfo from "./collection/CollectionMapInfo";
 import SSTMap from "./sst/SSTMap";
